@@ -1,7 +1,7 @@
 USE [BetterTeams]
 GO
 
-/****** Object:  Table [dbo].[Users]    Script Date: 29/11/2018 7:48:29 μμ ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 5/12/2018 19:13:53 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,7 +14,7 @@ CREATE TABLE [dbo].[Users](
 	[Username] [nvarchar](50) NOT NULL,
 	[Name] [nvarchar](50) NOT NULL,
 	[Surname] [nvarchar](50) NOT NULL,
-	[DateOfBirth] [date] NULL,
+	[DateOfBirth] [date] NOT NULL,
 	[Role] [nvarchar](20) NOT NULL,
 	[Active] [bit] NOT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 

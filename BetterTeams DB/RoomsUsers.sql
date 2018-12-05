@@ -1,7 +1,7 @@
 USE [BetterTeams]
 GO
 
-/****** Object:  Table [dbo].[RoomsUsers]    Script Date: 30/11/2018 12:32:22 μμ ******/
+/****** Object:  Table [dbo].[RoomsUsers]    Script Date: 5/12/2018 19:14:06 ******/
 SET ANSI_NULLS ON
 GO
 

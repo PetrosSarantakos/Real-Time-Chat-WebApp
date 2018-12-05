@@ -1,7 +1,7 @@
 USE [BetterTeams]
 GO
 
-/****** Object:  Table [dbo].[Messages]    Script Date: 29/11/2018 7:47:51 μμ ******/
+/****** Object:  Table [dbo].[Messages]    Script Date: 5/12/2018 19:15:18 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[Messages](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Sender] [nvarchar](50) NOT NULL,
 	[Receiver] [nvarchar](50) NOT NULL,
-	[Message] [varchar](250) NOT NULL,
+	[Text] [nvarchar](250) NOT NULL,
 	[DateTime] [date] NOT NULL,
 	[Deleted] [bit] NOT NULL,
  CONSTRAINT [PK_Messages] PRIMARY KEY CLUSTERED 
