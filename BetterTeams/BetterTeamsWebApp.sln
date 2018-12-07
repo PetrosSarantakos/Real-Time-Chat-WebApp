@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterTeamsWebApp", "BetterTeamsWebApp\BetterTeamsWebApp.csproj", "{2A8FE14E-986D-4E69-A218-8E9CF8353A9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{B11121FD-5C97-4D71-8DC1-2DF121A85681}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{60BF5204-7F64-4751-A80D-9AA1B2CA741A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2A8FE14E-986D-4E69-A218-8E9CF8353A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A8FE14E-986D-4E69-A218-8E9CF8353A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A8FE14E-986D-4E69-A218-8E9CF8353A9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11121FD-5C97-4D71-8DC1-2DF121A85681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11121FD-5C97-4D71-8DC1-2DF121A85681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11121FD-5C97-4D71-8DC1-2DF121A85681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11121FD-5C97-4D71-8DC1-2DF121A85681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BF5204-7F64-4751-A80D-9AA1B2CA741A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BF5204-7F64-4751-A80D-9AA1B2CA741A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BF5204-7F64-4751-A80D-9AA1B2CA741A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BF5204-7F64-4751-A80D-9AA1B2CA741A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
