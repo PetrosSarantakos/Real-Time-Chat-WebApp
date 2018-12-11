@@ -1,0 +1,4 @@
+﻿#back, #fixedBack, #formback{
+    background: url(../images/dashboard/IMG_0134_720.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
