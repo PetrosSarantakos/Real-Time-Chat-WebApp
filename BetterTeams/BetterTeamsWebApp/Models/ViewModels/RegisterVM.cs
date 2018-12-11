@@ -23,7 +23,7 @@ namespace BetterTeamsWebApp.Models.ViewModels
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Date of birth Required")]
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string Role { get; set; }
     }
 }
