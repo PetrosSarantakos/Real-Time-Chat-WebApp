@@ -1,0 +1,3 @@
+In case of "bin\roslyn\csc.exe" error:
+Go to Nugget Package Manager and run this command:
+Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r

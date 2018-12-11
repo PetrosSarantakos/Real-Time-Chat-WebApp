@@ -14,7 +14,7 @@ namespace Repository
         public BaseRepository()
         {
             _ownsConnection = true;
-            string connectionString = @"Server=MSI\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
+            string connectionString = @"Server=Localhost\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
             _con = new SqlConnection(connectionString);
         }
 
