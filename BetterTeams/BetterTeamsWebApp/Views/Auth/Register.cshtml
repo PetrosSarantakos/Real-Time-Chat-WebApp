@@ -1,0 +1,159 @@
+﻿@model BetterTeamsWebApp.Models.ViewModels.RegisterVM
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sign Up</title>
+    <!-- plugins:css -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/www/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/www/vendors/css/vendor.bundle.base.css">
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+
+    <link rel="stylesheet" href="~/www/css/style.css">
+    <link rel="stylesheet" href="~/www/css/RegisterBackground.css" />
+
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/www/images/favicon.png" />
+</head>
+<body>
+
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div id="fixedBack" class="content-wrapper d-flex align-items-center auth">
+                <div id="back" class="row w-100">
+                    <div id="formback" class="col-lg-4 mx-auto" style="opacity: 0.9">
+                        <div id="form" class="auth-form-light text-left p-5">
+                            <div class="brand-logo">
+                                <h2>EDW THA MPEI TO LOGO</h2>
+                            </div>
+                            <h4>New here?</h4>
+                            <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+
+                            <form method="post" action="@Url.Action("Register","Auth")" class="pt-3">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                <div id="Email" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your email address. Example: myemail@mail.com">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                                    @Html.ValidationMessageFor(model => model.Email)
+                                    @*<input type="email" class="form-control form-control-lg" id="InputEmail" placeholder="Email" value="@Model.Email">*@
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                    <div id="Name" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your First name">
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "First Name" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                        @*<input type="text" class="form-control form-control-lg" id="InputName" placeholder="First Name" value="@Model.Name">*@
+                                    </div>
+                                    @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                    <div id="Surname" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your Last name">
+                                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Last Name" })
+                                        @Html.ValidationMessageFor(model => model.Surname)
+                                        @*<input type="text" class="form-control form-control-lg" id="InputSurname" placeholder="Last Name" value="@Model.Surname">*@
+                                    </div>
+                                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                    <div id="Username" class="form-group" data-toggle="popover" data-trigger="focus" data-content="The Username you will use when you Login">
+                                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+                                        @Html.ValidationMessageFor(model => model.Username)
+                                        @*<input type="text" class="form-control form-control-lg" id="InputUsername" placeholder="Username" value="@Model.Username">*@
+                                    </div>
+                                </div>
+
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                <div id="Password" class="form-group" data-toggle="popover" data-trigger="focus" data-content="The Password you will use to Login">
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                    @*<input type="password" class="form-control form-control-lg" id="InputPassword1" placeholder="Password" value="@Model.Password">*@
+                                </div>
+                                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                <div id="ConfirmPassword" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Please repeat the Password, for confirmation">
+                                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                                    @*<input type="password" class="form-control form-control-lg" id="InputPassword2" placeholder="Confirm Password" value="@Model.ConfirmPassword">*@
+                                </div>
+                                @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                                <div id="DateOfBirth" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your date of birth">
+                                    @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control datepicker", id = "BirthDate", placeholder = "Date of Birth" })
+                                    @Html.ValidationMessageFor(model => model.DateOfBirth)
+                                    @*<input type="date" class="form-control form-control-lg" id="DateOfBirth" placeholder="Date of Birth" value="@Model.DateOfBirth">*@
+                                </div>
+                                <div class="mb-4">
+                                    @*<div class="form-check">
+                                            <label class="form-check-label text-muted">
+                                                <input type="checkbox" class="form-check-input">
+                                                I agree to all Terms & Conditions
+                                            </label>
+                                        </div>*@
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN UP</button>
+                                </div>
+
+
+                                <div class="text-center mt-4 font-weight-light">
+                                    Already have an account? <a href="@Url.Action("Login", "Auth")" class="text-primary">Login</a>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/www/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/www/vendors/js/vendor.bundle.addons.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/popper.js"></script>
+    <script src="https://unpkg.com/tooltip.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script>
+        $(function () {
+            $('.datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1902:2002",
+                value: Selection
+            });
+        });
+        $(function () {
+            $("#Email, #Name, #Surname, #Username, #Password, #ConfirmPassword, #DateOfBirth").popover({
+                trigger: 'focus'
+            });
+        });
+
+
+    </script>
+
+    <script>
+
+    </script>
+    <script src="~/www/js/off-canvas.js"></script>
+    <script src="~/www/js/misc.js"></script>
+    <!-- endinject -->
+</body>
+</html>
