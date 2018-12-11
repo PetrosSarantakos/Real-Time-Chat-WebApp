@@ -12,10 +12,11 @@ namespace BetterTeamsWebApp.Controllers
         // GET: Auth
         public ActionResult Register()
         {
-            return View();
+            var userToRegister = new RegisterVM();
+            return View(userToRegister);
         }
         [HttpPost]
-        public ActionResult RegisterSubmit(RegisterVM userToRegister)
+        public ActionResult Register(RegisterVM userToRegister)
         {
             return RedirectToAction("Login");
         }
