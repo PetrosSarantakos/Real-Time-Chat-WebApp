@@ -344,25 +344,14 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-<<<<<<< Updated upstream
-    <Content Include="Views\Shared\_ContactUsModal.cshtml" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-=======
->>>>>>> Stashed changes
     <Content Include="Scripts\README.md" />
     <Content Include="Scripts\popper.min.js.map" />
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-<<<<<<< Updated upstream
     <Content Include="Views\Auth\Login.cshtml" />
-=======
     <Content Include="Views\Shared\_ContactUsModal.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
->>>>>>> Stashed changes
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
