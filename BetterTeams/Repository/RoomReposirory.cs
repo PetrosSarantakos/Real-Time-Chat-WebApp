@@ -76,6 +76,20 @@ namespace Reporitory
 					throw;
 				}
 			}
+			public Room GetByName(string name)
+			{
+				try
+				{
+					string query = "SELECT * FROM dbo.[Rooms] where Name = @Name";
+					DynamicParameters parameters = new DynamicParameters();
+					parameters.Add("@Name", name);
+					return _con.Query<Room>(query, parameters).FirstOrDefault();
+				}
+				catch (Exception)
+				{
+					throw;
+				}
+			}
 
 
 			public Dictionary<string, object> GetValuesDictionary(Room model, bool isForUpdate)
