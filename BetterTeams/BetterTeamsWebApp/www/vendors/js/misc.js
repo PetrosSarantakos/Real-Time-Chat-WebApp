@@ -56,7 +56,8 @@
     }
 
     //checkbox and radios
-    $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
+      $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
+      $(".checkboxRememberMe").append('<i class="input-helper"></i>');
 
     //fullscreen
     $("#fullscreen-button").on("click", function toggleFullScreen() {

@@ -8879,6 +8879,12 @@ input[type="radio"],
 input[type="checkbox"] {
   box-sizing: border-box;
   padding: 0;
+  border-color: mediumpurple;
+}
+[name=RememberMe]{
+    box-sizing: border-box;
+    padding: 0;
+    border-color: mediumpurple;
 }
 
 input[type="date"],
@@ -20166,6 +20172,7 @@ code {
   margin-top: 15px;
   margin-bottom: 10px;
   padding-left: 0;
+  border-bottom-color: mediumpurple;
 }
 
 .form-check .form-check-label {
@@ -20188,7 +20195,7 @@ code {
   margin-top: 0;
   z-index: 1;
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   filter: alpha(opacity=0);
 }
 
