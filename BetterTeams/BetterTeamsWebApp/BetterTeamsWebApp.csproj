@@ -93,12 +93,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\About\font-awesome.min.css" />
+    <Content Include="Content\About\About.css" />
+    <Content Include="Content\About\noscriptAbout.css" />
+    <Content Include="Content\About\all.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\materialize.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -142,6 +147,10 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\themes\base\_ContactUs.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\About\jquery.min.js" />
+    <Content Include="Scripts\About\main.js" />
+    <Content Include="Scripts\About\About.min.js" />
+    <Content Include="Scripts\all.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -165,24 +174,50 @@
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\fontawesome.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Content\materialize.min.css" />
+    <Content Include="Scripts\materialize.js" />
+    <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\_ContactUs.js" />
     <Content Include="Web.config" />
+    <Content Include="www\About.css" />
     <Content Include="www\css\RegisterBackground.css" />
     <Content Include="www\css\style.css" />
+    <Content Include="www\images\AboutBcg.png" />
+    <Content Include="www\images\AboutBcg2.png" />
+    <Content Include="www\images\About\bg.jpg" />
+    <Content Include="www\images\About\gallery\fulls\01.jpg" />
+    <Content Include="www\images\About\gallery\fulls\02.jpg" />
+    <Content Include="www\images\About\gallery\fulls\03.jpg" />
+    <Content Include="www\images\About\gallery\fulls\04.jpg" />
+    <Content Include="www\images\About\gallery\fulls\05.jpg" />
+    <Content Include="www\images\About\gallery\fulls\06.jpg" />
+    <Content Include="www\images\About\gallery\fulls\07.jpg" />
+    <Content Include="www\images\About\gallery\fulls\08.jpg" />
+    <Content Include="www\images\About\gallery\fulls\09.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\01.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\02.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\03.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\04.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\05.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\06.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\07.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\08.jpg" />
+    <Content Include="www\images\About\gallery\thumbs\09.jpg" />
+    <Content Include="www\images\About\overlay.png" />
+    <Content Include="www\images\About\pic01.jpg" />
+    <Content Include="www\images\About\pic02.jpg" />
+    <Content Include="www\images\About\pic03.jpg" />
     <Content Include="www\images\dashboard\circle.svg" />
     <Content Include="www\images\dashboard\IMG_0134_720.jpg" />
     <Content Include="www\images\dashboard\img_1.jpg" />
@@ -309,17 +344,25 @@
     <Content Include="Views\Auth\Register.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+<<<<<<< Updated upstream
     <Content Include="Views\Shared\_ContactUsModal.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper-utils.js.map" />
+=======
+>>>>>>> Stashed changes
     <Content Include="Scripts\README.md" />
     <Content Include="Scripts\popper.min.js.map" />
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+<<<<<<< Updated upstream
     <Content Include="Views\Auth\Login.cshtml" />
+=======
+    <Content Include="Views\Shared\_ContactUsModal.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

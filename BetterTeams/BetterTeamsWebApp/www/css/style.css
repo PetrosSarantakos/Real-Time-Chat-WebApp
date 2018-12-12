@@ -12297,6 +12297,7 @@ input[type="button"].btn-block {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  background-color: mediumpurple;
 }
 
 .navbar > .container,
@@ -17326,16 +17327,17 @@ input:focus {
 
 /* Sidebar */
 .sidebar {
-  min-height: calc(100vh - 70px);
-  background: #ffffff;
-  font-family: "ubuntu-regular", sans-serif;
-  padding: 0;
-  width: 260px;
-  z-index: 11;
-  transition: width 0.25s ease, background 0.25s ease;
-  -webkit-transition: width 0.25s ease, background 0.25s ease;
-  -moz-transition: width 0.25s ease, background 0.25s ease;
-  -ms-transition: width 0.25s ease, background 0.25s ease;
+    min-height: calc(100vh - 70px);
+    background: #ffffff;
+    font-family: "ubuntu-regular", sans-serif;
+    padding: 0;
+    width: 260px;
+    z-index: 11;
+    transition: width 0.25s ease, background 0.25s ease;
+    -webkit-transition: width 0.25s ease, background 0.25s ease;
+    -moz-transition: width 0.25s ease, background 0.25s ease;
+    -ms-transition: width 0.25s ease, background 0.25s ease;
+    background-color: mediumpurple;
 }
 
 .sidebar .nav {
@@ -17729,6 +17731,7 @@ input:focus {
   -webkit-transition: background 0.25s ease;
   -moz-transition: background 0.25s ease;
   -ms-transition: background 0.25s ease;
+  background-color:mediumpurple;
 }
 
 .navbar.default-layout-navbar .navbar-brand-wrapper {
