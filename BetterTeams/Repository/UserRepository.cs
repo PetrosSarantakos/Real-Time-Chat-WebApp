@@ -64,7 +64,7 @@ namespace Repository
 			{
 				string query = "SELECT * FROM dbo.[Users] where Email = @Email";
 				DynamicParameters parameters = new DynamicParameters();
-				parameters.Add("@Id", email);
+				parameters.Add("@Email", email);
 				return _con.Query<User>(query, parameters).FirstOrDefault();
 			}
 			catch (Exception)

@@ -52,6 +52,20 @@ namespace Repository
 			}
 		}
 
+		public void DeleteByEmail(string email)
+		{
+			try
+			{
+				string query = "UPDATE dbo.[Posts] SET Deleted='TRUE' WHERE Email = @Email";
+
+				_con.Execute(query, new { Email = email });
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
 		//public void DeleteBySenderOrReceiverId(int id)
 		//{
 		//	try
