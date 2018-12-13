@@ -1,4 +1,5 @@
 ﻿#back, #fixedBack, #formback {
+    opacity: 0.9;
     /*background: url('../images/dashboard/Loginbcg2.jpg') no-repeat center center fixed;*/
     /*background: url(../images/dashboard/loginbcg.png) no-repeat center center fixed;*/
     background: url('../images/dashboard/loginbcg3.jpg') no-repeat center center fixed;
@@ -6,5 +7,11 @@
     background-size: cover;
 }
 #formback {
-    opacity: 0.9
+    opacity: 0.95
+}
+#BTlogo {
+    opacity: 0.9;
+    background: url('../images/BetterTeamsLogo3bcg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
 }

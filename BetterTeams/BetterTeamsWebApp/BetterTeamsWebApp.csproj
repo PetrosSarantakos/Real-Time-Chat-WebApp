@@ -224,6 +224,8 @@
     <Content Include="www\images\BetterTeamsLogo.jpg" />
     <Content Include="www\images\BetterTeamsLogo2.jpg" />
     <Content Include="www\images\BetterTeamsLogo3.jpg" />
+    <Content Include="www\images\BetterTeamsLogo3bcg.jpg" />
+    <Content Include="www\images\BTLogo.png" />
     <Content Include="www\images\dashboard\circle.svg" />
     <Content Include="www\images\dashboard\IMG_0134_720.jpg" />
     <Content Include="www\images\dashboard\img_1.jpg" />
