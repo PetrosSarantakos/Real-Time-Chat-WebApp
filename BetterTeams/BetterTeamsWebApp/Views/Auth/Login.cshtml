@@ -10,26 +10,27 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href="~/www/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/www/vendors/css/vendor.bundle.base.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="~/www/css/style.css">
+    <link href="~/www/css/LoginBackground.css" rel="stylesheet" />
+
     <!-- endinject -->
     <link rel="shortcut icon" href="~/www/images/favicon.png" />
-    <script>
-        function unhide() {
-            document.getElementByName("RememberMe").type = "checkbox";
-        }
-    </script>
+    
 </head>
 
-<body onload="unhide()">
+<body >
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth">
-                <div class="row w-100">
-                    <div class="col-lg-4 mx-auto">
+            <div id="fixedBack" class="content-wrapper d-flex align-items-center auth">
+                <div id="back" class="row w-100">
+                    <div id="formback" class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo">
                                 Edw tha mpei to logo

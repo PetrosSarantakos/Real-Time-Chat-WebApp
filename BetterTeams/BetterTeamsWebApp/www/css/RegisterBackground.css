@@ -1,4 +1,12 @@
 ﻿#back, #fixedBack, #formback{
-    background: url(../images/dashboard/IMG_0134_720.jpg) no-repeat center center fixed;
+    background: url(../images/dashboard/RegisterBcg2.jpg) no-repeat center center fixed;
+    background-size: cover;
+
+}
+#formback {
+   opacity: 0.9;
+}
+h2 {
+    background-image: url(../images/BetterTeamsLogo3.jpg);
     background-size: cover;
 }
