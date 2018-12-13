@@ -9,6 +9,7 @@ using Repository;
 using System.Web.Security;
 using System.Text;
 using System.Security.Cryptography;
+using System.Net.Mail;
 
 namespace BetterTeamsWebApp.Controllers
 {
@@ -35,13 +36,27 @@ namespace BetterTeamsWebApp.Controllers
                 Role= "User",
                 DateOfBirth= userToRegister.DateOfBirth.ToString()
             };
+            try
+            {
+                MailAddress m = new MailAddress(user.Email);
+            }
+            catch (FormatException)
+            {
+                ModelState.AddModelError("", "Enter a valid e-mail format (name@example.com)");
+                return View(userToRegister);
+            }
 
             UserRepository reg = new UserRepository();
 
-            if (reg.GetByUsername(user.Username) == null)
+            if (reg.GetByUsername(user.Username) == null && reg.GetByEmail(user.Email)==null)
             {
                 reg.Add(user);
                 return RedirectToAction("Login");
+            }
+            else if(reg.GetByUsername(user.Username) == null && reg.GetByEmail(user.Email) != null)
+            {
+                ModelState.AddModelError("", "This email already exists");
+                return View(userToRegister);
             }
             else
             {
