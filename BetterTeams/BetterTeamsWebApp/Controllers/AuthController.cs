@@ -30,7 +30,7 @@ namespace BetterTeamsWebApp.Controllers
                 Name =userToRegister.Name,
                 Surname= userToRegister.Surname,
                 Email= userToRegister.Email,
-                Role= userToRegister.Role,
+                Role= "User",
                 DateOfBirth= userToRegister.DateOfBirth.ToString()
             };
 
@@ -44,25 +44,34 @@ namespace BetterTeamsWebApp.Controllers
             return View();
         }
 
+
+        public ActionResult Login()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult Login(LoginVM userToLogin)
         {
             if(!ModelState.IsValid)
             {
-                return View();
+                return View(userToLogin);
             }
 
             UserRepository userRepo = new UserRepository();
-            User user = new User();
+            User user;
             user=userRepo.GetByUsername(userToLogin.Username);
 
-            if (user!=null && user.Password ==userToLogin.Password)
+            if (user!=null && user.Password == userToLogin.Password)
             {
+                var userRole = user.Role;
                 var ticket = new FormsAuthenticationTicket(version: 1,
                                    name: userToLogin.Username,
                                    issueDate: DateTime.Now,
                                    expiration: DateTime.Now.AddDays(30),
                                    isPersistent: userToLogin.RememberMe,
-                                   userData: user.Role);
+                                   userData: userRole);
                 var encryptedTicket = FormsAuthentication.Encrypt(ticket);
                 var cookie = new HttpCookie(FormsAuthentication.FormsCookieName,
                     encryptedTicket);
@@ -76,6 +85,7 @@ namespace BetterTeamsWebApp.Controllers
                 return null;
             }
         }
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
