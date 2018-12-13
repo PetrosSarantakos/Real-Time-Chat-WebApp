@@ -1,6 +1,8 @@
-﻿ <!-- Trigger/Open The Modal -->
-<button id="myBtn" class="btn-gradient-primary btn-rounded btn-fw">Contact Us</button>
-
+﻿
+    <!-- Trigger/Open The Modal -->
+<div class="form-control">
+    <button id="myBtn" class="btn-gradient-primary btn-rounded btn-fw">Contact Us</button>
+</div>
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -8,7 +10,7 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <p><strong>Send Us a message</strong></p>
-        <form class="contact-form">
+        <form id="contactForm" class="contact-form">
 
             <div class="form-group row">
                 <label for="Email" class="col-sm-3 col-form-label">Email</label>
@@ -41,4 +43,28 @@
 
 </div>
 
+<script>
+    $(function() {
 
+        $('#contactForm').submit(function () {
+            Message = new Object();
+            Message.Sender = $('#Email').val();
+            Message.Receiver = ('Admin');
+            Message.Message = $('#Message').val();
+
+            $.ajax({
+            type: "POST",
+                url: "",
+
+            data: $('form.contact-form').serialize(),
+            success: function(response) {
+                alert(response['response']);
+            },
+            error: function() {
+                alert('Error');
+            }
+        });
+        return false;
+    });
+});
+</script>

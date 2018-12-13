@@ -41,15 +41,15 @@
                             <form method="post" action="@Url.Action("Login","Auth")" class="pt-3">
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                <div id="Username" class="form-group" data-content="Your Username">
+                                <div id="Username" class="form-group" data-content="Your Username" data-animation="true">
                                     @Html.TextBoxFor(model => model.Username, new { @class = "form-control form-control-lg", placeholder = "Username" })
                                     @Html.ValidationMessageFor(model => model.Username)
                                 </div>
-                                <div id="Password" class="form-group" data-content="Your Password">
+                                <div id="Password" class="form-group" data-content="Your Password" data-animation="true">
                                     @Html.PasswordFor(model => model.Password, new { @class = "form-control form-control-lg", placeholder = "Password" })
                                     @Html.ValidationMessageFor(model => model.Password)
                                 </div>
-                                <div id="RememberMe" class="form-check" data-content="Check if you want to stay signed in">
+                                <div id="RememberMe" class="form-check" data-content="Check if you want to stay signed in" data-animation="true">
                                     <label class="form-check-label text-muted">
                                         @Html.CheckBoxFor(model => model.RememberMe, htmlAttributes: new { @class = "form-check-input", @Id = "checkboxRemember" })
                                         Keep me signed in
@@ -59,11 +59,16 @@
                                     <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">Login</button>
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <a href="@Url.Action("ForgotPassword","Auth")" class="auth-link text-black">Forgot password?</a>
+                                    <a href="@Url.Action("ForgotPassword", "Auth")" class="auth-link text-black">Forgot password?</a>
                                 </div>
+                                <div class="mt-5">
+                                    Don't have an account? <a class="text-primary font-weight-medium " href="@Url.Action("Register", "Auth")"> <strong>Create</strong></a>
+                                </div>
+                                
+                                <div class="btn-group mt-4 mb-1 form-inline d-flex font-weight-light">
 
-                                <div class="text-center mt-4 font-weight-light">
-                                    Don't have an account? <a href="@Url.Action("Register","Auth")" class="text-primary">Create</a>
+                                    <a href="button" class="btn btn-inverse-light btn-fw w-50"><strong>Contact Us</strong></a>
+                                    <a href="@Url.Action("About", "Home")" class="btn btn-inverse-light btn-fw w-50"><strong>About Us</strong></a>
                                 </div>
                             </form>
                         </div>
@@ -89,7 +94,8 @@
     <script>
         $(function () {
             $("#Username, #Password, #RememberMe").popover({
-                trigger: 'focus'
+                trigger: 'hover'
+                
             });
         });
     </script>

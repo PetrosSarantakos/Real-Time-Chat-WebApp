@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 namespace BetterTeamsWebApp.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home

@@ -225,6 +225,7 @@
     <Content Include="www\images\BetterTeamsLogo2.jpg" />
     <Content Include="www\images\BetterTeamsLogo3.jpg" />
     <Content Include="www\images\BetterTeamsLogo3bcg.jpg" />
+    <Content Include="www\images\BetterTeamsLogo4.jpg" />
     <Content Include="www\images\BTLogo.png" />
     <Content Include="www\images\dashboard\circle.svg" />
     <Content Include="www\images\dashboard\IMG_0134_720.jpg" />
@@ -271,6 +272,10 @@
     <Content Include="www\images\favicon.png" />
     <Content Include="www\images\logo-mini.svg" />
     <Content Include="www\images\logo.svg" />
+    <Content Include="www\materialize\css\materialize.css" />
+    <Content Include="www\materialize\css\materialize.min.css" />
+    <Content Include="www\materialize\js\materialize.js" />
+    <Content Include="www\materialize\js\materialize.min.js" />
     <Content Include="www\pages\charts\chartjs.html" />
     <Content Include="www\pages\forms\basic_elements.html" />
     <Content Include="www\pages\icons\mdi.html" />
@@ -333,6 +338,8 @@
     <Content Include="www\vendors\js\off-canvas.js" />
     <Content Include="www\vendors\js\vendor.bundle.addons.js" />
     <Content Include="www\vendors\js\vendor.bundle.base.js" />
+    <Content Include="www\materialize\LICENSE" />
+    <Content Include="www\materialize\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
