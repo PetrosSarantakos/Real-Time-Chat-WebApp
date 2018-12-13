@@ -82,7 +82,8 @@ namespace BetterTeamsWebApp.Controllers
             }
             else
             {
-                return null;
+                ModelState.AddModelError("", "Invalid Username or Password");
+                return View(userToLogin);
             }
         }
 
