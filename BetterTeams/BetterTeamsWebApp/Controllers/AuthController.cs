@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Repository;
+using System.Web.Security;
 
 namespace BetterTeamsWebApp.Controllers
 {
@@ -43,9 +44,42 @@ namespace BetterTeamsWebApp.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Login(LoginVM userToLogin)
         {
-            return View();
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            UserRepository userRepo = new UserRepository();
+            User user = new User();
+            user=userRepo.GetByUsername(userToLogin.Username);
+
+            if (user!=null && user.Password ==userToLogin.Password)
+            {
+                var ticket = new FormsAuthenticationTicket(version: 1,
+                                   name: userToLogin.Username,
+                                   issueDate: DateTime.Now,
+                                   expiration: DateTime.Now.AddDays(30),
+                                   isPersistent: userToLogin.RememberMe,
+                                   userData: user.Role);
+                var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName,
+                    encryptedTicket);
+
+                HttpContext.Response.Cookies.Add(cookie);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
