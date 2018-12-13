@@ -37,8 +37,17 @@ namespace BetterTeamsWebApp.Controllers
             };
 
             UserRepository reg = new UserRepository();
-            reg.Add(user);
-            return RedirectToAction("Login");
+
+            if (reg.GetByUsername(user.Username) == null)
+            {
+                reg.Add(user);
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ModelState.AddModelError("", "This username already exists");
+                return View(userToRegister);
+            }
         }
 
         public ActionResult ForgotPassword()
