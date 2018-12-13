@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Repository
 {
@@ -14,7 +16,7 @@ namespace Repository
         public BaseRepository()
         {
             _ownsConnection = true;
-            string connectionString = @"Server=DESKTOP-LDNN9KD\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
+            string connectionString = @"Server=MSI\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
             _con = new SqlConnection(connectionString);
         }
 
@@ -47,5 +49,11 @@ namespace Repository
                 return _con;
             }
         }
-    }
+		public string EncryptPassword(string Password)
+		{
+			byte[] bytes = Encoding.Unicode.GetBytes(Password);
+			byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+			return Convert.ToBase64String(inArray);
+		}
+	}
 }

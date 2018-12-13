@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using Repository;
 using System.Web.Security;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace BetterTeamsWebApp.Controllers
 {
@@ -63,7 +65,9 @@ namespace BetterTeamsWebApp.Controllers
             User user;
             user=userRepo.GetByUsername(userToLogin.Username);
 
-            if (user!=null && user.Password == userToLogin.Password)
+			string EncryptedPassword = EncryptPassword(userToLogin.Password);
+
+			if (user != null && user.Password == EncryptedPassword) 
             {
                 var userRole = user.Role;
                 var ticket = new FormsAuthenticationTicket(version: 1,
@@ -92,5 +96,12 @@ namespace BetterTeamsWebApp.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-    }
+
+		public string EncryptPassword(string Password)
+		{
+			byte[] bytes = Encoding.Unicode.GetBytes(Password);
+			byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+			return Convert.ToBase64String(inArray);
+		}
+	}
 }

@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Models
 {
@@ -14,6 +16,6 @@ namespace Models
 		public string DateOfBirth { get; set; }
 		public bool Active { get; set; }
         public string Role { get; set; }
-        
-    }
+		
+	}
 }
