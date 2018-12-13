@@ -191,6 +191,7 @@
     <Content Include="Scripts\_ContactUs.js" />
     <Content Include="Web.config" />
     <Content Include="www\About.css" />
+    <Content Include="www\css\chat.css" />
     <Content Include="www\css\RegisterBackground.css" />
     <Content Include="www\css\style.css" />
     <Content Include="www\images\AboutBcg.png" />

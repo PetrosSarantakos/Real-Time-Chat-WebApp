@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Purple Admin</title>
     <!-- plugins:css -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/www/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/www/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/www/css/chat.css">
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="~/www/css/style.css">
@@ -255,23 +257,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item sidebar-actions">
-                        <span class="nav-link">
-                            <div class="border-bottom">
-                                <h6 class="font-weight-normal mb-3">Projects</h6>
-                            </div>
-                            <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
-                            <div class="mt-4">
-                                <div class="border-bottom">
-                                    <p class="text-secondary">Categories</p>
-                                </div>
-                                <ul class="gradient-bullet-list mt-4">
-                                    <li>Free</li>
-                                    <li>Pro</li>
-                                </ul>
-                            </div>
-                        </span>
-                    </li>
+                    
                 </ul>
             </nav>
             @RenderBody()
@@ -291,6 +277,9 @@
     <!-- Custom js for this page-->
     <script src="~/www/vendors/js/dashboard.js"></script>
     <!-- End custom js for this page-->
+    <!--Chat's script-->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>
