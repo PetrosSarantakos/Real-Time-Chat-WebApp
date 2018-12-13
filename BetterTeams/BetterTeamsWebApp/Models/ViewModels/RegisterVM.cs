@@ -11,12 +11,16 @@ namespace BetterTeamsWebApp.Models.ViewModels
     {
         [Required(ErrorMessage = "Email Required")]
         public string Email { get; set; }
+        
         [Required(ErrorMessage = "First Name Required")]
         public string Name { get; set; }
+
         [Required(ErrorMessage = "Last Name Required")]
         public string Surname {get; set; }
+        
         [Required(ErrorMessage = "Username Required")]
         public string Username { get; set; }
+
         [Required(ErrorMessage = "Password Required")]
         public string Password { get; set; }
         [Required(ErrorMessage = "Password Confirmation Required")]

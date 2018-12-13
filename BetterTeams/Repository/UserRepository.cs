@@ -22,6 +22,8 @@ namespace Repository
         {
             try
             {
+				string EncryptedPassword = EncryptPassword(model.Password);
+				model.Password = EncryptedPassword;
                 Dictionary<string, object> dictValues = GetValuesDictionary(model, false);
 
                 DynamicParameters parms = new DynamicParameters(dictValues);

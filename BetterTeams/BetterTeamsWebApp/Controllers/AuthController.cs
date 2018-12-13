@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Repository;
 using System.Web.Security;
+using System.Text;
+using System.Security.Cryptography;
+using System.Net.Mail;
 
 namespace BetterTeamsWebApp.Controllers
 {
@@ -33,10 +36,33 @@ namespace BetterTeamsWebApp.Controllers
                 Role= "User",
                 DateOfBirth= userToRegister.DateOfBirth.ToString()
             };
+            try
+            {
+                MailAddress m = new MailAddress(user.Email);
+            }
+            catch (FormatException)
+            {
+                ModelState.AddModelError("", "Enter a valid e-mail format (name@example.com)");
+                return View(userToRegister);
+            }
 
             UserRepository reg = new UserRepository();
-            reg.Add(user);
-            return RedirectToAction("Login");
+
+            if (reg.GetByUsername(user.Username) == null && reg.GetByEmail(user.Email)==null)
+            {
+                reg.Add(user);
+                return RedirectToAction("Login");
+            }
+            else if(reg.GetByUsername(user.Username) == null && reg.GetByEmail(user.Email) != null)
+            {
+                ModelState.AddModelError("", "This email already exists");
+                return View(userToRegister);
+            }
+            else
+            {
+                ModelState.AddModelError("", "This username already exists");
+                return View(userToRegister);
+            }
         }
 
         public ActionResult ForgotPassword()
@@ -63,7 +89,9 @@ namespace BetterTeamsWebApp.Controllers
             User user;
             user=userRepo.GetByUsername(userToLogin.Username);
 
-            if (user!=null && user.Password == userToLogin.Password)
+			string EncryptedPassword = EncryptPassword(userToLogin.Password);
+
+			if (user != null && user.Password == EncryptedPassword) 
             {
                 var userRole = user.Role;
                 var ticket = new FormsAuthenticationTicket(version: 1,
@@ -92,5 +120,12 @@ namespace BetterTeamsWebApp.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-    }
+
+		public string EncryptPassword(string Password)
+		{
+			byte[] bytes = Encoding.Unicode.GetBytes(Password);
+			byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+			return Convert.ToBase64String(inArray);
+		}
+	}
 }
