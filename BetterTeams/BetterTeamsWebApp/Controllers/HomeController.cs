@@ -14,8 +14,18 @@ namespace BetterTeamsWebApp.Controllers
         // GET: Home
         [HttpGet]
         public ActionResult Index()
-        {                        
-            return View();
+        {
+            string sender = "admin";
+            string receiver = "petros_sa";
+            UserRepository ur = new UserRepository();
+            User U1 = ur.GetByUsername(sender);
+            User U2= ur.GetByUsername(receiver);
+
+            List<Message> messages = new List<Message>();
+
+            MessageRepository messageRepo = new MessageRepository();
+            messages = messageRepo.GetBySenderRecveiverUsername(U1, U2);
+            return View(messages);
         }
 
         [HttpPost]
@@ -23,15 +33,15 @@ namespace BetterTeamsWebApp.Controllers
         {
             MessageRepository messageRepo = new MessageRepository();
             Message message = new Message{
-                SenderUsername=messageVM.Sender,
-                ReceiverUsername=messageVM.Receiver,
+                Sender=messageVM.Sender,
+                Receiver=messageVM.Receiver,
                 Text=messageVM.Message,
                 DateTime=DateTime.Now,
                 Deleted=messageVM.Deleted
             };
 
             messageRepo.Add(message);
-            return View();
+            return View(message);
         }
 
 

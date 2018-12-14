@@ -8,40 +8,40 @@ namespace Models
 {
     public class Message : BaseModel
     {
-        public string SenderUsername
-		{
-			get
-			{
-				return Sender != null ? Sender.Username : "";
-			}
-			set
-			{
-				if (Sender == null)
-					Sender = new User();
+  //      public string SenderUsername
+		//{
+		//	get
+		//	{
+		//		return Sender != null ? Sender.Username : "";
+		//	}
+		//	set
+		//	{
+		//		if (Sender == null)
+		//			Sender = new User();
 
-				Sender.Username = value;
-			}
-		}
-        public string ReceiverUsername
-		{
-			get
-			{
-				return Receiver != null ? Receiver.Username : "";
-			}
-			set
-			{
-				if (Receiver == null)
-					Receiver = new User();
+		//		Sender.Username = value;
+		//	}
+		//}
+  //      public string ReceiverUsername
+		//{
+		//	get
+		//	{
+		//		return Receiver != null ? Receiver.Username : "";
+		//	}
+		//	set
+		//	{
+		//		if (Receiver == null)
+		//			Receiver = new User();
 
-				Receiver.Username = value;
-			}
-		}
+		//		Receiver.Username = value;
+		//	}
+		//}
         public string Text { get; set; }
 		public bool Deleted { get; set; }
 
 		#region helper properties
-		public User Sender { get; set; }
-		public User Receiver { get; set; }
+		public string Sender { get; set; }
+		public string Receiver { get; set; }
 		#endregion
 	}
 }

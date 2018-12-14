@@ -75,32 +75,57 @@ namespace Repository
 				throw;
 			}
 		}
+        public List<Message> GetAll()
+        {
+            return null;
+        }
+        //public List<Message> GetAll() //TODO:CHECK (Μπορει να μην το χρειαστουμε)
+        //{
+        //    StringBuilder query = new StringBuilder("SELECT * FROM dbo.[Messages] M");
 
-		public List<Message> GetAll() //TODO:CHECK (Μπορει να μην το χρειαστουμε)
-		{
-			StringBuilder query = new StringBuilder("SELECT * FROM dbo.[Messages] M");
+        //    if (ReadLevel == MessageReadLevel.WithSenderReceiver)
+        //    {
+        //        query.Append(" JOIN dbo.[Users] S ON M.Sender = S.Username");
+        //        query.Append(" JOIN dbo.[Users] R ON M.Receiver = R.Username");
+        //    }
 
-			if (ReadLevel == MessageReadLevel.WithSenderReceiver)
-			{
-				query.Append(" JOIN dbo.[Users] S ON M.Sender = S.Username");
-				query.Append(" JOIN dbo.[Users] R ON M.Receiver = R.Username");
-			}
+        //    query.Append(" ORDER BY M.Id ASC");
 
-			query.Append(" ORDER BY M.Id ASC");
+        //    if (ReadLevel == MessageReadLevel.WithSenderReceiver)
+        //        return _con.Query<Message, User, User, Message>(query.ToString(), (m, s, r) =>
+        //        {
+        //            m.Sender = s;
+        //            m.Receiver = r;
 
-			if (ReadLevel == MessageReadLevel.WithSenderReceiver)
-				return _con.Query<Message, User, User, Message>(query.ToString(), (m, s, r) =>
-				{
-					m.Sender = s;
-					m.Receiver = r;
+        //            return m;
+        //        }).ToList();
+        //    else
+        //        return _con.Query<Message>(query.ToString()).ToList();
+        //}
+        //public List<Message> GetAll2(User sender, User receiver) //TODO:CHECK (Μπορει να μην το χρειαστουμε)
+        //{
+        //    StringBuilder query = new StringBuilder("SELECT * FROM dbo.[Messages] M");
+        //    if (ReadLevel == MessageReadLevel.WithSenderReceiver)
+        //    {
+        //        DynamicParameters parameters = new DynamicParameters();
+        //        query.Append(" JOIN dbo.[Users] S ON M.Sender = S.Username");
+        //        parameters.Add("S.Username", sender.Username);
+        //        query.Append(" JOIN dbo.[Users] R ON M.Receiver = R.Username");
+        //        parameters.Add("r.Username", receiver.Username);
+        //    }
+        //    query.Append(" ORDER BY M.Id ASC");
+        //    if (ReadLevel == MessageReadLevel.WithSenderReceiver)
+        //        return _con.Query<Message, User, User, Message>(query.ToString(), (m, s, r) =>
+        //        {
+        //            m.Sender = s;
+        //            m.Receiver = r;
+        //            return m;
+        //        }).ToList();
+        //    else
+        //        return _con.Query<Message>(query.ToString()).ToList();
+        //}
 
-					return m;
-				}).ToList();
-			else
-				return _con.Query<Message>(query.ToString()).ToList();
-		}
-
-		public Message GetById(int id)
+        public Message GetById(int id)
         {
             try
             {
@@ -130,29 +155,29 @@ namespace Repository
 				throw;
 			}
 		}
-		public List<Message> GetBySenderRecveiverUsername(string sender, string receiver)
-		{
-			try
-			{
-				string query = "SELECT * FROM dbo.[Messages] where Sender = @Sender AND Receiver = @Receiver";
-				DynamicParameters parameters = new DynamicParameters();
-				parameters.Add("@Sender", sender);
-				parameters.Add("@Receiver", receiver);
-				
-				return _con.Query<Message>(query, parameters).ToList();
-			}
-			catch (Exception)
-			{
-				throw;
-			}
-		}
+        public List<Message> GetBySenderRecveiverUsername(User sender, User receiver)
+        {
+            try
+            {
+                string query = "SELECT * FROM dbo.[Messages] WHERE (Sender = @SenderUsername AND Receiver = @ReceiverUsername) OR (Sender = @ReceiverUsername AND Receiver = @SenderUsername) ORDER BY Id";
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@SenderUsername", "admin");
+                parameters.Add("@ReceiverUsername", "petros_sa");
 
-		public Dictionary<string, object> GetValuesDictionary(Message model, bool isForUpdate)
+                return _con.Query<Message>(query, parameters).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Dictionary<string, object> GetValuesDictionary(Message model, bool isForUpdate)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>
             {
-                { "@Receiver", model.ReceiverUsername },
-                { "@Sender", model.SenderUsername },
+                { "@Receiver", model.Receiver },
+                { "@Sender", model.Sender },
                // { "@Subject", model.Subject },
                 { "@Text", model.Text },
 				{ "@Deleted", model.Deleted },
