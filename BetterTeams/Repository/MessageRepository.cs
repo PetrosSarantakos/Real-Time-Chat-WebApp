@@ -156,7 +156,7 @@ namespace Repository
                // { "@Subject", model.Subject },
                 { "@Text", model.Text },
 				{ "@Deleted", model.Deleted },
-				//{ "@DateTime", model.DateTime }
+				{ "@DateTime", model.DateTime }
             };
 
             //if (isForUpdate)

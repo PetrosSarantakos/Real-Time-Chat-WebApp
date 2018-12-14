@@ -1,7 +1,7 @@
 USE [BetterTeams]
 GO
 
-/****** Object:  Table [dbo].[Posts]    Script Date: 5/12/2018 19:14:58 ******/
+/****** Object:  Table [dbo].[Posts]    Script Date: 14/12/2018 11:32:05 πμ ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[Posts](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Sender] [nvarchar](50) NOT NULL,
 	[PostText] [nvarchar](250) NOT NULL,
-	[DateTime] [date] NOT NULL,
+	[DateTime] [datetime] NOT NULL,
 	[Room] [nvarchar](50) NOT NULL,
 	[Deleted] [bit] NOT NULL,
  CONSTRAINT [PK_Posts] PRIMARY KEY CLUSTERED 
