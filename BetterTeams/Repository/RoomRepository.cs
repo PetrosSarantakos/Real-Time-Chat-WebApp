@@ -99,6 +99,7 @@ namespace Reporitory
 				return _con.Query<string>(query.ToString()).ToList();
 				
 			}
+
 			public List<int> GetAllRoomsByEmail(string email)
 			{
 				string query = "SELECT Id FROM dbo.[RoomsUsers]where Email = @Email";
@@ -106,6 +107,25 @@ namespace Reporitory
 				parameters.Add("@Email", email);
 				return _con.Query<int>(query.ToString()).ToList();
 			}
+
+
+
+            public List<string> GetAllUsernamesInARoom(int id)
+            {
+                string query = "SELECT dbo.[Users].Username FROM dbo.[Users] INNER JOIN dbo.[RoomsUsers] ON dbo.[RoomsUsers].Email = dbo.[Users].Email WHERE dbo.[RoomsUsers].RoomId = @Id";
+                DynamicParameters parameters= new DynamicParameters();
+                parameters.Add("@Id", id);
+                return _con.Query<string>(query.ToString()).ToList();
+            }
+
+
+            public List<string> GetNameRoomsByEmail (string email)
+            {
+                string query = "SELECT dbo.[Rooms].Name FROM dbo.[Rooms] INNER JOIN dbo.[RoomsUsers] ON dbo.[Rooms].Id = dbo.[RoomsUsers].RoomId WHERE dbo.[RoomsUsers].Email=@Email";
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Email", email);
+                return _con.Query<string>(query.ToString()).ToList();
+            }
 
 
 
