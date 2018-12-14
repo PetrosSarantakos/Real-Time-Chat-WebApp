@@ -8,35 +8,34 @@ namespace Models
 {
     public class Message : BaseModel
     {
-        public int SenderId
+        public string SenderUsername
 		{
 			get
 			{
-				return Sender != null ? Sender.Id : 0;
+				return Sender != null ? Sender.Username : "";
 			}
 			set
 			{
 				if (Sender == null)
 					Sender = new User();
 
-				Sender.Id = value;
+				Sender.Username = value;
 			}
 		}
-        public int ReceiverId
+        public string ReceiverUsername
 		{
 			get
 			{
-				return Receiver != null ? Receiver.Id : 0;
+				return Receiver != null ? Receiver.Username : "";
 			}
 			set
 			{
 				if (Receiver == null)
 					Receiver = new User();
 
-				Receiver.Id = value;
+				Receiver.Username = value;
 			}
 		}
-       // public string Subject { get; set; }
         public string Text { get; set; }
 		public bool Deleted { get; set; }
 
