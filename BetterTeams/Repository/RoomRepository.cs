@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Models;
 
+
 namespace Reporitory
 {
 	public class RoomReposirory
@@ -90,6 +91,23 @@ namespace Reporitory
 					throw;
 				}
 			}
+			public List<string> GetAllUsersEmailInRoom(int id)
+			{
+				string query = "SELECT Email FROM dbo.[RoomsUsers] where RoomId = @RoomId";
+				DynamicParameters parameters = new DynamicParameters();
+				parameters.Add("@RoomId", id);
+				return _con.Query<string>(query.ToString()).ToList();
+				
+			}
+			public List<int> GetAllRoomsByEmail(string email)
+			{
+				string query = "SELECT Id FROM dbo.[RoomsUsers]where Email = @Email";
+				DynamicParameters parameters = new DynamicParameters();
+				parameters.Add("@Email", email);
+				return _con.Query<int>(query.ToString()).ToList();
+			}
+
+
 
 
 			public Dictionary<string, object> GetValuesDictionary(Room model, bool isForUpdate)

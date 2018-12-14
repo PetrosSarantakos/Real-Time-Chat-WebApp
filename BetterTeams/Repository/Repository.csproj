@@ -49,7 +49,7 @@
     <Compile Include="MessageRepository.cs" />
     <Compile Include="PostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoomReposirory.cs" />
+    <Compile Include="RoomRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
