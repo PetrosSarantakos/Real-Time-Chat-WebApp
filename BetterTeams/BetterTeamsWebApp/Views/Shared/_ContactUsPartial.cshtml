@@ -47,10 +47,10 @@
     $(function() {
 
         $('#contactForm').submit(function () {
-            Message = new Object();
-            Message.Sender = $('#Email').val();
-            Message.Receiver = ('Admin');
-            Message.Message = $('#Message').val();
+            MessageVM = new Object();
+            MessageVM.Sender = $('#Email').val();
+            MessageVM.Receiver = ('Admin');
+            MessageVM.Message = $('#Message').val();
 
             $.ajax({
             type: "POST",

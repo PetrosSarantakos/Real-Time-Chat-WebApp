@@ -19,7 +19,7 @@ namespace BetterTeamsWebApp.Controllers
         public ActionResult Register()
         {
             var userToRegister = new RegisterVM();
-
+            
             return View(userToRegister);
         }
         [HttpPost]

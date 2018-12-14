@@ -143,6 +143,11 @@ namespace Reporitory
 					throw;
 				}
 			}
+            public List<Room> GetRoomsByUser(User user)
+            {
+                List<Room> rooms = new List<Room>();
+                return rooms;
+            }
 		}
 	}
 }

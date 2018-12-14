@@ -8879,12 +8879,12 @@ input[type="radio"],
 input[type="checkbox"] {
   box-sizing: border-box;
   padding: 0;
-  border-color: mediumpurple;
+  border-color: #934ff5;
 }
-[name=RememberMe]{
+[name=RememberMe] {
     box-sizing: border-box;
     padding: 0;
-    border-color: mediumpurple;
+    border-color: #934ff5;
 }
 
 input[type="date"],
@@ -12297,13 +12297,13 @@ input[type="button"].btn-block {
 }
 
 .navbar {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-  background-color: mediumpurple;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background-color: #934ff5;
 }
 
 .navbar > .container,
@@ -17343,7 +17343,7 @@ input:focus {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background-color: mediumpurple;
+    background-color: #934ff5;
 }
 
 .sidebar .nav {
@@ -17731,13 +17731,13 @@ input:focus {
 }
 
 .navbar.default-layout-navbar {
-  font-family: "ubuntu-light", sans-serif;
-  background: #ffffff;
-  transition: background 0.25s ease;
-  -webkit-transition: background 0.25s ease;
-  -moz-transition: background 0.25s ease;
-  -ms-transition: background 0.25s ease;
-  background-color:mediumpurple;
+    font-family: "ubuntu-light", sans-serif;
+    background: #ffffff;
+    transition: background 0.25s ease;
+    -webkit-transition: background 0.25s ease;
+    -moz-transition: background 0.25s ease;
+    -ms-transition: background 0.25s ease;
+    background-color: #934ff5;
 }
 
 .navbar.default-layout-navbar .navbar-brand-wrapper {
@@ -20167,12 +20167,12 @@ code {
 
 /* Checkboxes and Radios */
 .form-check {
-  position: relative;
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  padding-left: 0;
-  border-bottom-color: mediumpurple;
+    position: relative;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding-left: 0;
+    border-bottom-color: #934ff5;
 }
 
 .form-check .form-check-label {

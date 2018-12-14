@@ -397,8 +397,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Auth\Login.cshtml" />
-    <Content Include="Views\Shared\_ContactUsModal.cshtml" />
+    <Content Include="Views\Shared\_ContactUsPartial.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Shared\_ListUsersPartial.cshtml" />
+    <Content Include="Views\Shared\_ListPostsPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
