@@ -76,14 +76,14 @@ namespace Repository
 			}
 		}
 
-		public List<Message> GetAll() //TODO:CHECK
+		public List<Message> GetAll() //TODO:CHECK (Μπορει να μην το χρειαστουμε)
 		{
 			StringBuilder query = new StringBuilder("SELECT * FROM dbo.[Messages] M");
 
 			if (ReadLevel == MessageReadLevel.WithSenderReceiver)
 			{
-				query.Append(" JOIN dbo.[Users] S ON M.Sender = S.Email");
-				query.Append(" JOIN dbo.[Users] R ON M.Receiver = R.Email");
+				query.Append(" JOIN dbo.[Users] S ON M.Sender = S.Username");
+				query.Append(" JOIN dbo.[Users] R ON M.Receiver = R.Username");
 			}
 
 			query.Append(" ORDER BY M.Id ASC");
@@ -135,8 +135,8 @@ namespace Repository
         {
             Dictionary<string, object> dict = new Dictionary<string, object>
             {
-                { "@ReceiverId", model.ReceiverId },
-                { "@SenderId", model.SenderId },
+                { "@Receiver", model.ReceiverUsername },
+                { "@Sender", model.SenderUsername },
                // { "@Subject", model.Subject },
                 { "@Text", model.Text },
 				{ "@Deleted", model.Deleted },
