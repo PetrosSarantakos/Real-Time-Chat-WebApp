@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BetterTeamsWebApp.Models.ViewModels
 {
-    public class MesssageVM
+    public class MessageVM
     {
         public int Id { get; set; }
         //public User Sender { get; set; }
