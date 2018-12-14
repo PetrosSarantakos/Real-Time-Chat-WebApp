@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BetterTeamsWebApp.Models.ViewModels;
+using Repository;
+using Models;
 
 namespace BetterTeamsWebApp.Controllers
 {
@@ -19,6 +21,16 @@ namespace BetterTeamsWebApp.Controllers
         [HttpPost]
         public ActionResult Index(MesssageVM messageVM)
         {
+            MessageRepository messageRepo = new MessageRepository();
+            Message message = new Message{
+                SenderUsername=messageVM.Sender,
+                ReceiverUsername=messageVM.Receiver,
+                Text=messageVM.Message,
+                DateTime=DateTime.Now,
+                Deleted=messageVM.Deleted
+            };
+
+            messageRepo.Add(message);
             return View();
         }
 

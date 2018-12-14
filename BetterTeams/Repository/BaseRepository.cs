@@ -16,7 +16,11 @@ namespace Repository
         public BaseRepository()
         {
             _ownsConnection = true;
+<<<<<<< Updated upstream
             string connectionString = @"Server=.\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
+=======
+            string connectionString = @"Server=Localhost\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
+>>>>>>> Stashed changes
             _con = new SqlConnection(connectionString);
         }
 

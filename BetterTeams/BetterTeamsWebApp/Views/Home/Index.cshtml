@@ -81,7 +81,7 @@
         Message.Message = document.getElementById("msg").value;
         Message.DateTime = Date.now;
         Message.Sender = '@User.Identity.Name';
-        Message.Receiver = '';
+        Message.Receiver = 'petros_sa';
         console.log(Message);
         $.ajax({
             url: "/Home/Index",
