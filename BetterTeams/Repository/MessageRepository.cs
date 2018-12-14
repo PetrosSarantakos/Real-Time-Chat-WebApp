@@ -130,6 +130,22 @@ namespace Repository
 				throw;
 			}
 		}
+		public List<Message> GetBySenderRecveiverUsername(string sender, string receiver)
+		{
+			try
+			{
+				string query = "SELECT * FROM dbo.[Messages] where Sender = @Sender AND Receiver = @Receiver";
+				DynamicParameters parameters = new DynamicParameters();
+				parameters.Add("@Sender", sender);
+				parameters.Add("@Receiver", receiver);
+				
+				return _con.Query<Message>(query, parameters).ToList();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
 
 		public Dictionary<string, object> GetValuesDictionary(Message model, bool isForUpdate)
         {
