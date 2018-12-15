@@ -1,4 +1,4 @@
-﻿@model List<BetterTeamsWebApp.Models.ViewModels.MesssageVM>
+﻿@model List<BetterTeamsWebApp.Models.ViewModels.MessageVM>
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,21 +10,6 @@
         <div class="inbox_msg">
             <div class="mesgs">
                 <div id="chatBox" class="msg_history">
-
-                    <!--Receive-->
-                    <div class="incoming_msg">
-                        <div class="received_msg">
-                            <div class="received_withd_msg">
-                                <span class="time_date">@User.Identity.Name</span>
-                                <p>
-                                    Test which is a new approach to have all
-                                    solutions
-                                </p>
-                                <span class="time_date"> 11:01 AM | June 9</span>
-                            </div>
-                        </div>
-                    </div>
-
 
                 </div>
                 <!--Type Message-->
@@ -48,74 +33,88 @@
 <!--SignalR script to update the chat page and send messages.-->
 
 <script>
-        var Μessages = () => {
-            $.ajax({
-                url: 'Home/Index',
-                type: 'get',
-                success: function (messages) {
-                    alert("gg");
-                messageListSuccess(messages);
-                },
-                error: function (request, message, error) {
-                handleException(request, message, error);
-                }
-
-            });
-           
+    var message = () => {
+        $.ajax({
+            url: '/Home/GetMessages',
+            type: 'GET',
+            dataType: 'json',
+            success: function (List) {
+                messageListSuccess(List);
+            },
+            error: function (request, message, error) {
+                console.log(request);
+                console.log(error);
+                console.log(message);
             }
+
+        });
+    }
+
 
 
     //test
-    var messageListSuccess = (messages) => {
+    var messageListSuccess = (Msges) => {
 
-        $.each(messages, function (message) {
+        $.each(Msges, function (index, txt) {
+            let m = addMessage(txt);
             let chatBox = document.getElementById("chatBox");
-            chatBox += addMessage(message);
-            console.log(message);
+            chatBox.innerHTML += m;
+            console.log("messages projected");
         });
     }
 
     // Handles sendMessage event on send button
     function sendBtn() {
-        Message = new Object();
-        Message.Message = document.getElementById("msg").value;
-        Message.DateTime = Date.now;
-        Message.Sender = '@User.Identity.Name';
-        Message.Receiver = 'petros_sa';
-        console.log(Message);
+        let d = new Date();
+        newMessage = new Object();
+        newMessage.Message = document.getElementById("msg").value;
+        newMessage.DateTime = `${d.getDate}/${d.getMonth}/${d.getFullYear} ${d.getHours}/${d.getMinutes}/${d.getSeconds}`;
+        newMessage.Sender = 'test';
+        newMessage.Receiver = 'panospap';
+        //console.log(newMessage);
         $.ajax({
-            url: "/Home/Index",
-            type: "POST",
+            url: "/Home/PostMessage",
+            type: "post",
             contentType: "application/json;charset=utf-8",
-            data: JSON.stringify(Message),
-            success: function (Message) {
-                alert("GG");
-                
+            data: JSON.stringify(newMessage),
+            success: function (messageVM) {
+                console.log("Message sent!!!");
+                let m = addMessage(messageVM);
                 let chatBox = document.getElementById("chatBox");
-                chatBox += addMessage(Message);
+                chatBox.innerHTML += m;
             },
             error: function (request, message, error) {
-                alert("BG");
+                console.log(request);
                 console.log(error);
+                console.log(message);
             }
         });
 
     }
 
     //Message Builder
-    let addMessage = (Message) => {
+    let addMessage = (newMessage) => {
+        let msgBubble;
         console.log('addMessage run');
-        let msgBubble = `
-                           <div class="outgoing_msg">
-                                <div class="sent_msg">
-                                    <span class="time_date">${@User.Identity.Name}</span>
-                                    <p>
-                                        ${Message.Message}
-                                    </p>
-                                    <span class="time_date">${Message.DateTime}</span>
-                                </div>
-                           </div>`;
+        let CurrentUser = "@User.Identity.Name";
+        //console.log(newMessage);
+        if (newMessage.Sender === CurrentUser) {
 
+            msgBubble = '<div class="outgoing_msg">' +
+                        '<div class="sent_msg">' +
+                        '<span class="time_user">'+ newMessage.Sender + '</span>'+
+                        '<p>' + newMessage.Message + '</p>'+
+                        '<span class="time_user">' + newMessage.DateTime + '</span>' +
+                        '</div></div></div>';      
+        } else {
+            msgBubble = '<div class="incoming_msg">' +
+                '<div class="received_msg">' +
+                '<div class="received_withd_msg">' +
+                '<span class="time_user">' + newMessage.Sender + '</span>' +
+                '<p>' + newMessage.Message + '</p>' +
+                '<span class="time_user">' + newMessage.DateTime + '</span>' +
+                '</div></div></div>';
+        }
         return msgBubble;
     }
 
@@ -159,7 +158,9 @@
     //    });
 
     //});
-
+    window.addEventListener("load", () => {
+        message();
+    });
 </script>
 
 
