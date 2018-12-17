@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace BetterTeamsWebApp.Controllers
 {
-
-   
-
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult About()
@@ -44,7 +42,7 @@ namespace BetterTeamsWebApp.Controllers
                 msg.Text = msges[i].Text;
                 msg.Sender = msges[i].Sender;
                 msg.Receiver = msges[i].Receiver;
-                msg.DateTime = msges[i].DateTime;
+                msg.DateTime = msges[i].DateTime.ToString();
                 msg.Deleted = msges[i].Deleted;
 ;               messages.Add(msg);
             }
@@ -55,7 +53,7 @@ namespace BetterTeamsWebApp.Controllers
             UserRepository userRepo = new UserRepository();
             RoomRepository roomRepo = new RoomRepository();
             User user = userRepo.GetByUsername(User.Identity.Name);
-            List<string> userRooms = roomRepo.GetAllRoomsByEmail(user.Email);
+            List<string> userRooms = roomRepo.GetNameRoomsByEmail(user.Email);
 
             return Json(userRooms, JsonRequestBehavior.AllowGet);
         }
@@ -126,22 +124,23 @@ namespace BetterTeamsWebApp.Controllers
             User U2 = Userdb.GetByUsername(Username2);
 
             List<MessageVM> messages = new List<MessageVM>();
-            MessageVM msg = new MessageVM();
+            MessageVM msg;
 
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
             for (int i = 0; i < msges.Count; i++)
             {
+                msg = new MessageVM();
                 msg.Id = msges[i].Id;
                 msg.Text = msges[i].Text;
                 msg.Sender = msges[i].Sender;
                 msg.Receiver = msges[i].Receiver;
-                msg.DateTime = msges[i].DateTime;
+                msg.DateTime = msges[i].DateTime.ToString();
                 msg.Deleted = msges[i].Deleted;
                 messages.Add(msg);
             }
-            return Json(msges, JsonRequestBehavior.AllowGet);
+            return Json(messages, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ContactUs(MessageVM messageVM)
         {
@@ -150,7 +149,7 @@ namespace BetterTeamsWebApp.Controllers
             {
                 Sender = messageVM.Sender,
                 Receiver = messageVM.Receiver,
-                Text = messageVM.Message,
+                Text = messageVM.Text,
                 DateTime = DateTime.Now,
                 Deleted = messageVM.Deleted
             };

@@ -14,7 +14,7 @@ namespace BetterTeamsWebApp.Models.ViewModels
         public string Sender { get; set; }
         public string Receiver { get; set; }
         public string Text { get; set; }
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
         public bool Deleted { get; set; }
     }
 }
