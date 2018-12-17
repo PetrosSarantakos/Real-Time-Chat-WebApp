@@ -13,7 +13,7 @@ namespace BetterTeamsWebApp.Models.ViewModels
         //public User Receiver { get; set; }
         public string Sender { get; set; }
         public string Receiver { get; set; }
-        public string Message { get; set; }
+        public string Text { get; set; }
         public DateTime DateTime { get; set; }
         public bool Deleted { get; set; }
     }

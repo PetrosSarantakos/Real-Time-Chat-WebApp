@@ -41,7 +41,7 @@ namespace BetterTeamsWebApp.Controllers
             for (int i = 0; i < msges.Count-1; i++)
             {
                 msg.Id = msges[i].Id;
-                msg.Message = msges[i].Text;
+                msg.Text = msges[i].Text;
                 msg.Sender = msges[i].Sender;
                 msg.Receiver = msges[i].Receiver;
                 msg.DateTime = msges[i].DateTime;
@@ -105,7 +105,7 @@ namespace BetterTeamsWebApp.Controllers
             {
                 Sender = messageVM.Sender,
                 Receiver = messageVM.Receiver,
-                Text = messageVM.Message,
+                Text = messageVM.Text,
                 DateTime = DateTime.Now,
                 Deleted = messageVM.Deleted
             };
@@ -119,11 +119,11 @@ namespace BetterTeamsWebApp.Controllers
         public JsonResult GetMessages(List<MessageVM> List)
         {
 
-            string sender = "panospap";
-            string receiver = "test";
-            UserRepository ur = new UserRepository();
-            User U1 = ur.GetByUsername(sender);
-            User U2 = ur.GetByUsername(receiver);
+            string Username1 = ViewBag.CurrentUser;
+            string Username2 = ViewBag.OtherUser;
+            UserRepository Userdb = new UserRepository();
+            User U1 = Userdb.GetByUsername(Username1);
+            User U2 = Userdb.GetByUsername(Username2);
 
             List<MessageVM> messages = new List<MessageVM>();
             MessageVM msg = new MessageVM();
@@ -134,7 +134,7 @@ namespace BetterTeamsWebApp.Controllers
             for (int i = 0; i < msges.Count; i++)
             {
                 msg.Id = msges[i].Id;
-                msg.Message = msges[i].Text;
+                msg.Text = msges[i].Text;
                 msg.Sender = msges[i].Sender;
                 msg.Receiver = msges[i].Receiver;
                 msg.DateTime = msges[i].DateTime;
