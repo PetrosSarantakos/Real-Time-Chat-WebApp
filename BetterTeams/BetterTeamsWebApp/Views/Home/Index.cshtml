@@ -59,6 +59,7 @@
         let nm = addMessage(message);
         let chatBox = document.getElementById("chatBox");
         chatBox.innerHTML += nm;
+        msg.value = "";
     }
 
     //test
@@ -76,7 +77,7 @@
     function sendBtn() {
         let d = new Date();
         newMessage = new Object();
-        newMessage.Text = document.getElementById("msg").value;
+        newMessage.Text = msg.value;
         newMessage.Sender = "@User.Identity.Name";
         newMessage.Receiver = 'petros_sa';
         //console.log(newMessage);
@@ -99,6 +100,7 @@
 
     //Message Builder
     let addMessage = (m) => {
+        
         console.log(m);
         let msgBubble;
         let CurrentUser = "@User.Identity.Name";
@@ -124,7 +126,14 @@
         return msgBubble;
     }
 
-
+    var msg = document.getElementById("msg");
+    msg.addEventListener("keyup", (event) => {
+        console.log("enter pressed");
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            sendBtn();
+        }
+    });
     //window.addEventListener("load", () => {
 
 

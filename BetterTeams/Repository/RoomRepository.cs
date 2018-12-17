@@ -122,7 +122,7 @@ namespace Repository
             string query = "SELECT dbo.[Rooms].Name FROM dbo.[Rooms] INNER JOIN dbo.[RoomsUsers] ON dbo.[Rooms].Id = dbo.[RoomsUsers].RoomId WHERE dbo.[RoomsUsers].Email=@Email";
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("@Email", email);
-            return _con.Query<string>(query.ToString()).ToList();
+            return _con.Query<string>(query, parameters).ToList();
         }
 
 
