@@ -20,7 +20,7 @@ namespace Repository
             string connectionString = @"Server=tcp:betterteamsazure.database.windows.net,1433;Initial Catalog=BetterTeamsAzure;Persist Security Info=False;User ID=exceptionals;Password=7338@e@7338;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
             ////Local Connection
-            //string connectionString = @"Server=DESKTOP-LDNN9KD\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
+            //string connectionString = @"Server=localhost\SQLEXPRESS;Database=BetterTeams;Trusted_Connection=True;";
             _con = new SqlConnection(connectionString);
         }
 
