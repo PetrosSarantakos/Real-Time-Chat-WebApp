@@ -24,18 +24,20 @@ namespace BetterTeamsWebApp.Controllers
             User U2 = ur.GetByUsername(receiver);
 
             List<MessageVM> messages = new List<MessageVM>();
+            MessageVM msg = new MessageVM();
             
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
-            for (int i = 0; i < msges.Count; i++)
+            for (int i = 0; i < msges.Count-1; i++)
             {
-                messages[i].Id = msges[i].Id;
-                messages[i].Message = msges[i].Text;
-                messages[i].Sender = msges[i].Sender;
-                messages[i].Receiver = msges[i].Receiver;
-                messages[i].DateTime = msges[i].DateTime;
-                messages[i].Deleted = msges[i].Deleted;
+                msg.Id = msges[i].Id;
+                msg.Message = msges[i].Text;
+                msg.Sender = msges[i].Sender;
+                msg.Receiver = msges[i].Receiver;
+                msg.DateTime = msges[i].DateTime;
+                msg.Deleted = msges[i].Deleted;
+;               messages.Add(msg);
             }
             return View(messages);
         }
@@ -75,18 +77,20 @@ namespace BetterTeamsWebApp.Controllers
             User U2 = ur.GetByUsername(receiver);
 
             List<MessageVM> messages = new List<MessageVM>();
+            MessageVM msg = new MessageVM();
 
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
             for (int i = 0; i < msges.Count; i++)
             {
-                messages[i].Id = msges[i].Id;
-                messages[i].Message = msges[i].Text;
-                messages[i].Sender = msges[i].Sender;
-                messages[i].Receiver = msges[i].Receiver;
-                messages[i].DateTime = msges[i].DateTime;
-                messages[i].Deleted = msges[i].Deleted;
+                msg.Id = msges[i].Id;
+                msg.Message = msges[i].Text;
+                msg.Sender = msges[i].Sender;
+                msg.Receiver = msges[i].Receiver;
+                msg.DateTime = msges[i].DateTime;
+                msg.Deleted = msges[i].Deleted;
+                messages.Add(msg);
             }
             return Json(msges, JsonRequestBehavior.AllowGet);
         }
