@@ -21,7 +21,7 @@ namespace BetterTeamsWebApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            
+
             string sender = "admin";
             string receiver = "petros_sa";
             UserRepository ur = new UserRepository();
@@ -32,11 +32,11 @@ namespace BetterTeamsWebApp.Controllers
 
             List<MessageVM> messages = new List<MessageVM>();
             MessageVM msg = new MessageVM();
-            
+
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
-            for (int i = 0; i < msges.Count-1; i++)
+            for (int i = 0; i < msges.Count - 1; i++)
             {
                 msg.Id = msges[i].Id;
                 msg.Text = msges[i].Text;
@@ -44,11 +44,11 @@ namespace BetterTeamsWebApp.Controllers
                 msg.Receiver = msges[i].Receiver;
                 msg.DateTime = msges[i].DateTime.ToString();
                 msg.Deleted = msges[i].Deleted;
-;               messages.Add(msg);
+                ; messages.Add(msg);
             }
             return View(messages);
         }
-        public JsonResult GetUserRooms ()
+        public JsonResult GetUserRooms()
         {
             UserRepository userRepo = new UserRepository();
             RoomRepository roomRepo = new RoomRepository();
@@ -57,19 +57,22 @@ namespace BetterTeamsWebApp.Controllers
 
             return Json(userRooms, JsonRequestBehavior.AllowGet);
         }
-        //public JsonResult GetUsersInroom()
-        //{
-        //    UserRepository userRepo = new UserRepository();
-        //    RoomRepository roomRepo = new RoomRepository();
-        //    User user = userRepo.GetByUsername(User.Identity.Name);
-        //    List<string> usersInRoom = new List<string>();
-        //    usersInRoom = roomRepo.GetAllUsernamesInARoom()
-        //    List<string> userNames = new List<string>();
-        //    foreach(var item in users)
-            
-        //    return Json(userNames, JsonRequestBehavior.AllowGet);
+        public JsonResult GetUsers()
+        {
+            UserRepository userRepo = new UserRepository();
+            User user = userRepo.GetByUsername(User.Identity.Name);
+            List<User> allUsers = new List<User>();
+            allUsers = userRepo.GetAll().ToList();
+            allUsers.Remove(user);
+            List<string> usernames = new List<string>();
+            foreach (var item in allUsers)
+            {
+                usernames.Add(item.Username);
+            }
 
-        //}
+            return Json(usernames, JsonRequestBehavior.AllowGet);
+
+        }
         /// <summary>
         /// ///////////////////////////
         /// </summary>
@@ -83,10 +86,10 @@ namespace BetterTeamsWebApp.Controllers
         //    var roomNames = roomRepo.GetAllRoomsByEmail(user.Email).ToList();
         //    foreach(var item in roomNames)
         //    {
-                
+
         //    }
         //    return roomNames;
-        
+
         //}
         //public JsonResult GetUsers()
         //{
@@ -155,7 +158,7 @@ namespace BetterTeamsWebApp.Controllers
             };
 
             messageRepo.Add(message);
-           
+
             return Json(messageVM, JsonRequestBehavior.AllowGet);
         }
     }

@@ -93,7 +93,7 @@ namespace Repository
 			string query = "SELECT Email FROM dbo.[RoomsUsers] where RoomId = @RoomId";
 			DynamicParameters parameters = new DynamicParameters();
 			parameters.Add("@RoomId", id);
-			return _con.Query<string>(query.ToString()).ToList();
+			return _con.Query<string>(query, parameters).ToList();
 				
 		}
 
@@ -102,7 +102,7 @@ namespace Repository
 			string query = "SELECT Id FROM dbo.[RoomsUsers]where Email = @Email";
 			DynamicParameters parameters = new DynamicParameters();
 			parameters.Add("@Email", email);
-			return _con.Query<int>(query.ToString()).ToList();
+			return _con.Query<int>(query, parameters).ToList();
 		}
 
 
@@ -112,7 +112,7 @@ namespace Repository
             string query = "SELECT dbo.[Users].Username FROM dbo.[Users] INNER JOIN dbo.[RoomsUsers] ON dbo.[RoomsUsers].Email = dbo.[Users].Email WHERE dbo.[RoomsUsers].RoomId = @Id";
             DynamicParameters parameters= new DynamicParameters();
             parameters.Add("@Id", id);
-            return _con.Query<string>(query.ToString()).ToList();
+            return _con.Query<string>(query, parameters).ToList();
         }
 
 
