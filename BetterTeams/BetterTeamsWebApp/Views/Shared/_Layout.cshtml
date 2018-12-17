@@ -21,86 +21,82 @@
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center text-white" style="background-color: #934ff5">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center text-white display-3" style="background-color: #934ff5">
                 <strong>BetterTeams</strong>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-start">
-                <div>
-                    <div>
-                        <ul class="navbar-nav navbar-nav-left">
-                            <li class="nav-item nav-profile dropdown">
-                                <a class="nav-link dropdown-toggle" id="Dropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                    <div id="currentRoom" class="nav-profile-text">
-                                        <p class="mb-1 text-white"> My Rooms </p>
-                                    </div>
-                                </a>
-                                <div id="roomNamesList" class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                                    <a class="dropdown-item" href="#">
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                </div>
-                            </li>
-                            <li class="nav-item nav-settings d-none d-lg-block">
-                                <a class="nav-link" href="#">
-                                    <i class="mdi mdi-format-line-spacing"></i>
-                                </a>
-                            </li>
+            <div class="navbar-menu-wrapper d-flex align-items-center">
 
-                        </ul>
-                    </div>
-                    <div>
-                        <ul class="navbar-nav navbar-nav-right">
-                            <li class="nav-item nav-profile dropdown">
-                                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                    <div class="nav-profile-img">
+                <ul class="navbar-nav navbar-nav-left col-sm">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" id="Dropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                            <div id="currentRoom" class="nav-profile-text">
+                                <p class="mb-1 text-white"> My Rooms </p>
+                            </div>
+                        </a>
+                        <div id="roomNamesList" class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </li>
+                    @*<li class="nav-item nav-settings d-none d-lg-block">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-format-line-spacing"></i>
+                        </a>
+                        </a>
+                    </li>*@
 
-                                        @*<span class="availability-status online"></span>*@
-                                    </div>
-                                    <div class="nav-profile-text">
-                                        @*TODO SHOW ACTIVE USER HERE*@
-                                        <p class="mb-1 text-white">UUUUUSSSSEEEERRR</p>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="mdi mdi-account-settings-variant mr-2"></i>
-                                        Profile
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="@Url.Action("Logout", "Auth")">
-                                        <i class="mdi mdi-logout mr-2 text-primary"></i>
-                                        Signout
-                                    </a>
-                                </div>
-                            </li>
-                            <li class="nav-item d-none d-lg-block full-screen-link">
-                                <a class="nav-link">
-                                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-                                </a>
-                            </li>
+                </ul>
+                <div class="col-sm"></div>
+                <ul class="navbar-nav navbar-nav-right col-sm">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                           
+                            <div class="nav-profile-text">
+                                @*TODO SHOW ACTIVE USER HERE*@
+                                <p class="mb-1 text-white">User.Identity.Name</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="mdi mdi-account-settings-variant mr-2 text-primary"></i>
+                                Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("Logout", "Auth")">
+                                <i class="mdi mdi-logout mr-2 text-primary"></i>
+                                Signout
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item d-none d-lg-block full-screen-link">
+                        <a class="nav-link">
+                            <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                        </a>
+                    </li>
 
 
-                            <li class="nav-item nav-settings d-none d-lg-block">
-                                <a class="nav-link" href="#">
-                                    <i class="mdi mdi-format-line-spacing"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                        <span class="mdi mdi-menu"></span>
-                    </button>
-                </div>
+                    <li class="nav-item nav-settings d-none d-lg-block">
+                        <a class="nav-link" href="#">
+                            <i class="mdi mdi-format-line-spacing"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
             </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul id="list-users" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users</li></ul>
+            
         </nav>
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul id="list-users" class="nav"></ul>
-            </nav>
-            @RenderBody()
-        </div>
+        @RenderBody()
+    </div>
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
@@ -125,7 +121,7 @@
                     //});
                     var userList = $('#roomNamesList');
                     $(data).each(function (index, name) {
-                        userList.append(`<a id="${name}" class="dropdown-item" href="#"> ${name} </a >`);
+                        userList.append(`<a id="${name}" class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
                     });
 
 
@@ -149,7 +145,7 @@
                 success: function (data) {
                     var userList = $('#list-users');
                     $(data).each(function (index, username) {
-                        userList.append(`<a id="${username}" class="nav-link mdi mdi-contacts menu-icon mb-1 text-white" href="#"> ${username} </a >`);
+                        userList.append(`<a id="${username}" class="nav-link mdi mdi-human-greeting  mb-1 text-white" href="#"> ${username} </a >`);
                     });
 
                 },
