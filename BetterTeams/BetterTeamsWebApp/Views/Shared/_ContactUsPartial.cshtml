@@ -8,35 +8,34 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-        <span class="close">&times;</span>
         <p><strong>Send Us a message</strong></p>
         <form id="contactForm" class="contact-form">
 
             <div class="form-group row">
                 <label for="Email" class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
-                    <input type="email" class="form-control" id="Email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
                 </div>
             </div>
 
-            <div class="form-group row">
+            @*<div class="form-group row">
                 <label for="Username" class="col-sm-3 col-form-label">Username (optional)</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="Username" placeholder="Username">
+                    <input type="text" class="form-control" id="username" name="Username" placeholder="Username">
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group row">
                 <label for="Message" class="col-sm-3 col-form-label">Message</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control" id="Message" name="Message" rows="5" placeholder="Your message...">
+                    <textarea class="form-control" id="message" name="Message" rows="5" placeholder="Your message...">
       
       </textarea>
                     <!-- <input type="text" class="form-control" id="Message" placeholder="Your message..."> -->
                 </div>
             </div>
 
-            <button type="submit" class="btn-gradient-primary btn-rounded btn-fw">Submit</button>
+            <button id="contact-form-submit" type="submit" class="btn-gradient-primary btn-rounded btn-fw">Submit</button>
             <button class="btn btn-light">Cancel</button>
         </form>
     </div>
@@ -44,27 +43,38 @@
 </div>
 
 <script>
-    $(function() {
+    $('#myBtn').click(function (e) {
+        e.preventDefault();
+        $('#myModal').modal();
+    });
+    $(function () {
 
-        $('#contactForm').submit(function () {
-            MessageVM = new Object();
-            MessageVM.Sender = $('#Email').val();
-            MessageVM.Receiver = ('Admin');
-            MessageVM.Message = $('#Message').val();
+        $('#contact-form-submit').on('click', function (e) {
+            e.preventDefault();
+            let d = new Date();
+
+            Message = new Object();
+            Message.Sender = $('#Email').val();
+            Message.Receiver = 'admin';
+            Message.DateTime = `${d.getDate}/${d.getMonth}/${d.getFullYear} ${d.getHours}/${d.getMinutes}/${d.getSeconds}`;
+            Message.Message = $('#message').val();
 
             $.ajax({
-            type: "POST",
-                url: "",
-
-            data: $('form.contact-form').serialize(),
-            success: function(response) {
-                alert(response['response']);
-            },
-            error: function() {
-                alert('Error');
-            }
+                type: "POST",
+                url: "/Home/ContactUs",
+                contentType: 'application/json;charset=utf-8',
+                data: JSON.stringify(Message),
+                success: function () 
+                {
+                    alert('Success');
+                },
+                   
+                error: function () {
+                    alert('Error');
+                }
+            });
+            return false;
         });
-        return false;
     });
-});
+  
 </script>

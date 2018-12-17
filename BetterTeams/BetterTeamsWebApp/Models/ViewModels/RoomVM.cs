@@ -9,7 +9,6 @@ namespace BetterTeamsWebApp.Models.ViewModels
     public class RoomVM
     {
         public int Id { get; set; }
-        public User Creator { get; set; }
         public string Name { get; set; }
     }
 }
