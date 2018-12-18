@@ -110,7 +110,14 @@ namespace BetterTeamsWebApp.Controllers
                 DateTime = DateTime.Now,
                 Deleted = messageVM.Deleted
             };
-
+            messageVM = new MessageVM
+            {
+                Sender = message.Sender,
+                Receiver = message.Receiver,
+                Text = message.Text,
+                DateTime = message.DateTime.ToString(),
+                Deleted = message.Deleted
+            };
             messageRepo.Add(message);
 
             return Json(messageVM, JsonRequestBehavior.AllowGet);
