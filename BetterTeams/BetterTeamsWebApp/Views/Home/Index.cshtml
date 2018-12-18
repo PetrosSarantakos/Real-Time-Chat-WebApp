@@ -41,19 +41,20 @@
         var chat = $.connection.chatHub;
         let message = document.getElementById("msg");
         chat.addNewMessageToPage = function () {
-            addMessage(message);
+            addMessage(message.value);
         };
+
 
         $.connection.hub.start().done(function () {
             message.addEventListener("keyup", (event) => {
-                event.preventDefault();
+                //event.preventDefault();
                 if (event.keyCode === 13) {
                     chat.server.send(message.value, "petros_sa", false);
                     message.value = "";
                 }
             });
 
-            message.addEventListener("Click", (event) => {
+            message.addEventListener("click", (event) => {
                 chat.server.send(message.value, "petros_sa");
                 message.value = "";
             });

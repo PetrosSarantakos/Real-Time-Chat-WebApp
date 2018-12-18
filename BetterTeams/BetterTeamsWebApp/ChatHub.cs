@@ -34,13 +34,15 @@ namespace BetterTeamsWebApp
         public void Send(string Text, string To, bool Deleted)
         {
             //TODO: Copy the code from Home to save the message to db
-            
+
 
             UserCId receiver;
             
+        
+            
             if (Users.TryGetValue(To, out receiver))
             {
-
+                
                 UserCId sender =  GetUser(Context.User.Identity.Name);
                 
                 IEnumerable<string> allReceivers;
@@ -98,7 +100,7 @@ namespace BetterTeamsWebApp
 
         }
 
-        public override Task OnConnected()
+        public override async Task OnConnected()
         {
 
             string userName = Context.User.Identity.Name;
@@ -126,7 +128,7 @@ namespace BetterTeamsWebApp
                 }
             }
 
-            return base.OnConnected();
+            await base.OnConnected();
         }
 
 
