@@ -11,15 +11,15 @@ namespace Repository
 {
     public class MessageRepository : BaseRepository, IRepository<Message>
     {
-		#region ReadLevel
-		public enum MessageReadLevel
-		{
-			Normal,
-			WithSenderReceiver
-		}
+		//#region ReadLevel
+		//public enum MessageReadLevel
+		//{
+		//	Normal,
+		//	WithSenderReceiver
+		//}
 
-		public MessageReadLevel ReadLevel { get; set; } = MessageReadLevel.Normal;
-		#endregion
+		//public MessageReadLevel ReadLevel { get; set; } = MessageReadLevel.Normal;
+		//#endregion
 
 		public MessageRepository() : base()
         {
@@ -62,7 +62,7 @@ namespace Repository
             }
         }
 
-		public void DeleteBySenderOrReceiverId(string email) //TODO:CHECK
+		public void DeleteBySenderOrReceiverEmail(string email) //TODO:CHECK
 		{
 			try
 			{
@@ -129,7 +129,7 @@ namespace Repository
         {
             try
             {
-                string query = "SELECT * FROM dbo.[Messages] where Id = @Id";
+                string query = "SELECT * FROM dbo.[Messages] where Id = @Id AND Deleted='FALSE'";
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", id);
                 return _con.Query<Message>(query, parameters).FirstOrDefault();
@@ -144,7 +144,7 @@ namespace Repository
 		{
 			try
 			{
-				string query = "SELECT * FROM dbo.[Messages] where ReceiverId = @ReceiverId";
+				string query = "SELECT * FROM dbo.[Messages] where ReceiverId = @ReceiverId AND Deleted='FALSE'";
 				DynamicParameters parameters = new DynamicParameters();
 				parameters.Add("@ReceiverId", receiverId);
 
@@ -155,11 +155,11 @@ namespace Repository
 				throw;
 			}
 		}
-        public List<Message> GetBySenderRecveiverUsername(User sender, User receiver)
+        public List<Message> GetBySenderRecveiverUsername(User sender, User receiver) //TODO: MATCH WITH FRONT!!!
         {
             try
             {
-                string query = "SELECT * FROM dbo.[Messages] WHERE (Sender = @SenderUsername AND Receiver = @ReceiverUsername) OR (Sender = @ReceiverUsername AND Receiver = @SenderUsername) AND Deleted=0 ORDER BY Id";
+                string query = "SELECT * FROM dbo.[Messages] WHERE (Sender = @SenderUsername AND Receiver = @ReceiverUsername) OR (Sender = @ReceiverUsername AND Receiver = @SenderUsername) AND Deleted='FALSE' ORDER BY Id";
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@SenderUsername", "admin");
                 parameters.Add("@ReceiverUsername", "petros_sa");
