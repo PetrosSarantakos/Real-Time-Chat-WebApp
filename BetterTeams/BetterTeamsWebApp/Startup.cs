@@ -1,7 +1,7 @@
 ﻿using Owin;
 using Microsoft.Owin;
-[assembly: OwinStartup(typeof(SignalR_Chat.Startup))]
-namespace SignalR_Chat
+[assembly: OwinStartup(typeof(BetterTeamsWebApp.Startup))]
+namespace BetterTeamsWebApp
 {
     public partial class Startup
     {

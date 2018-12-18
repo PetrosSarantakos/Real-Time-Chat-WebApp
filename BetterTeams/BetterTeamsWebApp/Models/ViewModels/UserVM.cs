@@ -14,5 +14,7 @@ namespace BetterTeamsWebApp.Models.ViewModels
         public string Role { get; set; }
         public DateTime DateOfBirth { get; set; }
         public bool Active { get; set; }
+
+        public HashSet<string> ConnectionId { get; set; }
     }
 }

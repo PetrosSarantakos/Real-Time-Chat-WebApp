@@ -48,6 +48,8 @@ namespace BetterTeamsWebApp.Controllers
             }
             return View(messages);
         }
+
+
         public JsonResult GetUserRooms()
         {
             UserRepository userRepo = new UserRepository();
@@ -101,24 +103,7 @@ namespace BetterTeamsWebApp.Controllers
 
         public JsonResult PostMessage(MessageVM messageVM)
         {
-            MessageRepository messageRepo = new MessageRepository();
-            Message message = new Message
-            {
-                Sender = messageVM.Sender,
-                Receiver = messageVM.Receiver,
-                Text = messageVM.Text,
-                DateTime = DateTime.Now,
-                Deleted = messageVM.Deleted
-            };
-            messageVM = new MessageVM
-            {
-                Sender = message.Sender,
-                Receiver = message.Receiver,
-                Text = message.Text,
-                DateTime = message.DateTime.ToString(),
-                Deleted = message.Deleted
-            };
-            messageRepo.Add(message);
+           
 
             return Json(messageVM, JsonRequestBehavior.AllowGet);
         }
