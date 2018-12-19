@@ -101,9 +101,7 @@ namespace BetterTeamsWebApp.Controllers
         //    List<User> users = new List<User>();
         //    var usersInRoom = roomRepo.GetAllUsersEmailInRoom()
         //}
-        [Authorize]
-        public JsonResult PostMessage(MessageVM messageVM)
-        {
+       
            
 
 
@@ -130,8 +128,9 @@ namespace BetterTeamsWebApp.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
 
         }
+
         [Authorize]
-        public JsonResult GetMessages(List<MessageVM> List)
+        public JsonResult GetMessages(string UserTo)
         {
 
             string Username1 = User.Identity.Name;
