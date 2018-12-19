@@ -51,19 +51,16 @@
 
         $('#contact-form-submit').on('click', function (e) {
             e.preventDefault();
-            let d = new Date();
 
-            Message = new Object();
-            Message.Sender = $('#Email').val();
-            Message.Receiver = 'admin';
-            Message.DateTime = `${d.getDate}/${d.getMonth}/${d.getFullYear} ${d.getHours}/${d.getMinutes}/${d.getSeconds}`;
-            Message.Message = $('#message').val();
+            contactUs = new Object();
+            contactUs.Sender = $('#Email').val();
+            contactUs.Text = $('#message').val();
 
             $.ajax({
                 type: "POST",
                 url: "/Home/ContactUs",
                 contentType: 'application/json;charset=utf-8',
-                data: JSON.stringify(Message),
+                data: JSON.stringify(contactUs),
                 success: function () 
                 {
                     alert('Success');

@@ -22,7 +22,7 @@
 
     <!-- endinject -->
     <link rel="shortcut icon" href="~/www/images/favicon.png" />
-    
+
 </head>
 
 <body>
@@ -64,20 +64,58 @@
                                 <div class="mt-5">
                                     Don't have an account? <a class="text-primary font-weight-medium " href="@Url.Action("Register", "Auth")"> <strong>Create</strong></a>
                                 </div>
-                                
+
                                 <div class="btn-group mt-4 mb-1 form-inline d-flex font-weight-light">
 
-                                    <a href="button" class="btn btn-inverse-light btn-fw w-50"><strong>Contact Us</strong></a>
+                                    <a data-toggle="modal" href="#myModal" id="myBtn" class="btn btn-inverse-light btn-fw w-50"><strong>Contact Us</strong></a>
                                     <a href="@Url.Action("About", "Home")" class="btn btn-inverse-light btn-fw w-50"><strong>About Us</strong></a>
+
                                 </div>
                             </form>
+
                         </div>
+
                     </div>
                 </div>
             </div>
             <!-- content-wrapper ends -->
+            <!-- Trigger/Open The Modal -->
+
+
+
         </div>
         <!-- page-body-wrapper ends -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            
+                <div class="modal-content ">
+                    <p><strong>Send Us a message</strong></p>
+                    <form id="contactForm " class="contact-form">
+
+                        <div class="form-group row">
+                            <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input  type="text" class="form-control" id="email" name="Email" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Message" class="col-sm-3 col-form-label">Message</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control" id="message" name="Message" rows="5" placeholder="Your message..."></textarea>
+                                <!-- <input type="text" class="form-control" id="Message" placeholder="Your message..."> -->
+                            </div>
+                        </div>
+
+                        <button id="contact-form-submit" type="submit" class="btn btn-gradient-primary">Submit</button>
+                        <button class="btn btn-gradient-primary">Cancel</button>
+                    </form>
+                </div>
+           
+
+        </div>
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
@@ -95,11 +133,45 @@
         $(function () {
             $("#Username, #Password, #RememberMe").popover({
                 trigger: 'hover'
-                
+
             });
         });
     </script>
+    <script>
+        $('#myBtn').click(function (e) {
+            e.preventDefault();
+            $('#myModal').modal();
+        });
+        $(function () {
 
+            $('#contact-form-submit').on('click', function (e) {
+                e.preventDefault();
+
+                ContactMessage = new Object();
+                ContactMessage.SenderEmail = $('#Email').val();
+                ContactMessage.Text = $('#message').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/ContactUs",
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(ContactMessage),
+                    success: function () {
+                        alert('Success');
+                    },
+
+                    error: function (request, message, error) {
+                        console.log(request);
+                        console.log(message);
+                        console.log(error);
+                       
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
     <!-- endinject -->
 </body>
 

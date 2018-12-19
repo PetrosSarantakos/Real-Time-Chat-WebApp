@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Better Teams Home</title>
     <!-- plugins:css -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="~/www/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
@@ -40,21 +40,21 @@
                         </div>
                     </li>
                     @*<li class="nav-item nav-settings d-none d-lg-block">
-                        <a class="nav-link" href="#">
-                            <i class="mdi mdi-format-line-spacing"></i>
-                        </a>
-                        </a>
-                    </li>*@
+                            <a class="nav-link" href="#">
+                                <i class="mdi mdi-format-line-spacing"></i>
+                            </a>
+                            </a>
+                        </li>*@
 
                 </ul>
                 <div class="col-sm"></div>
                 <ul class="navbar-nav navbar-nav-right col-sm">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                           
+
                             <div class="nav-profile-text">
                                 @*TODO SHOW ACTIVE USER HERE*@
-                                <p class="mb-1 text-white">User.Identity.Name</p>
+                                <p class="mb-1 text-white display-5">@User.Identity.Name</p>
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -63,8 +63,19 @@
                                 Profile
                             </a>
                             <div class="dropdown-divider"></div>
+
+                            <a data-toggle="modal" href="#myModal" id="myBtn" class="btn btn-fw dropdown-item">
+                                <i class=" mdi mdi-message-draw mr-2 text-primary"></i>
+                                Contact Us
+                            </a>
+                            <a class="dropdown-item" href="@Url.Action("About", "Home")">
+                                <i class=" mdi mdi-information mr-2 text-primary"></i>
+                                About Us
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="@Url.Action("Logout", "Auth")">
-                                <i class="mdi mdi-logout mr-2 text-primary"></i>
+                                <i class="mdi mdi-logout-variant mr-2 text-primary"></i>
                                 Signout
                             </a>
                         </div>
@@ -87,16 +98,52 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
             </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <ul id="list-users" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users</li></ul>
-            
         </nav>
-        @RenderBody()
-    </div>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul id="list-users" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users</li></ul>
+
+            </nav>
+            <!-- Trigger/Open The Modal -->
+            @*<div class="form-control">
+                    <button id="myBtn" class="btn-gradient-primary btn-rounded btn-fw">Contact Us</button>
+                </div>*@
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+
+                <div class="modal-content ">
+                    <p><strong>Send Us a message</strong></p>
+                    <form id="contactForm " class="contact-form">
+
+                        <div class="form-group row">
+                            <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Message" class="col-sm-3 col-form-label">Message</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control" id="message" name="Message" rows="5" placeholder="Your message..."></textarea>
+                                <!-- <input type="text" class="form-control" id="Message" placeholder="Your message..."> -->
+                            </div>
+                        </div>
+
+                        <button id="contact-form-submit" type="submit" class="btn btn-gradient-primary">Submit</button>
+                        <button class="btn btn-gradient-primary">Cancel</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+            @RenderBody()
+        </div>
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
@@ -104,6 +151,52 @@
     <script src="~/www/vendors/js/vendor.bundle.addons.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="~/www/vendors/js/off-canvas.js"></script>
+    <script src="~/www/vendors/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="~/www/vendors/js/dashboard.js"></script>
+    <!-- End custom js for this page-->
+    <!--Chat's script-->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('#myBtn').click(function (e) {
+            e.preventDefault();
+            $('#myModal').modal();
+        });
+        $(function () {
+            $('#contact-form-submit').on('click', function (e) {
+                e.preventDefault();
+
+                ContactMessage = new Object();
+                ContactMessage.SenderEmail = $('#Email').val();
+                ContactMessage.Text = $('#message').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/ContactUs",
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(ContactMessage),
+                    success: function () {
+                        alert('Success');
+                    },
+
+                    error: function (request, message, error) {
+                        console.log(request);
+                        console.log(message);
+                        console.log(error);
+
+                    }
+                });
+                return false;
+            });
+        });
+
+    </script>
+
     <script>
 
         var getRooms = () => {
@@ -195,20 +288,6 @@
             getUsers();
         });
     </script>
-
-
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
-    <script src="~/www/vendors/js/off-canvas.js"></script>
-    <script src="~/www/vendors/js/misc.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page-->
-    <script src="~/www/vendors/js/dashboard.js"></script>
-    <!-- End custom js for this page-->
-    <!--Chat's script-->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    @RenderSection("Scripts", false)
 </body>
 
 </html>

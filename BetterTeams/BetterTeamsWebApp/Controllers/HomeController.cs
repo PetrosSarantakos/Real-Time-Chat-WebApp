@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BetterTeamsWebApp.Controllers
 {
-    [Authorize]
+   
     public class HomeController : Controller
     {
         public ActionResult About()
@@ -18,6 +18,7 @@ namespace BetterTeamsWebApp.Controllers
             return View();
         }
         // GET: Home
+        [Authorize]
         [HttpGet]
         public ActionResult Index()
         {
@@ -48,8 +49,7 @@ namespace BetterTeamsWebApp.Controllers
             }
             return View(messages);
         }
-
-
+        [Authorize]
         public JsonResult GetUserRooms()
         {
             UserRepository userRepo = new UserRepository();
@@ -59,13 +59,15 @@ namespace BetterTeamsWebApp.Controllers
 
             return Json(userRooms, JsonRequestBehavior.AllowGet);
         }
+        [Authorize]
         public JsonResult GetUsers()
         {
             UserRepository userRepo = new UserRepository();
-            User user = userRepo.GetByUsername(User.Identity.Name);
+            //User user = userRepo.GetByUsername(User.Identity.Name);
             List<User> allUsers = new List<User>();
             allUsers = userRepo.GetAll().ToList();
-            allUsers.Remove(user);
+            var removeUser = allUsers.SingleOrDefault(x => x.Username == User.Identity.Name);
+            allUsers.Remove(removeUser);
             List<string> usernames = new List<string>();
             foreach (var item in allUsers)
             {
@@ -100,7 +102,7 @@ namespace BetterTeamsWebApp.Controllers
         //    List<User> users = new List<User>();
         //    var usersInRoom = roomRepo.GetAllUsersEmailInRoom()
         //}
-
+        [Authorize]
         public JsonResult PostMessage(MessageVM messageVM)
         {
            
@@ -108,7 +110,30 @@ namespace BetterTeamsWebApp.Controllers
             return Json(messageVM, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult ContactUs(ContactMessageVM ContactMessage)
+        {
+            MessageRepository messageRepo = new MessageRepository();
+            UserRepository userRepo = new UserRepository();
+            Message newMessage = new Message();
+            if(userRepo.GetByEmail(ContactMessage.SenderEmail) == null)
+            {
+                newMessage.Sender = "NotRegistered";
+            }
+            else
+            {
+                newMessage.Sender = userRepo.GetByEmail(ContactMessage.SenderEmail).Username;
+            }
+            newMessage.Receiver = "admin";
+            newMessage.Text = ContactMessage.Text;
+            newMessage.DateTime = DateTime.Now;
+            newMessage.Deleted = false;
+            messageRepo.Add(newMessage);
 
+            return Json(true, JsonRequestBehavior.AllowGet);
+
+        }
+        [Authorize]
         public JsonResult GetMessages(List<MessageVM> List)
         {
 
