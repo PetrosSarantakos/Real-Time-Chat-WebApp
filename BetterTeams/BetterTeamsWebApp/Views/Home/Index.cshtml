@@ -111,7 +111,7 @@
         };
 
         chHub.client.received = (data) => {
-            alert("You have a new message!!");
+            
             SignalMessage(data);
         };
 
@@ -126,10 +126,11 @@
                         chat.server.send(message.value, UserTo);
                         let d = Now();
                         m = new Object();
-                        m.Txt = message.value;
+                        m.Text = message.value;
                         m.Sender = "@User.Identity.Name";
                         m.DateTime = d;
-                        addMessage(m);
+                        //Comment this!!!
+                        //addMessage(m);
                         message.value = "";
                     }
                 });
@@ -145,32 +146,32 @@
     });
 
 
- let SignalMessage = (m) => {
-     let msgBubble;
-     let CurrentUser = m.sender;
-     let d = Now();
-     //alert(CurrentUser + "@User.Identity.Name");
-     if (m.Sender === CurrentUser) {
+    let SignalMessage = (m) => {
+        let msgBubble;
+        let CurrentUser = "@User.Identity.Name";
+        let d = Now();
+        
+        if (m.sender === CurrentUser) {
 
-         msgBubble = '<div class="outgoing_msg">' +
-             '<div class="sent_msg">' +
-             '<span class="time_user">' + m.Sender + '</span>' +
-             '<p>' + m.Text + '</p>' +
-             '<span class="time_user">' + d + '</span>' +
-             '</div></div></div>';
-     } else {
-         msgBubble = '<div class="incoming_msg">' +
-             '<div class="received_msg">' +
-             '<div class="received_withd_msg">' +
-             '<span class="time_user">' + m.Sender + '</span>' +
-             '<p>' + m.Text + '</p>' +
-             '<span class="time_user">' + d + '</span>' +
-             '</div></div></div>';
-     }
-     let chatBox = document.getElementById("chatBox");
-     chatBox.innerHTML += msgBubble;
-
+            msgBubble = '<div class="outgoing_msg">' +
+                '<div class="sent_msg">' +
+                '<span class="time_user">' + m.sender + '</span>' +
+                '<p>' + m.Message + '</p>' +
+                '<span class="time_user">' + d + '</span>' +
+                '</div></div></div>';
+        } else {
+            msgBubble = '<div class="incoming_msg">' +
+                '<div class="received_msg">' +
+                '<div class="received_withd_msg">' +
+                '<span class="time_user">' + m.sender + '</span>' +
+                '<p>' + m.Message + '</p>' +
+                '<span class="time_user">' + d + '</span>' +
+                '</div></div></div>';
+        }
+        let chatBox = document.getElementById("chatBox");
+        chatBox.innerHTML += msgBubble;
     }
+    
 
 
 
@@ -222,79 +223,30 @@
         let CurrentUser = "@User.Identity.Name";
         
             //console.log(newMessage);
-            if (m.Sender === CurrentUser) {
+        if (m.Sender === CurrentUser) {
 
-                msgBubble = '<div class="outgoing_msg">' +
-                    '<div class="sent_msg">' +
-                    '<span class="time_user">' + m.Sender + '</span>' +
-                    '<p>' + m.Text + '</p>' +
-                    '<span class="time_user">' + m.DateTime + '</span>' +
-                    '</div></div></div>';
-            } else {
-                msgBubble = '<div class="incoming_msg">' +
-                    '<div class="received_msg">' +
-                    '<div class="received_withd_msg">' +
-                    '<span class="time_user">' + m.Sender + '</span>' +
-                    '<p>' + m.Text + '</p>' +
-                    '<span class="time_user">' + m.DateTime + '</span>' +
-                    '</div></div></div>';
+            msgBubble = '<div class="outgoing_msg">' +
+                '<div class="sent_msg">' +
+                '<span class="time_user">' + m.Sender + '</span>' +
+                '<p>' + m.Text + '</p>' +
+                '<span class="time_user">' + m.DateTime + '</span>' +
+                '</div></div></div>';
+        } else {
+            msgBubble = '<div class="incoming_msg">' +
+                '<div class="received_msg">' +
+                '<div class="received_withd_msg">' +
+                '<span class="time_user">' + m.Sender + '</span>' +
+                '<p>' + m.Text + '</p>' +
+                '<span class="time_user">' + m.DateTime + '</span>' +
+                '</div></div></div>';
         }
         let chatBox = document.getElementById("chatBox");
         chatBox.innerHTML += msgBubble;
     }
 
-    //var msg = document.getElementById("msg");
-    //msg.addEventListener("keyup", (event) => {
-    //    console.log("enter pressed");
-    //    event.preventDefault();
-    //    if (event.keyCode === 13) {
-    //        sendBtn();
-    //    }
-    //});
-    //window.addEventListener("load", () => {
 
-
-    //    let chatBox = document.getElementById("chatBox");
-    //    const btn = document.getElementById("btn")
-
-    //    msg.addEventListener("keyup", (event) => {
-    //        event.preventDefault();
-    //        if (event.keyCode === 13) {
-    //            let msg = document.getElementById("msg");
-
-    //            chatBox.innerHTML += `
-    //                       <div class="outgoing_msg">
-    //                            <div class="sent_msg">
-    //                                <p>
-    //                                    ${msg.value}
-    //                                </p>
-    //                                <span class="time_date"> 11:01 AM | June 9</span>
-    //                            </div>
-    //                       </div>`;
-    //            msg.value = "";
-    //        }
-    //    });
-
-    //    btn.addEventListener("click", () => {
-    //        let msg = document.getElementById("msg");
-    //        chatBox.innerHTML += `
-    //                       <div class="outgoing_msg">
-    //                            <div class="sent_msg">
-    //                                <p>
-    //                                    ${msg.value}
-    //                                </p>
-    //                                <span class="time_date"> 11:01 AM | June 9</span>
-    //                            </div>
-    //                       </div>`;
-    //        msg.value = "";
-    //    });
-
-    //});
-    //window.addEventListener("load", () => {
-    //    message();
-    //});
 </script>
-    }
+ }  
 
 
 

@@ -47,7 +47,7 @@ namespace BetterTeamsWebApp
                     lock (sender.ConnectionIds)
                     {
 
-                        allReceivers = receiver.ConnectionIds;//.Concat(sender.ConnectionIds);
+                        allReceivers = receiver.ConnectionIds.Concat(sender.ConnectionIds);//.Concat(sender.ConnectionIds);
                     }
                 }
 
