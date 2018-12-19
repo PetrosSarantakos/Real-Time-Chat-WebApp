@@ -22,32 +22,10 @@ namespace BetterTeamsWebApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            string sender = "admin";
-            string receiver = "petros_sa";
-            UserRepository ur = new UserRepository();
-
-            User U1 = ur.GetByUsername(sender);
-            User U2 = ur.GetByUsername(receiver);
-
-
-            List<MessageVM> messages = new List<MessageVM>();
-            MessageVM msg = new MessageVM();
-
-            MessageRepository messageRepo = new MessageRepository();
-
-            var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
-            for (int i = 0; i < msges.Count - 1; i++)
-            {
-                msg.Id = msges[i].Id;
-                msg.Text = msges[i].Text;
-                msg.Sender = msges[i].Sender;
-                msg.Receiver = msges[i].Receiver;
-                msg.DateTime = msges[i].DateTime.ToString();
-                msg.Deleted = msges[i].Deleted;
-                ; messages.Add(msg);
-            }
-            return View(messages);
+            
+            return View();
         }
+
         [Authorize]
         public JsonResult GetUserRooms()
         {
@@ -129,7 +107,7 @@ namespace BetterTeamsWebApp.Controllers
 
         }
 
-        [Authorize]
+        
         public JsonResult GetMessages(string UserTo)
         {
 
@@ -140,8 +118,23 @@ namespace BetterTeamsWebApp.Controllers
             User U2 = Userdb.GetByUsername(Username2);
 
             List<MessageVM> messages = new List<MessageVM>();
-            MessageVM msg;
+            MessageVM msg = new MessageVM();
 
+            //using(var messageRepo = new MessageRepository())
+            //{
+            //    var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
+            //    for (int i = 0; i < msges.Count; i++)
+            //    {
+            //        msg.Id = msges[i].Id;
+            //        msg.Text = msges[i].Text;
+            //        msg.Sender = msges[i].Sender;
+            //        msg.Receiver = msges[i].Receiver;
+            //        msg.DateTime = msges[i].DateTime.ToString();
+            //        msg.Deleted = msges[i].Deleted;
+            //        messages.Add(msg);
+            //    }
+            //    return Json(msges, JsonRequestBehavior.AllowGet);
+            //}
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);

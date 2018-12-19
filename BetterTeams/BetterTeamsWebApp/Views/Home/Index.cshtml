@@ -56,8 +56,11 @@
         return today;
     }
 
+    
+    var chHub = $.connection.chatHub;
     var UserTo;
     function setUser(id) {
+        UserTo = "";
         UserTo = document.getElementById(`${id}`).getAttribute("value");
         let c = document.getElementById("chatBox");
         c.innerHTML = "";
@@ -107,7 +110,7 @@
         };
 
         var UserName = "@User.Identity.Name";
-        var chHub = $.connection.chatHub;
+        
         chHub.client.userConnected = (UserName) => {
             chat.users.push(new UserCId(UserName));
         };
@@ -117,7 +120,10 @@
             SignalMessage(data);
         };
 
-       
+        window.setInterval(function () {
+            var elem = document.getElementById('chatBox');
+            elem.scrollTop = elem.scrollHeight;
+        }, 1000);
 
         let startConnection = () => {
             $.connection.hub.start().done(function () {
@@ -126,11 +132,11 @@
                     
                     if (event.keyCode === 13) {
                         chat.server.send(message.value, UserTo);
-                        let d = Now();
+                        @*let d = Now();
                         m = new Object();
                         m.Text = message.value;
                         m.Sender = "@User.Identity.Name";
-                        m.DateTime = d;
+                        m.DateTime = d;*@
                         //Comment this!!!
                         //addMessage(m);
                         message.value = "";
@@ -175,58 +181,12 @@
         let chatBox = document.getElementById("chatBox");
         chatBox.innerHTML += msgBubble;
     }
-    
-
-
-
-
-
-
-    //--------------------------------------------------------------------
-   
-
-    //var sendMessageSuccess = (message) => {
-    //    console.log("Message sent!!!");
-    //    let nm = addMessage(message);
-    //    let chatBox = document.getElementById("chatBox");
-    //    chatBox.innerHTML += nm;
-    //    msg.value = "";
-    //}
-
-    //test
-    
-
-    // Handles sendMessage event on send button
-    @*function sendBtn() {
-        let d = new Date();
-        newMessage = new Object();
-        newMessage.Text = msg.value;
-        newMessage.Sender = "@User.Identity.Name";
-        newMessage.Receiver = 'petros_sa';
-        //console.log(newMessage);
-        $.ajax({
-            url: "/Home/PostMessage",
-            type: "post",
-            contentType: "application/json;charset=utf-8",
-            data: JSON.stringify(newMessage),
-            success: function (newMessage) {
-                sendMessageSuccess(newMessage);
-            },
-            error: function (request, message, error) {
-                console.log(request);
-                console.log(error);
-                console.log(message);
-            }
-        });
-
-    }*@
 
     //Message Builder
     let addMessage = (m) => {
         let msgBubble;
         let CurrentUser = "@User.Identity.Name";
         
-            //console.log(newMessage);
         if (m.Sender === CurrentUser) {
 
             msgBubble = '<div class="outgoing_msg">' +
