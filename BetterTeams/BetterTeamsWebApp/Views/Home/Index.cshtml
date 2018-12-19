@@ -59,6 +59,8 @@
     var UserTo;
     function setUser(id) {
         UserTo = document.getElementById(`${id}`).getAttribute("value");
+        let c = document.getElementById("chatBox");
+        c.innerHTML = "";
         message(UserTo);
     }
 
@@ -157,6 +159,7 @@
                 '<div class="sent_msg">' +
                 '<span class="time_user">' + m.sender + '</span>' +
                 '<p>' + m.Message + '</p>' +
+                '<div id=""></div>' +
                 '<span class="time_user">' + d + '</span>' +
                 '</div></div></div>';
         } else {
@@ -165,6 +168,7 @@
                 '<div class="received_withd_msg">' +
                 '<span class="time_user">' + m.sender + '</span>' +
                 '<p>' + m.Message + '</p>' +
+                '<div></div>' +
                 '<span class="time_user">' + d + '</span>' +
                 '</div></div></div>';
         }

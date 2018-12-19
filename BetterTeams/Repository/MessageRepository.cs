@@ -159,10 +159,10 @@ namespace Repository
         {
             try
             {
-                string query = "SELECT * FROM dbo.[Messages] WHERE (Sender = @SenderUsername AND Receiver = @ReceiverUsername) OR (Sender = @ReceiverUsername AND Receiver = @SenderUsername) AND Deleted='FALSE' ORDER BY Id";
+                string query = "SELECT * FROM dbo.[Messages] WHERE (Sender = @SenderUsername AND Receiver = @ReceiverUsername) OR (Sender = @ReceiverUsername AND Receiver = @SenderUsername) AND Deleted='TRUE' ORDER BY Id";
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@SenderUsername", "admin");
-                parameters.Add("@ReceiverUsername", "petros_sa");
+                parameters.Add("@SenderUsername", sender.Username);
+                parameters.Add("@ReceiverUsername", receiver.Username);
 
                 return _con.Query<Message>(query, parameters).ToList();
             }
