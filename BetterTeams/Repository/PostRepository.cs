@@ -52,13 +52,13 @@ namespace Repository
 			}
 		}
 
-		public void DeleteByEmail(string email)
+		public void DeleteBySenderUsername(string username)
 		{
 			try
 			{
-				string query = "UPDATE dbo.[Posts] SET Deleted='TRUE' WHERE Email = @Email";
+				string query = "UPDATE dbo.[Posts] SET Deleted='TRUE' WHERE Sender = @Sender";
 
-				_con.Execute(query, new { Email = email });
+				_con.Execute(query, new { Sender = username });
 			}
 			catch (Exception)
 			{
@@ -82,7 +82,7 @@ namespace Repository
 
 		public List<Post> GetAll()
 		{
-			string query = "SELECT * FROM dbo.[Posts] ORDER BY Id ASC";
+			string query = "SELECT * FROM dbo.[Posts] Deleted='FALSE' ORDER BY Id ASC";
 
 			return _con.Query<Post>(query.ToString()).ToList();
 		}
@@ -91,7 +91,7 @@ namespace Repository
 		{
 			try
 			{
-				string query = "SELECT * FROM dbo.[Posts] where Id = @Id";
+				string query = "SELECT * FROM dbo.[Posts] Deleted='FALSE' where Id = @Id";
 				DynamicParameters parameters = new DynamicParameters();
 				parameters.Add("@Id", id);
 				return _con.Query<Post>(query, parameters).FirstOrDefault();
@@ -106,7 +106,7 @@ namespace Repository
 		{
 			try
 			{
-				string query = "SELECT * FROM dbo.[Posts] where Room = @Room";
+				string query = "SELECT * FROM dbo.[Posts] Deleted='FALSE' where Room = @Room";
 				DynamicParameters parameters = new DynamicParameters();
 				parameters.Add("@Room", room);
 

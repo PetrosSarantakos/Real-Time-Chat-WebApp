@@ -39,23 +39,39 @@ namespace Repository
             }
         }
 
-        public void Delete(int id)
-        {
-            try
-            {
-                string query = "DELETE dbo.[Users] WHERE Id = @Id";
+        //public void Delete(int id) //NOP
 
-                _con.Execute(query, new { Id = id });                
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //{
+        //    try
+        //    {
+        //        string query = "DELETE dbo.[Users] WHERE Id = @Id";
 
-        public List<User> GetAll()
+        //        _con.Execute(query, new { Id = id });                
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+		public User DeleteByEmail(string email)
+		{
+			try
+			{
+				string query = "UPDATE dbo.[Users] SET Active='FALSE' WHERE Email = @Email";
+				DynamicParameters parameters = new DynamicParameters();
+				parameters.Add("@Email", email);
+				return _con.Query<User>(query, parameters).FirstOrDefault();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+
+		public List<User> GetAll()
         {
-            string query = "SELECT * FROM dbo.[Users] ORDER BY Username ASC";
+            string query = "SELECT * FROM dbo.[Users] WHERE Active='TRUE' ORDER BY Username ASC";
             
             return _con.Query<User>(query.ToString()).ToList();
         }
@@ -74,26 +90,26 @@ namespace Repository
 				throw;
 			}
 		}
-		public User GetById(int id)
-        {
-            try
-            {
-                string query = "SELECT * FROM dbo.[Users] where Id = @Id";
-                DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@Id", id);
-                return _con.Query<User>(query, parameters).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+		//public User GetById(int id)//NOP
+  //      {
+  //          try
+  //          {
+  //              string query = "SELECT * FROM dbo.[Users] where Id = @Id";
+  //              DynamicParameters parameters = new DynamicParameters();
+  //              parameters.Add("@Id", id);
+  //              return _con.Query<User>(query, parameters).FirstOrDefault();
+  //          }
+  //          catch (Exception)
+  //          {
+  //              throw;
+  //          }
+  //      }
 
         public User GetByUsername(string username)
         {
             try
             {
-                string query = "SELECT * FROM dbo.[Users] where Username = @Username";
+                string query = "SELECT * FROM dbo.[Users] where Username= @Username AND Active='TRUE'";
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Username", username);
                 return _con.Query<User>(query, parameters).FirstOrDefault();
@@ -140,7 +156,6 @@ namespace Repository
                 Dictionary<string, object> dictValues = GetValuesDictionary(model, true);
 
                 DynamicParameters parms = new DynamicParameters(dictValues);
-                //parms.Add("@Email", model.Email);
 
                 string query = String.Format($"UPDATE dbo.[Users] SET {GetUpdateQuery(dictValues.Keys)} WHERE Email = @Email");
 

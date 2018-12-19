@@ -88,22 +88,22 @@ namespace Repository
 				throw;
 			}
 		}
-		public List<string> GetAllUsersEmailInRoom(int id)
-		{
-			string query = "SELECT Email FROM dbo.[RoomsUsers] where RoomId = @RoomId";
-			DynamicParameters parameters = new DynamicParameters();
-			parameters.Add("@RoomId", id);
-			return _con.Query<string>(query, parameters).ToList();
+		//public List<string> GetAllUsersEmailInRoom(int id)
+		//{
+		//	string query = "SELECT Email FROM dbo.[RoomsUsers] where RoomId = @RoomId";
+		//	DynamicParameters parameters = new DynamicParameters();
+		//	parameters.Add("@RoomId", id);
+		//	return _con.Query<string>(query, parameters).ToList();
 				
-		}
+		//}
 
-		public List<int> GetAllRoomsByEmail(string email)
-		{
-			string query = "SELECT Id FROM dbo.[RoomsUsers]where Email = @Email";
-			DynamicParameters parameters = new DynamicParameters();
-			parameters.Add("@Email", email);
-			return _con.Query<int>(query, parameters).ToList();
-		}
+		//public List<int> GetAllRoomsByEmail(string email)
+		//{
+		//	string query = "SELECT Id FROM dbo.[RoomsUsers]where Email = @Email";
+		//	DynamicParameters parameters = new DynamicParameters();
+		//	parameters.Add("@Email", email);
+		//	return _con.Query<int>(query, parameters).ToList();
+		//}
 
 
 
@@ -133,7 +133,6 @@ namespace Repository
 			{
 				{ "@Name", model.Name },
 				{ "@Creator", model.CreatorEmail },
-				//{ "@Deleted", model.Deleted },
 			};
 			if (!isForUpdate)
 			{
