@@ -31,14 +31,10 @@ namespace BetterTeamsWebApp
             Clients.All.received(new { sender = sender, message = message, isPrivate = false });
         }
 
-        public void Send(string Text, string To, bool Deleted)
+        public void Send(string Text, string To)
         {
-            //TODO: Copy the code from Home to save the message to db
-
 
             UserCId receiver;
-            
-        
             
             if (Users.TryGetValue(To, out receiver))
             {
@@ -51,13 +47,13 @@ namespace BetterTeamsWebApp
                     lock (sender.ConnectionIds)
                     {
 
-                        allReceivers = receiver.ConnectionIds.Concat(sender.ConnectionIds);
+                        allReceivers = receiver.ConnectionIds;//.Concat(sender.ConnectionIds);
                     }
                 }
 
                 foreach (var cid in allReceivers)
                 {
-                    Clients.Client(cid).received(new { sender = sender.Username, message = Text, isPrivate = true });
+                    Clients.Client(cid).received(new { sender = sender.Username, Message = Text, rcver = To,  isPrivate = true });
                 }
             }
 
@@ -65,21 +61,21 @@ namespace BetterTeamsWebApp
             Message message = new Message
             {
                 Sender = Context.User.Identity.Name,
-                Receiver = receiver.Username,
+                Receiver = To,
                 Text = Text,
                 DateTime = DateTime.Now,
-                Deleted = Deleted
+                Deleted = false
             };
-            MessageVM messageVM = new MessageVM
-            {
-                Sender = message.Sender,
-                Receiver = message.Receiver,
-                Text = message.Text,
-                DateTime = message.DateTime.ToString(),
-                Deleted = message.Deleted
-            };
+            //MessageVM messageVM = new MessageVM
+            //{
+            //    Sender = message.Sender,
+            //    Receiver = message.Receiver,
+            //    Text = message.Text,
+            //    DateTime = message.DateTime.ToString(),
+            //    Deleted = message.Deleted
+            //};
             messageRepo.Add(message);
-            Clients.All.addNewMessageToPage(To, Text);
+            Clients.All.addNewMessageToPage(message.Text, message.Receiver, message.DateTime, message.Deleted);
         }
 
 
@@ -100,7 +96,7 @@ namespace BetterTeamsWebApp
 
         }
 
-        public override async Task OnConnected()
+        public override  Task OnConnected()
         {
 
             string userName = Context.User.Identity.Name;
@@ -128,7 +124,7 @@ namespace BetterTeamsWebApp
                 }
             }
 
-            await base.OnConnected();
+            return base.OnConnected();
         }
 
 

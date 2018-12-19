@@ -238,7 +238,7 @@
                 success: function (data) {
                     var userList = $('#list-users');
                     $(data).each(function (index, username) {
-                        userList.append(`<a id="${username}" class="nav-link mdi mdi-human-greeting  mb-1 text-white" href="#"> ${username} </a >`);
+                        userList.append(`<a id="${index}" onclick="setUser(this.id)" value="${username}" class="nav-link mdi mdi-contacts menu-icon mb-1 text-white" href="#" > ${username} </a >`);
                     });
 
                 },

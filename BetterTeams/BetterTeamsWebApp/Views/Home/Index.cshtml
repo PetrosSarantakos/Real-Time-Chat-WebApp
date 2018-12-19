@@ -17,10 +17,9 @@
                     <div class="input_msg_write">
                         <input id="msg" class="write_msg" placeholder="Type a message" />
                         <button id="btn" class="msg_send_btn">s</button>
+                        <input type="hidden" id="OtherUser" value="@ViewBag.OtherUser" />
                     </div>
                 </div>
-                <input type="hidden" id="OtherUsername" value="petros_sa" />
-
             </div>
         </div>
     </div>
@@ -37,46 +36,38 @@
 <!--SignalR script to update the chat page and send messages.-->
 
 <script>
-    $(function () {
-        var chat = $.connection.chatHub;
-        let message = document.getElementById("msg");
-        chat.addNewMessageToPage = function () {
-            addMessage(message.value);
-        };
+    function Now() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        var hh = today.getHours();
+        var min = today.getMinutes();
+        var ss = today.getSeconds();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + min + ':' + ss;
+        return today;
+    }
+
+    var UserTo;
+    function setUser(id) {
+        UserTo = document.getElementById(`${id}`).getAttribute("value");
+        message(UserTo);
+    }
 
 
-        $.connection.hub.start().done(function () {
-            message.addEventListener("keyup", (event) => {
-                //event.preventDefault();
-                if (event.keyCode === 13) {
-                    chat.server.send(message.value, "petros_sa", false);
-                    message.value = "";
-                }
-            });
-
-            message.addEventListener("click", (event) => {
-                chat.server.send(message.value, "petros_sa");
-                message.value = "";
-            });
-        });
-
-    });
- 
-
-
-
-
-
-
-    //--------------------------------------------------------------------
-    var message = () => {
-        ConvDetails = new Object();
-        ConvDetails.CurrentUser = "@User.Identity.Name";
-        ConvDetails.OtherUser = document.getElementById("OtherUsername").value;
-        
+    var message = (To) => {
         $.ajax({
             url: '/Home/GetMessages',
-            type: 'get',
+            type: 'Post',
+            data: {UserTo: `${To}`},
             dataType: 'json',
             success: function (List) {
                 messageListSuccess(List);
@@ -90,6 +81,105 @@
         });
     }
 
+    var messageListSuccess = (Msges) => {
+
+        $.each(Msges, function (index, txt) {
+            addMessage(txt);
+        });
+    }
+    
+
+    $(function () {
+        
+        var UserCId = (name) => {
+            UserCId.username = name
+        }
+
+        let b = true;
+
+        var chat = $.connection.chatHub;
+        let btn = document.getElementById("btn");
+        let message = document.getElementById("msg");
+        chat.addNewMessageToPage = function () {
+            addMessage(message.value);
+        };
+
+        var UserName = "@User.Identity.Name";
+        var chHub = $.connection.chatHub;
+        chHub.client.userConnected = (UserName) => {
+            chat.users.push(new UserCId(UserName));
+        };
+
+        chHub.client.received = (data) => {
+            alert("You have a new message!!");
+            SignalMessage(data);
+        };
+
+       
+
+        let startConnection = () => {
+            $.connection.hub.start().done(function () {
+                message.addEventListener("keyup", (event) => {
+                    //event.preventDefault();
+                    
+                    if (event.keyCode === 13) {
+                        chat.server.send(message.value, UserTo);
+                        let d = Now();
+                        m = new Object();
+                        m.Txt = message.value;
+                        m.Sender = "@User.Identity.Name";
+                        m.DateTime = d;
+                        addMessage(m);
+                        message.value = "";
+                    }
+                });
+
+                btn.addEventListener("click", (event) => {
+                    chat.server.send(message.value, UserTo);
+                    message.value = "";
+                });
+            });
+        }
+
+        startConnection();
+    });
+
+
+ let SignalMessage = (m) => {
+     let msgBubble;
+     let CurrentUser = m.sender;
+     let d = Now();
+     //alert(CurrentUser + "@User.Identity.Name");
+     if (m.Sender === CurrentUser) {
+
+         msgBubble = '<div class="outgoing_msg">' +
+             '<div class="sent_msg">' +
+             '<span class="time_user">' + m.Sender + '</span>' +
+             '<p>' + m.Text + '</p>' +
+             '<span class="time_user">' + d + '</span>' +
+             '</div></div></div>';
+     } else {
+         msgBubble = '<div class="incoming_msg">' +
+             '<div class="received_msg">' +
+             '<div class="received_withd_msg">' +
+             '<span class="time_user">' + m.Sender + '</span>' +
+             '<p>' + m.Text + '</p>' +
+             '<span class="time_user">' + d + '</span>' +
+             '</div></div></div>';
+     }
+     let chatBox = document.getElementById("chatBox");
+     chatBox.innerHTML += msgBubble;
+
+    }
+
+
+
+
+
+
+    //--------------------------------------------------------------------
+   
+
     //var sendMessageSuccess = (message) => {
     //    console.log("Message sent!!!");
     //    let nm = addMessage(message);
@@ -99,15 +189,7 @@
     //}
 
     //test
-    var messageListSuccess = (Msges) => {
-
-        $.each(Msges, function (index, txt) {
-            let m = addMessage(txt);
-            let chatBox = document.getElementById("chatBox");
-            chatBox.innerHTML += m;
-            console.log("messages projected");
-        });
-    }
+    
 
     // Handles sendMessage event on send button
     @*function sendBtn() {
@@ -136,11 +218,9 @@
 
     //Message Builder
     let addMessage = (m) => {
-        
-        console.log(m);
         let msgBubble;
         let CurrentUser = "@User.Identity.Name";
-            console.log('addMessage run');
+        
             //console.log(newMessage);
             if (m.Sender === CurrentUser) {
 
@@ -158,8 +238,9 @@
                     '<p>' + m.Text + '</p>' +
                     '<span class="time_user">' + m.DateTime + '</span>' +
                     '</div></div></div>';
-            }
-        return msgBubble;
+        }
+        let chatBox = document.getElementById("chatBox");
+        chatBox.innerHTML += msgBubble;
     }
 
     //var msg = document.getElementById("msg");
@@ -209,9 +290,9 @@
     //    });
 
     //});
-    window.addEventListener("load", () => {
-        message();
-    });
+    //window.addEventListener("load", () => {
+    //    message();
+    //});
 </script>
     }
 

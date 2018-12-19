@@ -22,7 +22,6 @@ namespace BetterTeamsWebApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
             string sender = "admin";
             string receiver = "petros_sa";
             UserRepository ur = new UserRepository();
@@ -107,8 +106,6 @@ namespace BetterTeamsWebApp.Controllers
         {
            
 
-            return Json(messageVM, JsonRequestBehavior.AllowGet);
-        }
 
         [HttpPost]
         public JsonResult ContactUs(ContactMessageVM ContactMessage)
@@ -137,8 +134,8 @@ namespace BetterTeamsWebApp.Controllers
         public JsonResult GetMessages(List<MessageVM> List)
         {
 
-            string Username1 = ViewBag.CurrentUser;
-            string Username2 = ViewBag.OtherUser;
+            string Username1 = User.Identity.Name;
+            string Username2 = UserTo;
             UserRepository Userdb = new UserRepository();
             User U1 = Userdb.GetByUsername(Username1);
             User U2 = Userdb.GetByUsername(Username2);
@@ -162,6 +159,8 @@ namespace BetterTeamsWebApp.Controllers
             }
             return Json(messages, JsonRequestBehavior.AllowGet);
         }
+
+
         public JsonResult ContactUs(MessageVM messageVM)
         {
             MessageRepository messageRepo = new MessageRepository();
