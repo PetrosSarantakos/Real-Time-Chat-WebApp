@@ -261,7 +261,11 @@
     <Content Include="www\images\About\gallery\thumbs\07.jpg" />
     <Content Include="www\images\About\gallery\thumbs\08.jpg" />
     <Content Include="www\images\About\gallery\thumbs\09.jpg" />
+<<<<<<< Updated upstream
     <Content Include="www\images\About\IMG_20171015_144936_581copy3.jpg" />
+=======
+    <Content Include="www\images\About\Maria.jpg" />
+>>>>>>> Stashed changes
     <Content Include="www\images\About\overlay.png" />
     <Content Include="www\images\About\pic01.jpg" />
     <Content Include="www\images\About\pic02.jpg" />
