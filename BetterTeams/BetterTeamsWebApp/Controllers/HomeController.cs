@@ -83,7 +83,7 @@ namespace BetterTeamsWebApp.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         public JsonResult GetMessages(string UserTo)
         {
 
@@ -175,6 +175,28 @@ namespace BetterTeamsWebApp.Controllers
 			userVM.Role = user.Role;
 
 			return View(userVM);
+        }
+
+
+        public JsonResult GetPostsOfRoom(string Room)
+        {
+			//TODO: Fetch all posts of Room from db
+			List<PostVM> PostsList = new List<PostVM>();
+			PostRepository postrepo = new PostRepository();
+			var posts = postrepo.GetByRoom(Room);
+			foreach (var post in posts)
+			{
+				var newpost = new PostVM();
+				newpost.Id = post.Id;
+				newpost.PostText = post.PostText;
+				newpost.Room = post.Room;
+				newpost.Sender = post.Sender;
+				newpost.DateTime = post.DateTime;
+				PostsList.Add(newpost);
+			
+			}
+
+            return Json(PostsList, JsonRequestBehavior.AllowGet);
         }
     }
 }
