@@ -1,0 +1,140 @@
+﻿@model List<BetterTeamsWebApp.Models.ViewModels.MessageVM>
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="mesgs">
+                <div id="postBox" class="msg_history">
+
+                </div>
+                <!--Type Post-->
+                <div class="type_msg ">
+                    <div class="input_msg_write">
+                        <input id="pst" class="write_msg" placeholder="Type a message" />
+                        <button id="btn" onclick="clickToPost(this.value)" >s</button>
+                        <input id="crntRoom" type="hidden" value="General" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section postscripts{
+<script>
+    function Now() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+
+        var hh = today.getHours();
+        var min = today.getMinutes();
+        var ss = today.getSeconds();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + min + ':' + ss;
+        return today;
+    }
+
+    var postTxt = document.getElementById("pst").value;
+    var postBox = document.getElementById("pstBox");
+    var currentRoom = document.getElementById("crntRoom");
+
+
+    var clickToPost = (txt) => {
+        sendPost(txt, currentRoom.value)
+    }
+
+    
+    var setRoom = (id) => {
+        if (previd !== "-1") {
+            console.log("mpika rooms");
+            console.log(name);
+            $("#" + previd).removeClass('text-primary bg-white');
+            $("#" + previd).addClass('text-white');
+        }
+
+        previd = id;
+        $("#" + previd).removeClass('text-white');
+        $("#" + previd).addClass("text-primary bg-white");
+        ofRoom = document.getElementById(previd).getAttribute("value");
+        console.log(ofRoom);
+        let c = document.getElementById("postBox");
+        c.innerHTML = "";
+        currentRoom.value = ofRoom;
+        RoomHandler(ofRoom);
+    }
+
+    var RoomHandler = (r) => {
+        $.ajax({
+            url: '/Home/GetPostsOfRoom',
+            type: 'Get',
+            data: { Room: `${r}` },
+            dataType: 'json',
+            success: function (pList) {
+                postsListSuccess(pList);
+            },
+            error: function (request, message, error) {
+                console.log(request);
+                console.log(error);
+                console.log(message);
+            }
+
+        });
+    }
+
+    var sendPost = (p, r) => {
+        newPost = new Object();
+        newPost.PostText = p;
+        newPost.Sender = "@User.Identity.Name";
+        newPost.Room = r;
+        newPost.DateTime = Now();
+        $.ajax({
+            url: '/Home/SendPost',
+            type: 'Post',
+            data: JSON.stringify(newPost),
+            dataType: 'json',
+            success: function (newPost) {
+                pοst.innerHTML += addPost();
+            },
+            error: function (request, message, error) {
+                console.log(request);
+                console.log(error);
+                console.log(message);
+            }
+        });
+
+    }
+
+    var postsListSuccess = (Posts) => {
+
+        $.each(Posts, (index, post) => {
+            addPost(post);
+        });
+    }
+
+    var addPost = (p) => {
+        let dpost = Now();
+        let postBubble;
+        postBubble = '<div class="outgoing_msg">' +
+            '<div class="sent_msg">' +
+            '<span class="time_user">' + p.Sender + '</span>' +
+            '<p>' + p.PostText + '</p>' +
+            '<span class="time_user">' + dpost + '</span>' +
+            '</div></div></div>';
+        return postBubble;
+    }
+    </script>
+    
+    }

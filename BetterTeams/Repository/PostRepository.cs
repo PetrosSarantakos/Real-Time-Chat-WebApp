@@ -122,7 +122,7 @@ namespace Repository
 		{
 			Dictionary<string, object> dict = new Dictionary<string, object>
 			{
-				{ "@SenderEmail", model.SenderEmail },
+				{ "@SenderEmail", model.Sender },
                // { "@Subject", model.Subject },
                 { "@PostText", model.PostText },
 				{ "@Deleted", model.Deleted },
