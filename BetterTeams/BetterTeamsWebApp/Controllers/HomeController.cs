@@ -87,7 +87,7 @@ namespace BetterTeamsWebApp.Controllers
             {
                 newMessage.Sender = userRepo.GetByEmail(ContactMessage.SenderEmail).Username;
             }
-            newMessage.Receiver = "admin";
+            newMessage.Receiver = userRepo.GetAdmin().Username;
             newMessage.Text = ContactMessage.Text;
             newMessage.DateTime = DateTime.Now;
             newMessage.Deleted = false;

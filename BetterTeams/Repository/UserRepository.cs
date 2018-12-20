@@ -90,21 +90,32 @@ namespace Repository
 				throw;
 			}
 		}
-		//public User GetById(int id)//NOP
-  //      {
-  //          try
-  //          {
-  //              string query = "SELECT * FROM dbo.[Users] where Id = @Id";
-  //              DynamicParameters parameters = new DynamicParameters();
-  //              parameters.Add("@Id", id);
-  //              return _con.Query<User>(query, parameters).FirstOrDefault();
-  //          }
-  //          catch (Exception)
-  //          {
-  //              throw;
-  //          }
-  //      }
-
+        //public User GetById(int id)//NOP
+        //      {
+        //          try
+        //          {
+        //              string query = "SELECT * FROM dbo.[Users] where Id = @Id";
+        //              DynamicParameters parameters = new DynamicParameters();
+        //              parameters.Add("@Id", id);
+        //              return _con.Query<User>(query, parameters).FirstOrDefault();
+        //          }
+        //          catch (Exception)
+        //          {
+        //              throw;
+        //          }
+        //      }
+        public User GetAdmin()
+        {
+            try
+            {
+                string query = "SELECT * FROM dbo.[Users] where Role= 'Admin' AND Active='TRUE'";
+                return _con.Query<User>(query).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public User GetByUsername(string username)
         {
             try

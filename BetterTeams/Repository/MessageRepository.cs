@@ -11,17 +11,17 @@ namespace Repository
 {
     public class MessageRepository : BaseRepository, IRepository<Message>
     {
-		//#region ReadLevel
-		//public enum MessageReadLevel
-		//{
-		//	Normal,
-		//	WithSenderReceiver
-		//}
+        #region ReadLevel
+        public enum MessageReadLevel
+        {
+            Normal,
+            WithSenderReceiver
+        }
 
-		//public MessageReadLevel ReadLevel { get; set; } = MessageReadLevel.Normal;
-		//#endregion
+        public MessageReadLevel ReadLevel { get; set; } = MessageReadLevel.Normal;
+        #endregion
 
-		public MessageRepository() : base()
+        public MessageRepository() : base()
         {
 
         }
@@ -75,9 +75,12 @@ namespace Repository
 				throw;
 			}
 		}
+
         public List<Message> GetAll()
         {
-            return null;
+            StringBuilder query = new StringBuilder("SELECT * FROM dbo.[Messages]");
+
+            return _con.Query<Message>(query.ToString()).ToList();
         }
         //public List<Message> GetAll() //TODO:CHECK (Μπορει να μην το χρειαστουμε)
         //{

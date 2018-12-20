@@ -105,8 +105,14 @@ namespace BetterTeamsWebApp.Controllers
                     encryptedTicket);
 
                 HttpContext.Response.Cookies.Add(cookie);
-
-                return RedirectToAction("Index", "Home");
+                if (user.Role == "Admin")
+                {
+                    return RedirectToAction("IndexAdmin", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -115,6 +121,7 @@ namespace BetterTeamsWebApp.Controllers
             }
         }
 
+        
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
