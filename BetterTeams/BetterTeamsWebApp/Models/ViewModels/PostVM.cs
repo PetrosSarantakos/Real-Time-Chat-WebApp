@@ -12,7 +12,7 @@ namespace BetterTeamsWebApp.Models.ViewModels
         public string PostText { get; set; }
         public User Sender { get; set; }
         public DateTime DateTime { get; set; }
-        public Room Room { get; set; }
+        public string Room { get; set; }
         public bool Deleted { get; set; }
     }
 }
