@@ -12,23 +12,22 @@ namespace Models
 		public string PostText { get; set; }
 		public bool Deleted { get; set; }
 		public string Room { get; set; }
-		public string SenderEmail
-		{
-			get
-			{
-				return Sender != null ? Sender.Email : "";
-			}
-			set
-			{
-				if (Sender == null)
-					Sender = new User();
+		//public string SenderEmail
+		//{
+		//	get
+		//	{
+		//		return Sender != null ? Sender.Email : "";
+		//	}
+		//	set
+		//	{
+		//		if (Sender == null)
+		//			Sender = new User();
 
-				Sender.Email = value;
-			}
-		}
-		
+		//		Sender.Email = value;
+		//	}
+		//}
 		#region helper properties
-		public User Sender { get; set; }
+		public string Sender { get; set; }
 		#endregion
 	}
 }

@@ -212,11 +212,13 @@ namespace BetterTeamsWebApp.Controllers
 
             return Json(PostsList, JsonRequestBehavior.AllowGet);
         }
-        public string EncryptPassword(string Password)
+		#region Encryption
+		public string EncryptPassword(string Password)
         {
             byte[] bytes = Encoding.Unicode.GetBytes(Password);
             byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
             return Convert.ToBase64String(inArray);
         }
-    }
+		#endregion
+	}
 }
