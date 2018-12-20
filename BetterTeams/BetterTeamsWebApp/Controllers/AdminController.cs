@@ -44,8 +44,24 @@ namespace BetterTeamsWebApp.Controllers
         }
         public ActionResult Users()
         {
-            return View();
-        }
+            List<UserVM> users = new List<UserVM>();
+            UserVM user = new UserVM();
+            UserRepository userRepo = new UserRepository();
+            var usrs = userRepo.GetAll().ToList();
+            for (int i = 0; i < usrs.Count; i++)
+            {
+                user = new UserVM();
+                user.Username = usrs[i].Username;
+                user.Email = usrs[i].Email;
+                user.Name = usrs[i].Name;
+                user.Surname = usrs[i].Surname;
+                user.Role = usrs[i].Role;
+                user.DateOfBirth = usrs[i].DateOfBirth;
+                user.Active = usrs[i].Active;
+                users.Add(user);
+            }
+            return View(users);
+    }
         public ActionResult EditUser(string email)
         {
             return View();
@@ -59,9 +75,13 @@ namespace BetterTeamsWebApp.Controllers
         }
         public ActionResult Rooms()
         {
-            return View();
+            List<Room> rooms = new List<Room>();
+            Room room = new Room();
+            RoomRepository roomRepo = new RoomRepository();
+            rooms = roomRepo.GetAll().ToList();
+            return View(rooms);
         }
-        public ActionResult EditRoom(string id)
+        public ActionResult EditRoom(int id)
         {
             return View();
         }
@@ -74,9 +94,25 @@ namespace BetterTeamsWebApp.Controllers
         }
         public ActionResult Posts()
         {
-            return View();
+            List<PostVM> posts = new List<PostVM>();
+            PostVM post = new PostVM();
+            PostRepository postRepo = new PostRepository();
+            var psts = postRepo.GetAll().ToList();
+            for (int i = 0; i < psts.Count; i++)
+            {
+                post = new PostVM();
+                post.Id = psts[i].Id;
+                post.PostText = psts[i].PostText;
+                post.Sender = psts[i].Sender;
+                post.DateTime = psts[i].DateTime;
+                post.Room = psts[i].Room;
+                post.Deleted = psts[i].Deleted;
+                posts.Add(post);
+            }
+            return View(posts);
+          
         }
-        public ActionResult EditPost(string id)
+        public ActionResult EditPost(int id)
         {
             return View();
         }

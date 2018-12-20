@@ -107,7 +107,7 @@ namespace BetterTeamsWebApp.Controllers
                 HttpContext.Response.Cookies.Add(cookie);
                 if (user.Role == "Admin")
                 {
-                    return RedirectToAction("IndexAdmin", "Admin");
+                    return RedirectToAction("Users", "Admin");
                 }
                 else
                 {

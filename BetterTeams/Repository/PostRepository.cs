@@ -82,7 +82,7 @@ namespace Repository
 
 		public List<Post> GetAll()
 		{
-			string query = "SELECT * FROM dbo.[Posts] Deleted='FALSE' ORDER BY Id ASC";
+			string query = "SELECT * FROM dbo.[Posts] WHERE Deleted='FALSE' ORDER BY Id ASC";
 
 			return _con.Query<Post>(query.ToString()).ToList();
 		}
@@ -91,7 +91,7 @@ namespace Repository
 		{
 			try
 			{
-				string query = "SELECT * FROM dbo.[Posts] Deleted='FALSE' where Id = @Id";
+				string query = "SELECT * FROM dbo.[Posts] WHERE Deleted='FALSE' AND Id = @Id";
 				DynamicParameters parameters = new DynamicParameters();
 				parameters.Add("@Id", id);
 				return _con.Query<Post>(query, parameters).FirstOrDefault();

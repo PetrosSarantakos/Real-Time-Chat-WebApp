@@ -174,21 +174,21 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item nav-profile">
-                        <a href="#" class="nav-link">
+                        <a href="@Url.Action("Users","Admin")" class="nav-link">
 
                             <i class="mdi mdi-account-settings-variant mr-2 "></i>
                             <span class="align-text-center text-white display-5 mr-2">Manage Users</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="@Url.Action("Rooms","Admin")">
                             <i class=" mdi mdi-hexagon-outline mr-2 "></i>
                             <span class="align-text-center text-white display-5 mr-2">Manage Rooms</span>
 
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">
+                        <a class="nav-link " href="@Url.Action("Posts","Admin")">
                             <i class="mdi mdi-group mr-2 "></i>
                             <span class="align-text-center text-white display-5 mr-2">Manage Posts</span>
                         </a>
@@ -206,6 +206,7 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
+                    @RenderBody()
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:../../partials/_footer.html -->
@@ -215,7 +216,7 @@
                         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
                     </div>
                 </footer>
-               @RenderBody()
+              
             </div>
             <!-- main-panel ends -->
         </div>

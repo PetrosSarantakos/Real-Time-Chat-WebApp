@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Models.Room>
 @{
     ViewBag.Title = "Rooms";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -6,3 +6,33 @@
 
 <h2>Rooms</h2>
 
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Creator</th>
+                <th>Creator Email</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="table-active">
+                    <td>@item.Name</td>
+                    <td>@item.Creator</td>
+                    <td>@item.CreatorEmail</td>
+                    
+                    <td>
+                        <a href="@Url.Action("EditPost", "Admin")?id=@(item.Name)">Edit</a> |
+                        <a href="@Url.Action("DeletePost","Admin")?id=@(item.Name)">Delete</a>
+                    </td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+</div>

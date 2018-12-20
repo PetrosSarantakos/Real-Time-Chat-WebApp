@@ -1,4 +1,4 @@
-﻿
+﻿@model List<BetterTeamsWebApp.Models.ViewModels.PostVM>
 @{
     ViewBag.Title = "Posts";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -6,3 +6,38 @@
 
 <h2>Posts</h2>
 
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            
+            <tr>
+                <th>Id</th>
+                <th>PostText</th>
+                <th>Sender</th>
+                <th>Date</th>
+                <th>Room</th>
+                <th>Deleted</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="table-active">
+                    <td>@item.Id</td>
+                    <td>@item.PostText</td>
+                    <td>@item.Sender</td>
+                    <td>@item.DateTime</td>
+                    <td>@item.Room</td>
+                    <td>@item.Deleted</td>
+                    <td>
+                        <a href="@Url.Action("EditPost", "Admin")?id=@(item.Id)">Edit</a> |
+                        <a href="@Url.Action("DeletePost","Admin")?id=@(item.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+</div>
