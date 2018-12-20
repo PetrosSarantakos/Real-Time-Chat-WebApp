@@ -127,12 +127,12 @@ namespace Repository
                 { "@PostText", model.PostText },
 				{ "@Deleted", model.Deleted },
 				{ "@Room", model.Room },
-				//{ "@DateTime", model.DateTime }
+				{ "@DateTime", model.DateTime }
             };
-			if (!isForUpdate)
-			{
-				dict.Add("DateTime", DateTime.UtcNow);
-			}
+			//if (!isForUpdate)
+			//{
+			//	dict.Add("DateTime", DateTime.UtcNow);
+			//}
 				
 			//if (isForUpdate)
 			//{

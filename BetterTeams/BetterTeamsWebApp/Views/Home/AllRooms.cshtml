@@ -55,10 +55,16 @@
             return today;
         }
 
-        var postTxt = document.getElementById("pst").value;
+        var postTxt = document.getElementById("pst");
         var currentRoom = document.getElementById("crntRoom");
 
+        postTxt.addEventListener("keyup", (event) => {
+            if (event.keyCode === 13) {
+                sendPost(postTxt.value, currentRoom.value)
+                message.value = "";
+            }
 
+        })
         var clickToPost = (txt) => {
             sendPost(txt, currentRoom.value)
         }
@@ -94,16 +100,14 @@
         
 
             var sendPost = (p, r) => {
-                newPost = new Object();
-                newPost.PostText = p;
-                newPost.Sender = "@User.Identity.Name";
-                newPost.Room = r;
-                newPost.DateTime = Now();
+                Sender = "@User.Identity.Name";
+                DateTime = Now();
                 $.ajax({
+                    //"application/json;charset=utf-8"
                     url: '/Home/SendPost',
                     type: 'POST',
-                    data: JSON.stringify(newPost),
                     dataType: 'json',
+                    data: { PostText: `${p}`, Sender: `${Sender}`, Room: `${r}`, dateTime: `${DateTime}` },
                     success: function (data) {
                         var pBox = document.getElementById('postBox');
                         console.log("success");
