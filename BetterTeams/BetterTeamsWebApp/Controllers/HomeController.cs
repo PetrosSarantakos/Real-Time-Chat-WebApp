@@ -13,18 +13,18 @@ namespace BetterTeamsWebApp.Controllers
    
     public class HomeController : Controller
     {
+        [Authorize]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
         public ActionResult About()
         {
             return View();
         }
-        // GET: Home
-        [Authorize]
-        [HttpGet]
-        public ActionResult Index()
-        {
-            
-            return View();
-        }
+
 
         [Authorize]
         public JsonResult GetUserRooms()
@@ -36,6 +36,7 @@ namespace BetterTeamsWebApp.Controllers
 
             return Json(userRooms, JsonRequestBehavior.AllowGet);
         }
+
         [Authorize]
         public JsonResult GetUsers()
         {
@@ -54,32 +55,6 @@ namespace BetterTeamsWebApp.Controllers
             return Json(usernames, JsonRequestBehavior.AllowGet);
 
         }
-        /// <summary>
-        /// ///////////////////////////
-        /// </summary>
-        /// <returns></returns>
-        //public JsonResult GetRooms(UserVM user)
-        //{
-        //    UserRepository userRepo = new UserRepository();
-        //    User pageUser = userRepo.GetByUsername(User.Identity.Name);
-        //    RoomRepository roomRepo = new RoomRepository();
-        //    List<Room> rooms = new List<Room>();
-        //    var roomNames = roomRepo.GetAllRoomsByEmail(user.Email).ToList();
-        //    foreach(var item in roomNames)
-        //    {
-
-        //    }
-        //    return roomNames;
-
-        //}
-        //public JsonResult GetUsers()
-        //{
-        //    UserRepository userRepo = new UserRepository();
-        //    RoomRepository roomRepo = new RoomRepository();
-        //    List<User> users = new List<User>();
-        //    var usersInRoom = roomRepo.GetAllUsersEmailInRoom()
-        //}
-       
            
 
 
@@ -107,7 +82,8 @@ namespace BetterTeamsWebApp.Controllers
 
         }
 
-        
+        [Authorize]
+        [HttpGet]
         public JsonResult GetMessages(string UserTo)
         {
 
@@ -120,21 +96,6 @@ namespace BetterTeamsWebApp.Controllers
             List<MessageVM> messages = new List<MessageVM>();
             MessageVM msg = new MessageVM();
 
-            //using(var messageRepo = new MessageRepository())
-            //{
-            //    var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
-            //    for (int i = 0; i < msges.Count; i++)
-            //    {
-            //        msg.Id = msges[i].Id;
-            //        msg.Text = msges[i].Text;
-            //        msg.Sender = msges[i].Sender;
-            //        msg.Receiver = msges[i].Receiver;
-            //        msg.DateTime = msges[i].DateTime.ToString();
-            //        msg.Deleted = msges[i].Deleted;
-            //        messages.Add(msg);
-            //    }
-            //    return Json(msges, JsonRequestBehavior.AllowGet);
-            //}
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
@@ -152,22 +113,28 @@ namespace BetterTeamsWebApp.Controllers
             return Json(messages, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult ContactUs(MessageVM messageVM)
+        [Authorize]
+        [HttpGet]
+        public ActionResult Edit(UserVM userVM)
         {
-            MessageRepository messageRepo = new MessageRepository();
-            Message message = new Message
-            {
-                Sender = messageVM.Sender,
-                Receiver = messageVM.Receiver,
-                Text = messageVM.Text,
-                DateTime = DateTime.Now,
-                Deleted = messageVM.Deleted
-            };
+            //TODO: Find fetch userVM from db 
+            return View(userVM);
+        }
 
-            messageRepo.Add(message);
+        [Authorize]
+        [HttpPost]
+        public ActionResult PostEdit(UserVM userVM)
+        {
+            //TODO: Find userVM from db and Update it
+            return RedirectToAction("MyProfile", "Home");
+        }
 
-            return Json(messageVM, JsonRequestBehavior.AllowGet);
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyProfile(UserVM userVM)
+        {
+            //TODO: Find userVM from db with
+            return View(userVM);
         }
     }
 }
