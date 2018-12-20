@@ -104,7 +104,7 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul id="list-users" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users</li></ul>
-
+                <ul id="list-rooms" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Rooms</li></ul>
             </nav>
             <!-- Trigger/Open The Modal -->
             @*<div class="form-control">
@@ -199,8 +199,7 @@
 
     <script>
 
-        var getRooms = () => {
-            var roomNames = [];
+        var getUserRooms = () => {
             $.ajax({
                 url: '/Home/GetUserRooms',
                 type: 'GET',
@@ -214,7 +213,7 @@
                     //});
                     var userList = $('#roomNamesList');
                     $(data).each(function (index, name) {
-                        userList.append(`<a id="${name}" class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
+                        userList.append(`<a class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
                     });
 
 
@@ -241,6 +240,28 @@
                         userList.append(`<a id="${index}" onclick="setUser(this.id)" value="${username}" class="nav-link mdi mdi-contacts menu-icon mb-1 text-white" href="#" > ${username} </a >`);
                     });
 
+                },
+                error: function (request, message, error) {
+                    console.log(request);
+                    console.log(error);
+                    console.log(message);
+                }
+
+            });
+        }
+
+        var getRooms = () => {
+            
+            $.ajax({
+                url: '/Home/GetRooms',
+                type: 'GET',
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    var roomList = $('#list-rooms');
+                    $(data).each(function (index, name) {
+                        roomList.append(`<a onclick="setRoom(this.id)" name="${name}" value="${name}" href="#" class="nav-link mdi mdi-login-variant menu-icon mb-1 text-white">${name} </a >`);
+                    });
                 },
                 error: function (request, message, error) {
                     console.log(request);
@@ -284,8 +305,9 @@
 
         //};
         window.addEventListener("load", () => {
-            getRooms();
+            getUserRooms();
             getUsers();
+            getRooms();
         });
     </script>
     @RenderSection("scripts", false)

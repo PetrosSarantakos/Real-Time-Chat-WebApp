@@ -39,7 +39,7 @@
     function Now() {
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
+        var mm = today.getMonth() + 1; 
         var yyyy = today.getFullYear();
 
         var hh = today.getHours();
@@ -56,17 +56,35 @@
         return today;
     }
 
-    
+    var previd = "-1";
     var chHub = $.connection.chatHub;
     var UserTo;
     function setUser(id) {
+        if (previd !== "-1") {
+            console.log("mpika");
+            $(`#${previd}`).removeClass();
+            $(`#${previd}`).addClass('nav-link mdi mdi-contacts menu-icon mb-1 text-white href="#"');
+        }
+        previd = id;
         UserTo = "";
-        UserTo = document.getElementById(`${id}`).getAttribute("value");
+        
+        $(`#${previd}`).addClass("nav-link mdi mdi-contacts menu-icon mb-1 text-primary bg-white");
+        UserTo = document.getElementById(`${previd}`).getAttribute("value");
+
         let c = document.getElementById("chatBox");
         c.innerHTML = "";
         message(UserTo);
     }
 
+
+    var ofRoom = "General";
+    var setRoom = (name) => {
+        
+        ofRoom = document.getElementsByName(`${name}`).getAttribute("value");
+        let c = document.getElementById("chatBox");
+        c.innerHTML = "";
+        RoomHandler(ofRoom);
+    }
 
     var message = (To) => {
         $.ajax({
@@ -132,13 +150,6 @@
                     
                     if (event.keyCode === 13) {
                         chat.server.send(message.value, UserTo);
-                        @*let d = Now();
-                        m = new Object();
-                        m.Text = message.value;
-                        m.Sender = "@User.Identity.Name";
-                        m.DateTime = d;*@
-                        //Comment this!!!
-                        //addMessage(m);
                         message.value = "";
                     }
                 });
@@ -219,8 +230,8 @@
             type: 'Post',
             data: { Room: `${r}` },
             dataType: 'json',
-            success: function (List) {
-                postsListSuccess(List);
+            success: function (pList, uList) {
+                postsListSuccess(pList, uList);
             },
             error: function (request, message, error) {
                 console.log(request);
@@ -231,10 +242,14 @@
         });
     }
 
-    var postsListSuccess = (Posts) => {
+    var postsListSuccess = (Posts, Users) => {
 
-        $.each(Posts, function (index, post) {
+        $.each(Posts, (index, post) => {
             addPost(post);
+        });
+
+        $.each(Users, (index, user) => {
+
         });
     }
 
