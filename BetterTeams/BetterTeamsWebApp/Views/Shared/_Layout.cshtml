@@ -105,7 +105,7 @@
 
                 <ul id="list-rooms"  class="nav">
                 <li class="align-text-center text-white display-5 mr-2">
-                    <i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Rooms
+                    <i class="mdi mdi mdi-format-list-bulleted mr-2 "></i><a class="align-text-center text-white display-5 mr-2" href="/home/allrooms">Rooms</a>
                 </li>
                 </ul>
             </nav>
@@ -221,7 +221,7 @@
                     //});
                     var userList = $('#roomNamesList');
                     $(data).each(function (index, name) {
-                        userList.append(`<a class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
+                        userList.append(`<a class="dropdown-item" href="url"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
                     });
 
 
@@ -268,7 +268,7 @@
                 success: function (data) {
                     var roomList = $('#list-rooms');
                     $(data).each(function (index, name) {
-                        roomList.append(`<a id="${name}" onclick="setRoom(this.id)" value="${name}" href="#" class="nav-link mdi mdi-chevron-right menu-icon mb-1 text-white">${name} </a >`);
+                        roomList.append(`<a id="${name}" onclick="setRoom(this.id)" value="${name}" href="" class="nav-link mdi mdi-chevron-right menu-icon mb-1 text-white">${name} </a >`);
                     });
                 },
                 error: function (request, message, error) {

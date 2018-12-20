@@ -197,21 +197,21 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpPost]
-        public JsonResult SendPost(PostVM postVM)
+        public JsonResult SendPost(string PostText, string Sender, string Room, string dateTime)
         {
             //done baby --backenda --TODO: Save postVM to db and send it back to me plz i need it!
             Post post = new Post
             {
-                PostText=postVM.PostText,
-                DateTime=postVM.DateTime,
-                Room=postVM.Room,
-                Sender=postVM.Sender,
-                Deleted=postVM.Deleted
+                PostText=PostText,
+                DateTime=DateTime.Now,
+                Room=Room,
+                Sender=Sender,
+                Deleted=false
             };
             PostRepository postRepo = new PostRepository();
             postRepo.Add(post);
 
-            return Json(postVM, JsonRequestBehavior.AllowGet);
+            return Json(post, JsonRequestBehavior.AllowGet);
         }
 
 
