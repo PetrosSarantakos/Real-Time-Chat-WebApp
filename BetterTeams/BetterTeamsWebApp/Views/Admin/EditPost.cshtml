@@ -1,0 +1,64 @@
+﻿@model BetterTeamsWebApp.Models.ViewModels.PostVM
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group row">
+                <h3>
+                    Edit Post
+                </h3>
+            </div>
+            <form class="editPost" method="post" action="@Url.Action("EditPost","Admin")">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group row">
+                    <label for="Username" class="col-sm-3 col-form-label">Id</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.Id" })
+                        @Html.ValidationMessageFor(model => model.Id)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-3 col-form-label">Post text</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.PostText, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.PostText" })
+                        @Html.ValidationMessageFor(model => model.PostText)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-3 col-form-label">Sender</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Sender, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.Sender" })
+                        @Html.ValidationMessageFor(model => model.Sender)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Surname" class="col-sm-3 col-form-label">Date</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.DateTime, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.DateTime" })
+                        @Html.ValidationMessageFor(model => model.DateTime)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Surname" class="col-sm-3 col-form-label">Room</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Room, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.Room" })
+                        @Html.ValidationMessageFor(model => model.Room)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="NewPassword" class="col-sm-3 col-form-label">Deleted</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Deleted, new { @class = "form-control", placeholder = "@Model.Deleted" })
+                        @Html.ValidationMessageFor(model => model.Deleted)
+                    </div>
+                </div>
+                <button id="saveChanges" type="submit" class="btn btn-gradient-primary mr-2">Save Changes</button>
+                <a class="btn btn-light btn-gradient-secondary" href="@Url.Action("Posts","Admin")">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

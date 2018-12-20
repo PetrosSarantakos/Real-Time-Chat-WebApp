@@ -153,42 +153,82 @@ namespace Repository
 
             return dict;
         }
-    //    public Dictionary<string, object> GetValuesDictionary(User model, bool isForUpdate)
-    //    {
-    //        Dictionary<string, object> dict = new Dictionary<string, object>
-    //        {
-    //            { "@Username", model.Username },
-    //            { "@Password", model.Password },
-    //            { "@Role", model.Role },
-				//{ "@Email", model.Email },
-				//{ "@Name", model.Name },
-				//{ "@Surname", model.Surname },
-				//{ "@DateOfBirth", model.DateOfBirth },
-				//{ "@Active", model.Active },
-				////{ "@DateTime", model.DateTime }
-    //        };
+        public Dictionary<string, object> GetValuesDictionary2(User model, bool isForUpdate)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>
+            {
+                { "@Username", model.Username },
+                { "@Password", model.Password },
+                { "@Role", model.Role },
+                { "@Email", model.Email },
+                { "@Name", model.Name },
+                { "@Surname", model.Surname },
+                { "@DateOfBirth", model.DateOfBirth },
+                { "@Active", model.Active },
+            };
 
-            
-    //            //if (isForUpdate)
-    //            //{
-    //            //    dict.Add("@ModifiedBy", model.ModifiedBy);
-    //            //    dict.Add("@LastEditDate", DateTime.UtcNow);
-    //            //}
-    //            //else
-    //            //{
-    //            //    dict.Add("@CreatedBy", model.CreatedBy);
-    //            //    dict.Add("@CreationDate", DateTime.UtcNow);
-    //            //}
+            if (isForUpdate)
+            {
+                dict.Remove("@DateOfBirth");
+                dict.Remove("@Password");
+            }
 
-    //            return dict;
-    //    }
-       
+
+            return dict;
+        }
+        //    public Dictionary<string, object> GetValuesDictionary(User model, bool isForUpdate)
+        //    {
+        //        Dictionary<string, object> dict = new Dictionary<string, object>
+        //        {
+        //            { "@Username", model.Username },
+        //            { "@Password", model.Password },
+        //            { "@Role", model.Role },
+        //{ "@Email", model.Email },
+        //{ "@Name", model.Name },
+        //{ "@Surname", model.Surname },
+        //{ "@DateOfBirth", model.DateOfBirth },
+        //{ "@Active", model.Active },
+        ////{ "@DateTime", model.DateTime }
+        //        };
+
+
+        //            //if (isForUpdate)
+        //            //{
+        //            //    dict.Add("@ModifiedBy", model.ModifiedBy);
+        //            //    dict.Add("@LastEditDate", DateTime.UtcNow);
+        //            //}
+        //            //else
+        //            //{
+        //            //    dict.Add("@CreatedBy", model.CreatedBy);
+        //            //    dict.Add("@CreationDate", DateTime.UtcNow);
+        //            //}
+
+        //            return dict;
+        //    }
+
 
         public void Update(User model)
         {
             try
             {
                 Dictionary<string, object> dictValues = GetValuesDictionary(model, true);
+
+                DynamicParameters parms = new DynamicParameters(dictValues);
+
+                string query = String.Format($"UPDATE dbo.[Users] SET {GetUpdateQuery(dictValues.Keys)} WHERE Username = @Username");
+
+                _con.Execute(query, parms);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void Edit(User model)
+        {
+            try
+            {
+                Dictionary<string, object> dictValues = GetValuesDictionary2(model, true);
 
                 DynamicParameters parms = new DynamicParameters(dictValues);
 

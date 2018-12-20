@@ -14,6 +14,7 @@ namespace BetterTeamsWebApp.Controllers
     public class AdminController : Controller
     {
        
+        [HttpGet]
         public ActionResult Messages()
         {
             List<MessageVM> messages = new List<MessageVM>();
@@ -57,8 +58,10 @@ namespace BetterTeamsWebApp.Controllers
         {
             MessageRepository messageRepo = new MessageRepository();
             messageRepo.Delete(id);
-            return View("Messages","Admin");
+            return View("Messages", "Admin");
         }
+       
+        [HttpGet]
         public ActionResult Users()
         {
             List<UserVM> users = new List<UserVM>();
@@ -78,33 +81,55 @@ namespace BetterTeamsWebApp.Controllers
                 users.Add(user);
             }
             return View(users);
-		}
+        }
+        [HttpGet]
+        public ActionResult EditUser(string email)
+        {
+            UserRepository userRepo = new UserRepository();
+            User user = userRepo.GetByEmail(email);
+            UserVM userVM = new UserVM
+            {
+                Username = user.Username,
+                Email = user.Email,
+                Name = user.Name,
+                Surname = user.Surname,
+                Active = user.Active,
+                Password = user.Password,
+                Role = user.Role,
+                DateOfBirth = user.DateOfBirth
+            };
+            return View(userVM);
 
-		[HttpPost]
+
+        }
+        [HttpPost]
         public ActionResult EditUser(UserVM uservm)
         {
-			UserRepository ur = new UserRepository();
-			User user = new User
-			{
-				Username = uservm.Username,
-				Password = EncryptPassword(uservm.Password),
-				Name = uservm.Name,
-				Surname = uservm.Surname,
-				Role = uservm.Role,
-				Active = uservm.Active,
-				Email = uservm.Email,
-				DateOfBirth = uservm.DateOfBirth
-			};
-			ur.Update(user);
-			return View(); //TODO: THE VIEW WE WANT TO RETURN
-		}
+            UserRepository ur = new UserRepository();
+            User user = new User
+            {
+                Username = uservm.Username,
+                Password = uservm.Password,
+                Name = uservm.Name,
+                Surname = uservm.Surname,
+                Role = uservm.Role,
+                Active = uservm.Active,
+                Email = uservm.Email,
+                DateOfBirth = uservm.DateOfBirth
+            };
+            ur.Edit(user);
+            return View("Users");
+        }
+
         [HttpPost]
         public ActionResult DeleteUser(string email)
         {
             UserRepository userRepo = new UserRepository();
             userRepo.DeleteByEmail(email);
-            return View("Users","Admin");
+            return View("Users", "Admin");
         }
+        
+        [HttpGet]
         public ActionResult Rooms()
         {
             List<Room> rooms = new List<Room>();
@@ -113,6 +138,7 @@ namespace BetterTeamsWebApp.Controllers
             rooms = roomRepo.GetAll().ToList();
             return View(rooms);
         }
+        [HttpGet]
         public ActionResult EditRoom(Room room)
         {
             return View();
@@ -122,8 +148,9 @@ namespace BetterTeamsWebApp.Controllers
         {
             RoomRepository roomRepo = new RoomRepository();
             roomRepo.Delete(id);
-            return View("Rooms","Admin");
+            return View("Rooms", "Admin");
         }
+        [HttpGet]
         public ActionResult Posts()
         {
             List<PostVM> posts = new List<PostVM>();
@@ -142,38 +169,54 @@ namespace BetterTeamsWebApp.Controllers
                 posts.Add(post);
             }
             return View(posts);
-          
+
         }
-		[HttpPost]
+        [HttpGet]
+        public ActionResult EditPost(int id)
+        {
+            PostRepository postRepo = new PostRepository();
+            Post post = postRepo.GetById(id);
+            PostVM postVM = new PostVM
+            {
+                Id = post.Id,
+                PostText = post.PostText,
+                Sender = post.Sender,
+                DateTime = post.DateTime,
+                Room = post.Room,
+                Deleted = post.Deleted,
+            };
+            return View(postVM);
+        }
+        [HttpPost]
         public ActionResult EditPost(PostVM postvm)
         {
-			PostRepository ur = new PostRepository();
-			Post post = new Post
-			{
-				Id = postvm.Id,
-				PostText = postvm.PostText,
-				Sender = postvm.Sender,
-				DateTime = postvm.DateTime,
-				Deleted = postvm.Deleted,
-				Room = postvm.Room
-			};
-			ur.Update(post);
-			return View(); //TODO: THE VIEW WE WANT TO RETURN
+            PostRepository ur = new PostRepository();
+            Post post = new Post
+            {
+                Id = postvm.Id,
+                PostText = postvm.PostText,
+                Sender = postvm.Sender,
+                DateTime = postvm.DateTime,
+                Deleted = postvm.Deleted,
+                Room = postvm.Room
+            };
+            ur.Update(post);
+            return View(); //TODO: THE VIEW WE WANT TO RETURN
         }
         [HttpPost]
         public ActionResult DeletePost(int id)
         {
             PostRepository postRepo = new PostRepository();
             postRepo.Delete(id);
-            return View("Post", "Admin");
+            return View("Posts", "Admin");
         }
-		#region Encryption
-		public string EncryptPassword(string Password)
-		{
-			byte[] bytes = Encoding.Unicode.GetBytes(Password);
-			byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
-			return Convert.ToBase64String(inArray);
-		}
-		#endregion
-	}
+        #region Encryption
+        public string EncryptPassword(string Password)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(Password);
+            byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+            return Convert.ToBase64String(inArray);
+        }
+        #endregion
+    }
 }

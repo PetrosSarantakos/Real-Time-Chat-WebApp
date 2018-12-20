@@ -1,0 +1,84 @@
+﻿@model BetterTeamsWebApp.Models.ViewModels.UserVM
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group row">
+                <h3>
+                    Edit User
+                </h3>
+            </div>
+            <form class="editProfile" method="post" action="@Url.Action("EditUser","Admin")?username=@(User.Identity.Name)">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", type="hidden", placeholder = "@Model.Password" })
+                @Html.ValidationMessageFor(model => model.Password)
+
+
+                @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", type = "hidden", placeholder = "@Model.DateOfBirth" })
+                @Html.ValidationMessageFor(model => model.DateOfBirth)
+
+
+                <div class="form-group row">
+                    <label for="Username" class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.Username" })
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.Email" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                        @*<input type="email" class="form-control" id="Email" placeholder="@Model.Email" readonly>*@
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "@Model.Name" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                        @*<input type="text" class="form-control" id="Name" placeholder="@Model.Name">*@
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Surname" class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(model => model.Surname)
+                        @*<input type="text" class="form-control" id="Surname" placeholder="@Model.Surname">*@
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="NewPassword" class="col-sm-3 col-form-label">Role</label>
+
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Role, new { @class = "form-control", placeholder = "@Model.Role" })
+                        @Html.ValidationMessageFor(model => model.Role)
+
+                        @*<input type="password" class="form-control" id="NewPassword" placeholder="New Password">*@
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="NewPassword" class="col-sm-3 col-form-label">Active</label>
+
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Active, new { @class = "form-control", placeholder = "@Model.Active" })
+                        @Html.ValidationMessageFor(model => model.Active)
+
+                        @*<input type="password" class="form-control" id="NewPassword" placeholder="New Password">*@
+                    </div>
+                </div>
+                <button id="saveChanges" type="submit" class="btn btn-gradient-primary mr-2">Save Changes</button>
+                <a class="btn btn-light btn-gradient-secondary" href="@Url.Action("Users","Admin")">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
