@@ -57,9 +57,14 @@ namespace BetterTeamsWebApp.Controllers
            
         public JsonResult GetRooms()
         {
-            //TODO: Fetch Rooms from db
+            RoomRepository roomRepo = new RoomRepository();
+            List<Room> rooms = roomRepo.GetAll();
 
             List<string> roomnames = new List<string>();
+            foreach (var item in rooms)
+            {
+                roomnames.Add(item.Name);
+            }
             return Json(roomnames, JsonRequestBehavior.AllowGet);
         }
 
