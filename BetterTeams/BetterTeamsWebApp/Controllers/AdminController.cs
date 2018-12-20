@@ -33,6 +33,24 @@ namespace BetterTeamsWebApp.Controllers
             }
             return View(messages);
         } 
+
+		[HttpPost]
+		public ActionResult EditMessage (MessageVM messagevm)
+		{
+			MessageRepository messagerepo = new MessageRepository();
+
+			Message msg = new Message
+			{
+				Id = messagevm.Id,
+				Text = messagevm.Text,
+				Sender = messagevm.Sender,
+				DateTime = Convert.ToDateTime(messagevm.DateTime),
+				Deleted = messagevm.Deleted,
+				Receiver = messagevm.Receiver
+			};
+			messagerepo.Update(msg);
+			return View(); //TODO: THE VIEW WE WANT TO RETURN
+		}
        
         [HttpPost]
         public ActionResult DeleteMessage(int id)

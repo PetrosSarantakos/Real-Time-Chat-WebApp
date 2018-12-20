@@ -26,8 +26,7 @@ namespace Models
 		//		Sender.Email = value;
 		//	}
 		//}
-		#region helper properties
 		public string Sender { get; set; }
-		#endregion
+		
 	}
 }
