@@ -174,5 +174,14 @@ namespace BetterTeamsWebApp.Controllers
 
 			return View(userVM);
         }
+
+
+        public JsonResult GetPostsOfRoom(string Room)
+        {
+            List<PostVM> PostsList = new List<PostVM>();
+            //TODO: Fetch all posts of Room from db
+
+            return Json(PostsList, JsonRequestBehavior.AllowGet);
+        }
     }
 }
