@@ -211,7 +211,7 @@ namespace BetterTeamsWebApp.Controllers
             PostRepository postRepo = new PostRepository();
             postRepo.Add(post);
 
-            return Json(postVM, JsonRequestBehavior.AllowGet);
+            return Json(post, JsonRequestBehavior.AllowGet);
         }
 
 
