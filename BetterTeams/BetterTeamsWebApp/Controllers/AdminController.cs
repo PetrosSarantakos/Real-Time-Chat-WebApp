@@ -126,6 +126,7 @@ namespace BetterTeamsWebApp.Controllers
             return View(posts);
           
         }
+		[HttpPost]
         public ActionResult EditPost(PostVM postvm)
         {
 			PostRepository ur = new PostRepository();
