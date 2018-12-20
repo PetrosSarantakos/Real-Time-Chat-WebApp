@@ -214,7 +214,7 @@
                     //});
                     var userList = $('#roomNamesList');
                     $(data).each(function (index, name) {
-                        userList.append(`<a id="${name}" class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
+                        userList.append(`<a onclick="setRoom(this.id)" name="${name}" value="${name}" class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
                     });
 
 

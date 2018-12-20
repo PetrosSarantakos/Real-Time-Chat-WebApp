@@ -41,7 +41,6 @@ namespace BetterTeamsWebApp.Controllers
         public JsonResult GetUsers()
         {
             UserRepository userRepo = new UserRepository();
-            //User user = userRepo.GetByUsername(User.Identity.Name);
             List<User> allUsers = new List<User>();
             allUsers = userRepo.GetAll().ToList();
             var removeUser = allUsers.SingleOrDefault(x => x.Username == User.Identity.Name);
@@ -86,7 +85,6 @@ namespace BetterTeamsWebApp.Controllers
         [HttpPost]
         public JsonResult GetMessages(string UserTo)
         {
-
             string Username1 = User.Identity.Name;
             string Username2 = UserTo;
             UserRepository Userdb = new UserRepository();
@@ -117,7 +115,6 @@ namespace BetterTeamsWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(string Username)
         {
-			//TODO: Find fetch userVM from db
 			UserRepository userrepo = new UserRepository();
 			UserVM userVM = new UserVM();
 			var user = userrepo.GetByUsername(Username);
@@ -158,7 +155,6 @@ namespace BetterTeamsWebApp.Controllers
         [HttpGet]
         public ActionResult MyProfile(string Username)
         {
-			//TODO: Find userVM from db with
 			UserRepository userrepo = new UserRepository();
 			UserVM userVM = new UserVM();
 			var user = userrepo.GetByUsername(Username);
@@ -178,7 +174,6 @@ namespace BetterTeamsWebApp.Controllers
 
         public JsonResult GetPostsOfRoom(string Room)
         {
-			//TODO: Fetch all posts of Room from db
 			List<PostVM> PostsList = new List<PostVM>();
 			PostRepository postrepo = new PostRepository();
 			var posts = postrepo.GetByRoom(Room);
