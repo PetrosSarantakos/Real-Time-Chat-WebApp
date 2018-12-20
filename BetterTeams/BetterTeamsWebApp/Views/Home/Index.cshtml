@@ -228,58 +228,6 @@
     }
 
 
-    var RoomHandler = (r) => {
-        $.ajax({
-            url: '/Home/GetPostsOfRoom',
-            type: 'Get',
-            data: { Room: `${r}` },
-            dataType: 'json',
-            success: function (pList) {
-                postsListSuccess(pList);
-            },
-            error: function (request, message, error) {
-                console.log(request);
-                console.log(error);
-                console.log(message);
-            }
-
-        });
-    }
-
-    var sendPost = (p, r) => {
-        newPost = new Object();
-        newPost.PostText = p;
-        newPost.Sender = "@User.Identity.Name";
-        newPost.Room = r;
-        newPost.DateTime = Now();
-        $.ajax({
-            url: '/Home/SendPost',
-            type: 'Post',
-            data: JSON.stringify(newPost),
-            dataType: 'json',
-            success: function (newPost) {
-                addPost()
-                let pst = document.getElementById("chatBox");
-                pst.innerHTML += addPost();
-            },
-            error: function (request, message, error) {
-                console.log(request);
-                console.log(error);
-                console.log(message);
-            }
-
-        });
-    }
-
-    var postsListSuccess = (Posts) => {
-
-        $.each(Posts, (index, post) => {
-            addPost(post);
-        });
-    }
-
-    
-
     </script>
 }
 

@@ -135,6 +135,11 @@
             '</div></div></div>';
         return postBubble;
     }
+
+    window.setInterval(function () {
+        var elem = document.getElementById('chatBox');
+        elem.scrollTop = elem.scrollHeight;
+    }, 1000);
     </script>
     
     }

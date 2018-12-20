@@ -190,9 +190,9 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult Rooms()
+        public ActionResult AllRooms()
         {
-            return View("Posts");
+            return View();
         }
 
         public JsonResult GetPostsOfRoom(string Room)
