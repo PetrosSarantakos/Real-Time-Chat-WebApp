@@ -188,6 +188,10 @@ namespace BetterTeamsWebApp.Controllers
 			return View(userVM);
         }
 
+        public ActionResult Posts()
+        {
+            return View();
+        }
 
         public JsonResult GetPostsOfRoom(string Room)
         {
