@@ -83,7 +83,7 @@ namespace BetterTeamsWebApp.Controllers
         }
 
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         public JsonResult GetMessages(string UserTo)
         {
 
