@@ -123,6 +123,7 @@ namespace BetterTeamsWebApp.Controllers
 			var user = userrepo.GetByUsername(Username);
 
 			userVM.Username = user.Username;
+			userVM.Password = user.Password;
 			userVM.Surname = user.Surname;
 			userVM.Name = user.Name;
 			userVM.Email = user.Email;
@@ -141,6 +142,7 @@ namespace BetterTeamsWebApp.Controllers
             User user = new User
             {
                 Username = userVM.Username,
+				Password = userVM .Password,
                 Name = userVM.Name,
                 Surname = userVM.Surname,
                 DateOfBirth = userVM.DateOfBirth,
@@ -162,6 +164,7 @@ namespace BetterTeamsWebApp.Controllers
 			var user = userrepo.GetByUsername(Username);
 
 			userVM.Username = user.Username;
+			userVM.Password = user.Password;
 			userVM.Surname = user.Surname;
 			userVM.Name = user.Name;
 			userVM.Email = user.Email;
