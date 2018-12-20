@@ -115,17 +115,28 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult Edit(UserVM userVM)
+        public ActionResult Edit(string username)
         {
             //TODO: Find fetch userVM from db 
-            return View(userVM);
+            return View();
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult PostEdit(UserVM userVM)
         {
-            //TODO: Find userVM from db and Update it
+            UserRepository ur = new UserRepository();
+            User user = new User
+            {
+                Username = userVM.Username,
+                Name = userVM.Name,
+                Surname = userVM.Surname,
+                DateOfBirth = userVM.DateOfBirth,
+                Role = userVM.Role,
+                Active = userVM.Active,
+                Email = userVM.Email
+            };
+            ur.Update(user);
             return RedirectToAction("MyProfile", "Home");
         }
 
