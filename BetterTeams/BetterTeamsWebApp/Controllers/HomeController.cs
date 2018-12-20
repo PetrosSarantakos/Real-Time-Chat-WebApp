@@ -199,7 +199,17 @@ namespace BetterTeamsWebApp.Controllers
         [HttpPost]
         public JsonResult SendPost(PostVM postVM)
         {
-            //TODO: Save postVM to db and send it back to me plz i need it!
+            //done baby --backenda --TODO: Save postVM to db and send it back to me plz i need it!
+            Post post = new Post
+            {
+                PostText=postVM.PostText,
+                DateTime=postVM.DateTime,
+                Room=postVM.Room,
+                Sender=postVM.Sender,
+                Deleted=postVM.Deleted
+            };
+            PostRepository postRepo = new PostRepository();
+            postRepo.Add(post);
 
             return Json(postVM, JsonRequestBehavior.AllowGet);
         }
