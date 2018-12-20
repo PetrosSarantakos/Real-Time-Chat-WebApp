@@ -195,6 +195,16 @@ namespace BetterTeamsWebApp.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpPost]
+        public JsonResult SendPost(PostVM postVM)
+        {
+            //TODO: Save postVM to db and send it back to me plz i need it!
+
+            return Json(postVM, JsonRequestBehavior.AllowGet);
+        }
+
+
         public JsonResult GetPostsOfRoom(string Room)
         {
 			List<PostVM> PostsList = new List<PostVM>();
