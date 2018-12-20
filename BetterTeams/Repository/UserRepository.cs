@@ -157,7 +157,7 @@ namespace Repository
 
                 DynamicParameters parms = new DynamicParameters(dictValues);
 
-                string query = String.Format($"UPDATE dbo.[Users] SET {GetUpdateQuery(dictValues.Keys)} WHERE Email = @Email");
+                string query = String.Format($"UPDATE dbo.[Users] SET {GetUpdateQuery(dictValues.Keys)} WHERE Username = @Username");
 
                 _con.Execute(query, parms);
             }
