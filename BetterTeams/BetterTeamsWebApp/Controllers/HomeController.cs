@@ -115,10 +115,22 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult Edit(UserVM userVM)
+        public ActionResult Edit(string Username)
         {
-            //TODO: Find fetch userVM from db 
-            return View(userVM);
+			//TODO: Find fetch userVM from db
+			UserRepository userrepo = new UserRepository();
+			UserVM userVM = new UserVM();
+			var user = userrepo.GetByUsername(Username);
+
+			userVM.Username = user.Username;
+			userVM.Surname = user.Surname;
+			userVM.Name = user.Name;
+			userVM.Email = user.Email;
+			userVM.DateOfBirth = user.DateOfBirth;
+			userVM.Active = user.Active;
+			userVM.Role = user.Role;
+
+			return View(userVM);
         }
 
         [Authorize]
@@ -131,10 +143,22 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult MyProfile(UserVM userVM)
+        public ActionResult MyProfile(string Username)
         {
-            //TODO: Find userVM from db with
-            return View(userVM);
+			//TODO: Find userVM from db with
+			UserRepository userrepo = new UserRepository();
+			UserVM userVM = new UserVM();
+			var user = userrepo.GetByUsername(Username);
+
+			userVM.Username = user.Username;
+			userVM.Surname = user.Surname;
+			userVM.Name = user.Name;
+			userVM.Email = user.Email;
+			userVM.DateOfBirth = user.DateOfBirth;
+			userVM.Active = user.Active;
+			userVM.Role = user.Role;
+
+			return View(userVM);
         }
     }
 }
