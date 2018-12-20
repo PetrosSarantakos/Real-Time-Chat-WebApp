@@ -260,7 +260,7 @@
                 success: function (data) {
                     var roomList = $('#list-rooms');
                     $(data).each(function (index, name) {
-                        roomList.append(`<a onclick="setRoom(this.id)" name="${name}" value="${name}" class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
+                        roomList.append(`<a onclick="setRoom(this.id)" name="${name}" value="${name}" href="#" class="nav-link mdi mdi-login-variant menu-icon mb-1 text-white">${name} </a >`);
                     });
                 },
                 error: function (request, message, error) {

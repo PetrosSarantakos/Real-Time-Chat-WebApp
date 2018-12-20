@@ -10,6 +10,6 @@ namespace Models
 	{
 		public string Name { get; set; }
 		public string CreatorEmail { get; set; }
-		public User Creator { get; set; }
+		public string Creator { get; set; }
 	}
 }
