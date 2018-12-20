@@ -251,14 +251,14 @@
         }
 
         var getRooms = () => {
-            var roomList = [];
+            
             $.ajax({
                 url: '/Home/GetRooms',
                 type: 'GET',
                 dataType: 'json',
                 async: false,
                 success: function (data) {
-                    var userList = $('#list-rooms');
+                    var roomList = $('#list-rooms');
                     $(data).each(function (index, name) {
                         roomList.append(`<a onclick="setRoom(this.id)" name="${name}" value="${name}" class="dropdown-item" href="#"><i class="mdi mdi-login-variant mr-2 text-primary"></i>${name} </a >`);
                     });
@@ -307,6 +307,7 @@
         window.addEventListener("load", () => {
             getUserRooms();
             getUsers();
+            getRooms();
         });
     </script>
     @RenderSection("scripts", false)

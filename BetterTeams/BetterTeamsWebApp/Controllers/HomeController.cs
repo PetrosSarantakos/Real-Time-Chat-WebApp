@@ -54,7 +54,9 @@ namespace BetterTeamsWebApp.Controllers
             return Json(usernames, JsonRequestBehavior.AllowGet);
 
         }
-           
+        
+        [Authorize]
+        [HttpGet]
         public JsonResult GetRooms()
         {
             RoomRepository roomRepo = new RoomRepository();
