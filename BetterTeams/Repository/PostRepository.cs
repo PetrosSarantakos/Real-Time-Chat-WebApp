@@ -106,7 +106,7 @@ namespace Repository
 		{
 			try
 			{
-				string query = "SELECT * FROM dbo.[Posts] Deleted='FALSE' where Room = @Room";
+				string query = "SELECT * FROM dbo.[Posts] WHERE Deleted='FALSE' AND Room = @Room";
 				DynamicParameters parameters = new DynamicParameters();
 				parameters.Add("@Room", room);
 
