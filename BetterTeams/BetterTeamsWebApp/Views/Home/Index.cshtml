@@ -149,6 +149,10 @@
                 });
             });
         }
+        window.setInterval(function () {
+            var elem = document.getElementById('chatBox');
+            elem.scrollTop = elem.scrollHeight;
+        }, 500);
 
         startConnection();
     });

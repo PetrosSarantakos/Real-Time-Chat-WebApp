@@ -96,6 +96,8 @@ namespace BetterTeamsWebApp.Controllers
             List<MessageVM> messages = new List<MessageVM>();
             MessageVM msg = new MessageVM();
 
+            
+
             MessageRepository messageRepo = new MessageRepository();
 
             var msges = messageRepo.GetBySenderRecveiverUsername(U1, U2);
