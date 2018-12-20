@@ -23,40 +23,6 @@ namespace BetterTeamsWebApp
         private static readonly ConcurrentDictionary<string, UserCId> Users
             = new ConcurrentDictionary<string, UserCId>(StringComparer.InvariantCultureIgnoreCase);
 
-        public void Send(string message, List<string> toNames) {
-            
-            //List<UserCId> UsersTo = new List<UserCId>();
-            foreach (var name in toNames)
-            {
-                UserCId receiver;
-                if (Users.TryGetValue(name, out receiver))
-                {
-                    UserCId sender = GetUser(Context.User.Identity.Name);
-
-                    IEnumerable<string> allReceivers;
-
-                    lock (receiver.ConnectionIds)
-                    {
-                        lock (sender.ConnectionIds)
-                        {
-                            allReceivers = receiver.ConnectionIds.Concat(sender.ConnectionIds);
-                        }
-                    }
-
-                    foreach (var cid in allReceivers)
-                    {
-                        Clients.Client(cid).received(new { sender = sender.Username, Message = message, isPrivate = true });
-                    }
-                }
-            }
-            
-
-            
-
-            // So, broadcast the sender, too.
-            Clients.All.received(new { sender = Context.User.Identity.Name, message = message, isPrivate = false });
-        }
-
         public void Send(string Text, string To)
         {
 

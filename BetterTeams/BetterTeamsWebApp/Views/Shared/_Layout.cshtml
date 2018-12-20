@@ -97,8 +97,17 @@
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul id="list-users" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users</li></ul>
-                <ul id="list-rooms" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Rooms</li></ul>
+                <ul id="list-users" class="nav">
+                <li class="align-text-center text-white display-5 mr-2">
+                    <i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users
+                </li>
+                </ul>
+
+                <ul id="list-rooms"  class="nav">
+                <li class="align-text-center text-white display-5 mr-2">
+                    <i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Rooms
+                </li>
+                </ul>
             </nav>
             
             <!-- Modal -->
@@ -259,7 +268,7 @@
                 success: function (data) {
                     var roomList = $('#list-rooms');
                     $(data).each(function (index, name) {
-                        roomList.append(`<a onclick="setRoom(this.id)" name="${name}" value="${name}" href="#" class="nav-link mdi mdi-login-variant menu-icon mb-1 text-white">${name} </a >`);
+                        roomList.append(`<a id="${name}" onclick="setRoom(this.id)" value="${name}" href="#" class="nav-link mdi mdi-chevron-right menu-icon mb-1 text-white">${name} </a >`);
                     });
                 },
                 error: function (request, message, error) {

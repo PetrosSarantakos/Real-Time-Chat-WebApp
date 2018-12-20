@@ -23,11 +23,14 @@ namespace BetterTeamsWebApp.Models.ViewModels
 
         [Required(ErrorMessage = "Password Required")]
         public string Password { get; set; }
+
         [Required(ErrorMessage = "Password Confirmation Required")]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
+
         [Required(ErrorMessage = "Date of birth Required")]
         public string DateOfBirth { get; set; }
+
         public string Role { get; set; }
     }
 }
