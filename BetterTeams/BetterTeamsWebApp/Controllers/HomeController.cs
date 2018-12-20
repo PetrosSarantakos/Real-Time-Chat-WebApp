@@ -55,7 +55,13 @@ namespace BetterTeamsWebApp.Controllers
 
         }
            
+        public JsonResult GetRooms()
+        {
+            //TODO: Fetch Rooms from db
 
+            List<string> roomnames = new List<string>();
+            return Json(roomnames, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public JsonResult ContactUs(ContactMessageVM ContactMessage)
