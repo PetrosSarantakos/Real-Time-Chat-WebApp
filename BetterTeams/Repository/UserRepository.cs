@@ -119,7 +119,6 @@ namespace Repository
                 throw;
             }
         }
-
         public Dictionary<string, object> GetValuesDictionary(User model, bool isForUpdate)
         {
             Dictionary<string, object> dict = new Dictionary<string, object>
@@ -127,28 +126,51 @@ namespace Repository
                 { "@Username", model.Username },
                 { "@Password", model.Password },
                 { "@Role", model.Role },
-				{ "@Email", model.Email },
-				{ "@Name", model.Name },
-				{ "@Surname", model.Surname },
-				{ "@DateOfBirth", model.DateOfBirth },
-				{ "@Active", model.Active },
-				//{ "@DateTime", model.DateTime }
+                { "@Email", model.Email },
+                { "@Name", model.Name },
+                { "@Surname", model.Surname },
+                { "@DateOfBirth", model.DateOfBirth },
+                { "@Active", model.Active },
             };
 
-            
-                //if (isForUpdate)
-                //{
-                //    dict.Add("@ModifiedBy", model.ModifiedBy);
-                //    dict.Add("@LastEditDate", DateTime.UtcNow);
-                //}
-                //else
-                //{
-                //    dict.Add("@CreatedBy", model.CreatedBy);
-                //    dict.Add("@CreationDate", DateTime.UtcNow);
-                //}
+            if (isForUpdate)
+            {
+                dict.Remove("@DateOfBirth");
 
-                return dict;
+            }
+
+
+            return dict;
         }
+    //    public Dictionary<string, object> GetValuesDictionary(User model, bool isForUpdate)
+    //    {
+    //        Dictionary<string, object> dict = new Dictionary<string, object>
+    //        {
+    //            { "@Username", model.Username },
+    //            { "@Password", model.Password },
+    //            { "@Role", model.Role },
+				//{ "@Email", model.Email },
+				//{ "@Name", model.Name },
+				//{ "@Surname", model.Surname },
+				//{ "@DateOfBirth", model.DateOfBirth },
+				//{ "@Active", model.Active },
+				////{ "@DateTime", model.DateTime }
+    //        };
+
+            
+    //            //if (isForUpdate)
+    //            //{
+    //            //    dict.Add("@ModifiedBy", model.ModifiedBy);
+    //            //    dict.Add("@LastEditDate", DateTime.UtcNow);
+    //            //}
+    //            //else
+    //            //{
+    //            //    dict.Add("@CreatedBy", model.CreatedBy);
+    //            //    dict.Add("@CreationDate", DateTime.UtcNow);
+    //            //}
+
+    //            return dict;
+    //    }
        
 
         public void Update(User model)

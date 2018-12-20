@@ -30,7 +30,7 @@
                 <div class="form-group row">
                     <label for="Email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "readonly", placeholder = "@Model.Email" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "readonly", placeholder = "@Model.Email" })
                         @Html.ValidationMessageFor(model => model.Email)
                         @*<input type="email" class="form-control" id="Email" placeholder="@Model.Email" readonly>*@
                     </div>
@@ -62,7 +62,7 @@
                 </div>
 
                 <button id="saveChanges" type="submit" class="btn btn-gradient-primary mr-2">Save Changes</button>
-                <button class="btn btn-light">Cancel</button>
+                <a class="btn btn-light" href="@Url.Action("MyProfile","Home")">Cancel</a>
             </form>
         </div>
     </div>

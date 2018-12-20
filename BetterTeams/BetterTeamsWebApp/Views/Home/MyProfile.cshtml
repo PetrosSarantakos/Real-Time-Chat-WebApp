@@ -1,0 +1,58 @@
+﻿@model BetterTeamsWebApp.Models.ViewModels.UserVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group row">
+                <h3>
+                    My Profile
+                </h3>
+            </div>
+            <form class="myProfile">
+                <div class="form-group row">
+                    <label for="Username" class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Username" placeholder="@Model.Username" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+
+                        <input type="email" class="form-control" id="Email" placeholder="@Model.Email" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+
+                        <input type="text" class="form-control" id="Name" placeholder="@Model.Name" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Surname" class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+
+                        <input type="text" class="form-control" id="Surname" placeholder="@Model.Surname" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="Username" class="col-sm-3 col-form-label">Date Of Birth</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Username" placeholder="@Model.DateOfBirth" readonly>
+                    </div>
+                </div>
+                <a id="edit" class="btn btn-gradient-primary mr-2" href="@Url.Action("Edit","Home")">Edit Profile</a>
+                <a id="edit" class="btn btn-gradient-secondary mr-2" href="@Url.Action("Index","Home")">Return</a>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+

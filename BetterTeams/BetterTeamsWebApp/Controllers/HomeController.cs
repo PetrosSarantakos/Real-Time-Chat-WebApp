@@ -170,11 +170,11 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult MyProfile(string Username)
+        public ActionResult MyProfile()
         {
 			UserRepository userrepo = new UserRepository();
 			UserVM userVM = new UserVM();
-			var user = userrepo.GetByUsername(Username);
+			var user = userrepo.GetByUsername(User.Identity.Name);
 
 			userVM.Username = user.Username;
 			userVM.Password = user.Password;
