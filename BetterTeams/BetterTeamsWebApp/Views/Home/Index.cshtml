@@ -149,7 +149,7 @@
         window.setInterval(function () {
             var elem = document.getElementById('chatBox');
             elem.scrollTop = elem.scrollHeight;
-        }, 1000);
+        }, 500);
 
         let startConnection = () => {
             $.connection.hub.start().done(function () {
