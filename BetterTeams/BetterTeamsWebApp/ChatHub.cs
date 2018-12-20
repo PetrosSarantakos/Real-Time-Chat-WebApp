@@ -23,12 +23,38 @@ namespace BetterTeamsWebApp
         private static readonly ConcurrentDictionary<string, UserCId> Users
             = new ConcurrentDictionary<string, UserCId>(StringComparer.InvariantCultureIgnoreCase);
 
-        public void Send(string message) { 
-        
-            string sender = Context.User.Identity.Name;
+        public void Send(string message, List<string> toNames) {
+            
+            //List<UserCId> UsersTo = new List<UserCId>();
+            foreach (var name in toNames)
+            {
+                UserCId receiver;
+                if (Users.TryGetValue(name, out receiver))
+                {
+                    UserCId sender = GetUser(Context.User.Identity.Name);
+
+                    IEnumerable<string> allReceivers;
+
+                    lock (receiver.ConnectionIds)
+                    {
+                        lock (sender.ConnectionIds)
+                        {
+                            allReceivers = receiver.ConnectionIds.Concat(sender.ConnectionIds);
+                        }
+                    }
+
+                    foreach (var cid in allReceivers)
+                    {
+                        Clients.Client(cid).received(new { sender = sender.Username, Message = message, isPrivate = true });
+                    }
+                }
+            }
+            
+
+            
 
             // So, broadcast the sender, too.
-            Clients.All.received(new { sender = sender, message = message, isPrivate = false });
+            Clients.All.received(new { sender = Context.User.Identity.Name, message = message, isPrivate = false });
         }
 
         public void Send(string Text, string To)
@@ -47,7 +73,7 @@ namespace BetterTeamsWebApp
                     lock (sender.ConnectionIds)
                     {
 
-                        allReceivers = receiver.ConnectionIds.Concat(sender.ConnectionIds);//.Concat(sender.ConnectionIds);
+                        allReceivers = receiver.ConnectionIds.Concat(sender.ConnectionIds);
                     }
                 }
 
@@ -66,14 +92,7 @@ namespace BetterTeamsWebApp
                 DateTime = DateTime.Now,
                 Deleted = false
             };
-            //MessageVM messageVM = new MessageVM
-            //{
-            //    Sender = message.Sender,
-            //    Receiver = message.Receiver,
-            //    Text = message.Text,
-            //    DateTime = message.DateTime.ToString(),
-            //    Deleted = message.Deleted
-            //};
+
             messageRepo.Add(message);
             Clients.All.addNewMessageToPage(message.Text, message.Receiver, message.DateTime, message.Deleted);
         }
