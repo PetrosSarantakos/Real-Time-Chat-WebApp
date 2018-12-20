@@ -12,7 +12,7 @@ namespace BetterTeamsWebApp.Models.ViewModels
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Role { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public bool Active { get; set; }
 
         public HashSet<string> ConnectionId { get; set; }
