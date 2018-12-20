@@ -7,6 +7,9 @@ using BetterTeamsWebApp.Models.ViewModels;
 using Repository;
 using Models;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
+using System.Globalization;
 
 namespace BetterTeamsWebApp.Controllers
 {
@@ -128,39 +131,38 @@ namespace BetterTeamsWebApp.Controllers
 
         [Authorize]
         [HttpGet]
-        public ActionResult Edit(string Username)
+        public ActionResult Edit()
         {
 			UserRepository userrepo = new UserRepository();
-			UserVM userVM = new UserVM();
-			var user = userrepo.GetByUsername(Username);
+			UserVM uservm = new UserVM();
+			var user = userrepo.GetByUsername(User.Identity.Name);
 
-			userVM.Username = user.Username;
-			userVM.Password = user.Password;
-			userVM.Surname = user.Surname;
-			userVM.Name = user.Name;
-			userVM.Email = user.Email;
-			userVM.DateOfBirth = user.DateOfBirth;
-			userVM.Active = user.Active;
-			userVM.Role = user.Role;
-
-			return View(userVM);
+            uservm.Username = user.Username;
+            uservm.Password = user.Password;
+            uservm.Surname = user.Surname;
+            uservm.Name = user.Name;
+            uservm.Email = user.Email;
+            uservm.Active = user.Active;
+            uservm.Role = user.Role;
+            uservm.DateOfBirth = user.DateOfBirth;
+			return View(uservm);
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult PostEdit(UserVM userVM)
+        public ActionResult PostEdit(UserVM uservm)
         {
             UserRepository ur = new UserRepository();
             User user = new User
             {
-                Username = userVM.Username,
-				Password = userVM .Password,
-                Name = userVM.Name,
-                Surname = userVM.Surname,
-                DateOfBirth = userVM.DateOfBirth,
-                Role = userVM.Role,
-                Active = userVM.Active,
-                Email = userVM.Email
+                Username = uservm.Username,
+                Password = EncryptPassword(uservm.Password),
+                Name = uservm.Name,
+                Surname = uservm.Surname,
+                Role = uservm.Role,
+                Active = uservm.Active,
+                Email = uservm.Email,
+                DateOfBirth = uservm.DateOfBirth
             };
             ur.Update(user);
             return RedirectToAction("MyProfile", "Home");
@@ -205,6 +207,12 @@ namespace BetterTeamsWebApp.Controllers
 			}
 
             return Json(PostsList, JsonRequestBehavior.AllowGet);
+        }
+        public string EncryptPassword(string Password)
+        {
+            byte[] bytes = Encoding.Unicode.GetBytes(Password);
+            byte[] inArray = HashAlgorithm.Create("SHA1").ComputeHash(bytes);
+            return Convert.ToBase64String(inArray);
         }
     }
 }

@@ -47,26 +47,22 @@
                                 <div id="Email" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your email address. Example: myemail@mail.com" data-animation="true">
                                     @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
                                     @Html.ValidationMessageFor(model => model.Email)
-                                    @*<input type="email" class="form-control form-control-lg" id="InputEmail" placeholder="Email" value="@Model.Email">*@
                                 </div>
                                 <div class="form-group">
 
                                     <div id="Name" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your First name">
                                         @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "First Name" })
                                         @Html.ValidationMessageFor(model => model.Name)
-                                        @*<input type="text" class="form-control form-control-lg" id="InputName" placeholder="First Name" value="@Model.Name">*@
                                     </div>
 
                                     <div id="Surname" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your Last name">
                                         @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Last Name" })
                                         @Html.ValidationMessageFor(model => model.Surname)
-                                        @*<input type="text" class="form-control form-control-lg" id="InputSurname" placeholder="Last Name" value="@Model.Surname">*@
                                     </div>
 
                                     <div id="Username" class="form-group" data-toggle="popover" data-trigger="focus" data-content="The Username you will use when you Login">
                                         @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
                                         @Html.ValidationMessageFor(model => model.Username)
-                                        @*<input type="text" class="form-control form-control-lg" id="InputUsername" placeholder="Username" value="@Model.Username">*@
                                     </div>
                                 </div>
 
@@ -74,27 +70,19 @@
                                 <div id="Password" class="form-group" data-toggle="popover" data-trigger="focus" data-content="The Password you will use to Login">
                                     @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password" })
                                     @Html.ValidationMessageFor(model => model.Password)
-                                    @*<input type="password" class="form-control form-control-lg" id="InputPassword1" placeholder="Password" value="@Model.Password">*@
                                 </div>
 
                                 <div id="ConfirmPassword" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Please repeat the Password, for confirmation">
                                     @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
                                     @Html.ValidationMessageFor(model => model.ConfirmPassword)
-                                    @*<input type="password" class="form-control form-control-lg" id="InputPassword2" placeholder="Confirm Password" value="@Model.ConfirmPassword">*@
                                 </div>
 
                                 <div id="DateOfBirth" class="form-group" data-toggle="popover" data-trigger="focus" data-content="Your date of birth">
                                     @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control datepicker", id = "BirthDate", placeholder = "Date of Birth" })
                                     @Html.ValidationMessageFor(model => model.DateOfBirth)
-                                    @*<input type="date" class="form-control form-control-lg" id="DateOfBirth" placeholder="Date of Birth" value="@Model.DateOfBirth">*@
                                 </div>
                                 <div class="mb-4">
-                                    @*<div class="form-check">
-                                            <label class="form-check-label text-muted">
-                                                <input type="checkbox" class="form-check-input">
-                                                I agree to all Terms & Conditions
-                                            </label>
-                                        </div>*@
+                                 
                                 </div>
                                 <div class="mt-3">
                                     <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN UP</button>
@@ -104,10 +92,8 @@
                                 </div>
 
                                 <div class="btn-group mt-5 mb-1 form-inline d-flex font-weight-light">
-                                    @*<div class="form-control">
-                                            <buttonclass="btn-gradient-primary btn-rounded btn-fw">Contact Us</button>
-                                        </div>*@
-                                    <a data-toggle="modal" href="#myModal" id="myBtn" class="btn btn-inverse-light btn-fw"><strong>Contact Us</strong></a>
+                                
+                                    <a data-toggle="modal"  data-target="#contactModal" href="#myModal" id="myBtn" class="btn btn-inverse-light btn-fw"><strong>Contact Us</strong></a>
                                     <a href="@Url.Action("About","Home")" class="btn btn-inverse-light btn-fw"><strong>About Us</strong></a>
                                 </div>
                             </form>
@@ -122,37 +108,52 @@
             <!-- content-wrapper ends -->
         </div>
         <!-- Trigger/Open The Modal -->
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
+        @*<div class="form-control">
+            <button id="myBtn" class="btn-gradient-primary btn-rounded btn-fw">Contact Us</button>
+        </div>*@
+        <!-- Button trigger modal -->
+        @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contactModal">
+            Launch demo modal
+        </button>*@
 
-            <!-- Modal content -->
+        <!-- Modal -->
+        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="ContactUs" aria-hidden="true">
+            <div class="modal-dialog modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalCenterTitle">Send Us a Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-content ">
+                            <form id="contactForm " class="contact-form">
 
-            <div class="modal-content ">
-                <p><strong>Send Us a message</strong></p>
-                <form id="contactForm " class="contact-form">
+                                <div class="form-group row">
+                                    <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
+                                    </div>
+                                </div>
 
-                    <div class="form-group row">
-                        <label for="Email" class="col-sm-3 col-form-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email" name="Email" placeholder="Email">
+                                <div class="form-group row">
+                                    <label for="Message" class="col-sm-3 col-form-label">Message</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="text" class="form-control" id="message" name="Message" rows="5" placeholder="Your message..."></textarea>
+                                    </div>
+                                </div>
+
+                                <button id="contact-form-submit" type="submit" class="btn btn-gradient-primary btn-success" data-dismiss="modal">Submit</button>
+                                <button class="btn btn-gradient-primary" data-dismiss="modal">Cancel</button>
+                            </form>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="Message" class="col-sm-3 col-form-label">Message</label>
-                        <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="message" name="Message" rows="5" placeholder="Your message..."></textarea>
-                            <!-- <input type="text" class="form-control" id="Message" placeholder="Your message..."> -->
-                        </div>
-                    </div>
-
-                    <button id="contact-form-submit" type="submit" class="btn btn-gradient-primary">Submit</button>
-                    <button class="btn btn-gradient-primary">Cancel</button>
-                </form>
+                </div>
             </div>
-
-
         </div>
+
 
         <!-- page-body-wrapper ends -->
     </div>
@@ -195,10 +196,9 @@
     <script>
         $('#myBtn').click(function (e) {
             e.preventDefault();
-            $('#myModal').modal();
+            $('#contactModal').modal();
         });
         $(function () {
-
             $('#contact-form-submit').on('click', function (e) {
                 e.preventDefault();
 
@@ -212,19 +212,20 @@
                     contentType: 'application/json;charset=utf-8',
                     data: JSON.stringify(ContactMessage),
                     success: function () {
-                        alert('Success');
-                    },
 
+                        alert('Thank you for contacting us!');
+
+                    },
                     error: function (request, message, error) {
                         console.log(request);
                         console.log(message);
                         console.log(error);
-
+                        alert('Error, please try again.');
                     }
                 });
                 return false;
-
             });
+        });
 
     </script>
 

@@ -135,19 +135,21 @@ namespace Repository
 				//{ "@DateTime", model.DateTime }
             };
 
-            //if (isForUpdate)
-            //{
-            //    dict.Add("@ModifiedBy", model.ModifiedBy);
-            //    dict.Add("@LastEditDate", DateTime.UtcNow);
-            //}
-            //else
-            //{
-            //    dict.Add("@CreatedBy", model.CreatedBy);
-            //    dict.Add("@CreationDate", DateTime.UtcNow);
-            //}
+            
+                //if (isForUpdate)
+                //{
+                //    dict.Add("@ModifiedBy", model.ModifiedBy);
+                //    dict.Add("@LastEditDate", DateTime.UtcNow);
+                //}
+                //else
+                //{
+                //    dict.Add("@CreatedBy", model.CreatedBy);
+                //    dict.Add("@CreationDate", DateTime.UtcNow);
+                //}
 
-            return dict;
+                return dict;
         }
+       
 
         public void Update(User model)
         {

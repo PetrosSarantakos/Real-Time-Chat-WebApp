@@ -261,7 +261,7 @@
     <Content Include="www\images\About\gallery\thumbs\07.jpg" />
     <Content Include="www\images\About\gallery\thumbs\08.jpg" />
     <Content Include="www\images\About\gallery\thumbs\09.jpg" />
-    <Content Include="www\images\About\IMG_20171015_144936_581copy.jpg" />
+    <Content Include="www\images\About\IMG_20171015_144936_581copy3.jpg" />
     <Content Include="www\images\About\overlay.png" />
     <Content Include="www\images\About\pic01.jpg" />
     <Content Include="www\images\About\pic02.jpg" />
@@ -426,6 +426,7 @@
     <Content Include="Views\Shared\_ListPostsPartial.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

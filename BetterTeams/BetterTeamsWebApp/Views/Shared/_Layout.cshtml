@@ -39,13 +39,7 @@
                             <div class="dropdown-divider"></div>
                         </div>
                     </li>
-                    @*<li class="nav-item nav-settings d-none d-lg-block">
-                            <a class="nav-link" href="#">
-                                <i class="mdi mdi-format-line-spacing"></i>
-                            </a>
-                            </a>
-                        </li>*@
-
+             
                 </ul>
                 <div class="col-sm"></div>
                 <ul class="navbar-nav navbar-nav-right col-sm">
@@ -58,13 +52,13 @@
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="@Url.Action("Edit","Home")">
                                 <i class="mdi mdi-account-settings-variant mr-2 text-primary"></i>
                                 Profile
                             </a>
                             <div class="dropdown-divider"></div>
-
-                            <a data-toggle="modal" href="#myModal" id="myBtn" class="btn btn-fw dropdown-item">
+                            
+                            <a data-toggle="modal" href="#myModal" data-target="#contactModal" id="myBtn" class="btn btn-fw dropdown-item">
                                 <i class=" mdi mdi-message-draw mr-2 text-primary"></i>
                                 Contact Us
                             </a>
@@ -106,41 +100,45 @@
                 <ul id="list-users" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Users</li></ul>
                 <ul id="list-rooms" class="nav"><li class="align-text-center text-white display-5 mr-2"><i class="mdi mdi mdi-format-list-bulleted mr-2 "></i>Rooms</li></ul>
             </nav>
-            <!-- Trigger/Open The Modal -->
-            @*<div class="form-control">
-                    <button id="myBtn" class="btn-gradient-primary btn-rounded btn-fw">Contact Us</button>
-                </div>*@
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
+            
+            <!-- Modal -->
+            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="ContactUs" aria-hidden="true">
+                <div class="modal-dialog modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalCenterTitle">Send Us a Message</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-content ">
+                                <form id="contactForm " class="contact-form">
 
-                <!-- Modal content -->
+                                    <div class="form-group row">
+                                        <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
+                                        </div>
+                                    </div>
 
-                <div class="modal-content ">
-                    <p><strong>Send Us a message</strong></p>
-                    <form id="contactForm " class="contact-form">
+                                    <div class="form-group row">
+                                        <label for="Message" class="col-sm-3 col-form-label">Message</label>
+                                        <div class="col-sm-9">
+                                            <textarea type="text" class="form-control" id="message" name="Message" rows="5" placeholder="Your message..."></textarea>
+                                        </div>
+                                    </div>
 
-                        <div class="form-group row">
-                            <label for="Email" class="col-sm-3 col-form-label">Email</label>
-                            <div class="col-sm-9">
-                                <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
+                                    <button id="contact-form-submit" type="submit" class="btn btn-gradient-primary btn-success" data-dismiss="modal">Submit</button>
+                                    <button class="btn btn-gradient-primary" data-dismiss="modal">Cancel</button>
+                                </form>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="Message" class="col-sm-3 col-form-label">Message</label>
-                            <div class="col-sm-9">
-                                <textarea type="text" class="form-control" id="message" name="Message" rows="5" placeholder="Your message..."></textarea>
-                                <!-- <input type="text" class="form-control" id="Message" placeholder="Your message..."> -->
-                            </div>
-                        </div>
-
-                        <button id="contact-form-submit" type="submit" class="btn btn-gradient-primary">Submit</button>
-                        <button class="btn btn-gradient-primary">Cancel</button>
-                    </form>
+                       
+                    </div>
                 </div>
-
-
             </div>
+           
 
             @RenderBody()
         </div>
@@ -165,7 +163,7 @@
     <script>
         $('#myBtn').click(function (e) {
             e.preventDefault();
-            $('#myModal').modal();
+            $('#contactModal').modal();
         });
         $(function () {
             $('#contact-form-submit').on('click', function (e) {
@@ -181,14 +179,15 @@
                     contentType: 'application/json;charset=utf-8',
                     data: JSON.stringify(ContactMessage),
                     success: function () {
-                        alert('Success');
-                    },
-
+                        
+                        alert('Thank you for contacting us!');
+                        
+                    }, 
                     error: function (request, message, error) {
                         console.log(request);
                         console.log(message);
                         console.log(error);
-
+                        alert('Error, please try again.');
                     }
                 });
                 return false;

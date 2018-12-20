@@ -1,0 +1,70 @@
+﻿@model BetterTeamsWebApp.Models.ViewModels.UserVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group row">
+                <h3>
+                    Edit Profile
+                </h3>
+            </div>
+            <form class="editProfile" method="post" action="@Url.Action("PostEdit","Home")?username=@(User.Identity.Name)">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.Role, new { @class = "form-control", type = "hidden", placeholder = "@Model.Role" })
+                @Html.ValidationMessageFor(model => model.Role)
+                @Html.TextBoxFor(model => model.Active, new { @class = "form-control", type = "hidden", placeholder = "@Model.Active" })
+                @Html.ValidationMessageFor(model => model.Active)
+                @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", type = "hidden", placeholder = "@Model.DateOfBirth" })
+                @Html.ValidationMessageFor(model => model.DateOfBirth) 
+               
+
+                <div class="form-group row">
+                    <label for="Username" class="col-sm-3 col-form-label">Username</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="Username" placeholder="@Model.Username" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Email" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "readonly", placeholder = "@Model.Email" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                        @*<input type="email" class="form-control" id="Email" placeholder="@Model.Email" readonly>*@
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Name" class="col-sm-3 col-form-label">First Name</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "@Model.Name" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                        @*<input type="text" class="form-control" id="Name" placeholder="@Model.Name">*@
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Surname" class="col-sm-3 col-form-label">Last Name</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(model => model.Surname)
+                        @*<input type="text" class="form-control" id="Surname" placeholder="@Model.Surname">*@
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="NewPassword" class="col-sm-3 col-form-label">New Password</label>
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "password", placeholder = "New Password" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                        @*<input type="password" class="form-control" id="NewPassword" placeholder="New Password">*@
+                    </div>
+                </div>
+
+                <button id="saveChanges" type="submit" class="btn btn-gradient-primary mr-2">Save Changes</button>
+                <button class="btn btn-light">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
