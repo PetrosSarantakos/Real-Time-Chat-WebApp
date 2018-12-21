@@ -16,7 +16,7 @@
                 <div class="type_msg ">
                     <div class="input_msg_write">
                         <input id="pst" class="write_msg" placeholder="Type a message" />
-                        <button id="btn" onclick="clickToPost(this.value)" class="msg_send_btn">s</button>
+                        <button id="btn" onclick="clickToPost()" class="msg_send_btn">s</button>
                         <input id="crntRoom" type="hidden" value="General" />
                     </div>
                 </div>
@@ -61,12 +61,14 @@
         postTxt.addEventListener("keyup", (event) => {
             if (event.keyCode === 13) {
                 sendPost(postTxt.value, currentRoom.value)
-                message.value = "";
+                postTxt.value = "";
             }
 
         })
         var clickToPost = (txt) => {
+            txt = postTxt.value;
             sendPost(txt, currentRoom.value)
+            postTxt.value = "";
         }
 
 
