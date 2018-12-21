@@ -207,7 +207,7 @@ namespace BetterTeamsWebApp.Controllers
                 PostText=PostText,
                 DateTime=DateTime.Now,
                 Room=Room,
-                Sender=sender.Username,
+                Sender=sender.Email,
                 Deleted=false
             };
             PostRepository postRepo = new PostRepository();

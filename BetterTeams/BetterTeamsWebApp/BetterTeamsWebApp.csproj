@@ -244,6 +244,7 @@
     <Content Include="www\images\AboutBcg3.jpg" />
     <Content Include="www\images\About\bg.jpg" />
     <Content Include="www\images\About\10942505_10205397056502354_1913257704388263352_n.jpg" />
+    <Content Include="www\images\About\Exceptionals.jpg" />
     <Content Include="www\images\About\gallery\fulls\01.jpg" />
     <Content Include="www\images\About\gallery\fulls\02.jpg" />
     <Content Include="www\images\About\gallery\fulls\03.jpg" />
@@ -265,9 +266,12 @@
     <Content Include="www\images\About\Apostolos.jpg" />
     <Content Include="www\images\About\Maria.jpg" />
     <Content Include="www\images\About\overlay.png" />
+    <Content Include="www\images\About\panos.jpg" />
+    <Content Include="www\images\About\PanosPap.png" />
     <Content Include="www\images\About\pic01.jpg" />
     <Content Include="www\images\About\pic02.jpg" />
     <Content Include="www\images\About\pic03.jpg" />
+    <Content Include="www\images\About\Savvas.jpg" />
     <Content Include="www\images\BetterTeamsLogo.jpg" />
     <Content Include="www\images\BetterTeamsLogo2.jpg" />
     <Content Include="www\images\BetterTeamsLogo3.jpg" />
