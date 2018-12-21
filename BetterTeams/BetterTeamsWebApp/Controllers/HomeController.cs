@@ -200,12 +200,14 @@ namespace BetterTeamsWebApp.Controllers
         public JsonResult SendPost(string PostText, string Sender, string Room, string dateTime)
         {
             //done baby --backenda --TODO: Save postVM to db and send it back to me plz i need it!
+            UserRepository userRepo = new UserRepository();
+            User sender = userRepo.GetByUsername(Sender);
             Post post = new Post
             {
                 PostText=PostText,
                 DateTime=DateTime.Now,
                 Room=Room,
-                Sender=Sender,
+                Sender=sender.Email,
                 Deleted=false
             };
             PostRepository postRepo = new PostRepository();
@@ -219,17 +221,19 @@ namespace BetterTeamsWebApp.Controllers
         {
 			List<PostVM> PostsList = new List<PostVM>();
 			PostRepository postrepo = new PostRepository();
+            UserRepository userRepo = new UserRepository();
+            User sender = new User();
 			var posts = postrepo.GetByRoom(Room);
 			foreach (var post in posts)
 			{
+                sender = userRepo.GetByUsername(post.Sender);
 				var newpost = new PostVM();
 				newpost.Id = post.Id;
 				newpost.PostText = post.PostText;
 				newpost.Room = post.Room;
-				newpost.Sender = post.Sender;
+				newpost.Sender = sender.Email;
 				newpost.DateTime = post.DateTime;
-				PostsList.Add(newpost);
-			
+				PostsList.Add(newpost);			
 			}
 
             return Json(PostsList, JsonRequestBehavior.AllowGet);
