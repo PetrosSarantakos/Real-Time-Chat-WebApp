@@ -268,7 +268,7 @@
                 success: function (data) {
                     var roomList = $('#list-rooms');
                     $(data).each(function (index, name) {
-                        roomList.append(`<a id="${name}" onclick="setRoom(this.id)" value="${name}" href="" class="nav-link mdi mdi-chevron-right menu-icon mb-1 text-white">${name} </a >`);
+                        roomList.append(`<a id="${name}" onclick="setRoom(this.id)" value="${name}" href="#" class="nav-link mdi mdi-chevron-right menu-icon mb-1 text-white">${name} </a >`);
                     });
                 },
                 error: function (request, message, error) {

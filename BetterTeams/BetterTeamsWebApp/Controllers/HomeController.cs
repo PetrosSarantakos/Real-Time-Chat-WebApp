@@ -216,23 +216,27 @@ namespace BetterTeamsWebApp.Controllers
             return Json(post, JsonRequestBehavior.AllowGet);
         }
 
-
+        [Authorize]
+        [HttpGet]
         public JsonResult GetPostsOfRoom(string Room)
         {
-			List<PostVM> PostsList = new List<PostVM>();
+            PostVM newpost;
+
+            List<PostVM> PostsList = new List<PostVM>();
 			PostRepository postrepo = new PostRepository();
             UserRepository userRepo = new UserRepository();
             User sender = new User();
 			var posts = postrepo.GetByRoom(Room);
 			foreach (var post in posts)
 			{
-                sender = userRepo.GetByUsername(post.Sender);
-				var newpost = new PostVM();
+                sender = userRepo.GetByEmail(post.Sender);
+				newpost = new PostVM();
 				newpost.Id = post.Id;
 				newpost.PostText = post.PostText;
 				newpost.Room = post.Room;
 				newpost.Sender = sender.Email;
 				newpost.DateTime = post.DateTime;
+                newpost.Deleted = post.Deleted;
 				PostsList.Add(newpost);			
 			}
 
