@@ -124,12 +124,18 @@
 
             }
 
-
+        refresh = document.getElementById("postBox");
+        //refresh.addEventListener("change", () => {
+        //    location = location;
+        //});
+        $("#postBox").change(function () {
+            location = location;
+        });
          
          var postsListSuccess = (Posts) => {
-
-            $.each(Posts, (index, post) => {
-                addPost(post);
+             let postBox = document.getElementById("postBox");
+             $.each(Posts, (index, post) => {
+               postBox.innerHTML += addPost(post);
             });
          }
 

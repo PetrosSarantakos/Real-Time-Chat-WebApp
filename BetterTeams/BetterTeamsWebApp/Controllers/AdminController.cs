@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace BetterTeamsWebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
        

@@ -207,7 +207,7 @@ namespace BetterTeamsWebApp.Controllers
                 PostText=PostText,
                 DateTime=DateTime.Now,
                 Room=Room,
-                Sender=sender.Email,
+                Sender=sender.Username,
                 Deleted=false
             };
             PostRepository postRepo = new PostRepository();
@@ -234,7 +234,7 @@ namespace BetterTeamsWebApp.Controllers
 				newpost.Id = post.Id;
 				newpost.PostText = post.PostText;
 				newpost.Room = post.Room;
-				newpost.Sender = sender.Email;
+				newpost.Sender = sender.Username;
 				newpost.DateTime = post.DateTime;
                 newpost.Deleted = post.Deleted;
 				PostsList.Add(newpost);			
